@@ -40,6 +40,10 @@ MyScene::~MyScene()
 
 void MyScene::update(float deltaTime)
 {
+
+	//Move camera
+	moveCamera(deltaTime);
+
 	// ###############################################################
 	// Escape key stops the Scene
 	// ###############################################################
