@@ -183,6 +183,8 @@ add_executable(start
 	start/myentity.h
 	start/myscene.cpp
 	start/myscene.h
+	start/UnitBase.cpp
+	start/UnitBase.h
 )
 target_link_libraries(start
 	${ALL_LIBS}
