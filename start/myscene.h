@@ -14,6 +14,7 @@
 #include <rt2d/text.h>
 #include "myentity.h"
 #include "UnitBase.h"
+#include "basicentity.h"
 
 
 struct Player
@@ -40,6 +41,7 @@ public:
 protected:
 	Player* player;
 	std::vector<Text*> text;
+	std::vector<BasicEntity*> layers;
 	void moveCamera(float deltaTime);
 
 private:
@@ -47,6 +49,14 @@ private:
 	MyEntity* myentity;
 	/// @brief a Timer to rotate the color every n seconds
 	Timer t;
+
+	BasicEntity* map;
+	Sprite* heightmapsprite;
+
+	int gridwidth;
+	int gridheight;
+	int cellwidth;
+	int cellheight;
 };
 
 #endif /* SCENE00_H */

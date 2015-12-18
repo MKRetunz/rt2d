@@ -185,6 +185,8 @@ add_executable(start
 	start/myscene.h
 	start/UnitBase.cpp
 	start/UnitBase.h
+	start/basicentity.cpp
+	start/basicentity.h
 )
 target_link_libraries(start
 	${ALL_LIBS}

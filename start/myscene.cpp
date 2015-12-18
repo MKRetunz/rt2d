@@ -14,14 +14,18 @@ MyScene::MyScene() : Scene()
 	// start the timer.
 	t.start();
 
-	//camera()->position.x = 0;
-	//camera()->position.y = 0;
+	gridwidth = 7;
+	gridheight = 8;
+	cellwidth = 64;
+	cellheight = 64;
+
+	map = new BasicEntity();
+
+	//map->addGrid("assets/defaultgray.tga", 8, 8, gridwidth, gridheight, cellwidth, cellheight);
 
 	// create a single instance of MyEntity in the middle of the screen.
 	// the Sprite is added in Constructor of MyEntity.
 	myentity = new MyEntity();
-	//myentity->position = Point2(SWIDTH/2, SHEIGHT/2);
-	//myentity->position
 
 	// create the scene 'tree'
 	// add myentity to this Scene as a child.
@@ -66,7 +70,7 @@ void MyScene::update(float deltaTime)
 	// ###############################################################
 	if (t.seconds() > 0.0333f) {
 		RGBAColor color = myentity->sprite()->color;
-		myentity->sprite()->color = Color::rotate(color, 0.01f);
+		myentity->sprite()->color = Color::rotate(color, 0.03f);
 		t.start();
 	}
 }
