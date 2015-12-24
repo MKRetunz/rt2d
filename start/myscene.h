@@ -16,6 +16,12 @@
 #include "UnitBase.h"
 #include "basicentity.h"
 
+struct Cell
+{
+	BasicEntity* entity; // visual representation
+	Point_t<int> position; // x/y in grid
+};
+
 
 struct Player
 {
@@ -39,12 +45,19 @@ public:
 	void addPlayer(Player* p) { player = p; };
 
 protected:
+	unsigned int top_layer;
 	Player* player;
 	std::vector<Text*> text;
+
 	std::vector<BasicEntity*> layers;
 	void moveCamera(float deltaTime);
 
 private:
+	BasicEntity* grid;
+	std::vector<Cell*> cells;
+
+	int border;
+
 	/// @brief the rotating square in the middle of the screen
 	MyEntity* myentity;
 	/// @brief a Timer to rotate the color every n seconds
@@ -52,6 +65,8 @@ private:
 
 	BasicEntity* map;
 	Sprite* heightmapsprite;
+
+	UnitBase* soldier;
 
 	int gridwidth;
 	int gridheight;

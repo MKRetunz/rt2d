@@ -11,17 +11,64 @@
 
 MyScene::MyScene() : Scene()
 {
-	// start the timer.
+	top_layer = 7; // 8 layers (0-7)
+
+	//add layers
+	for (unsigned int i = 0; i <= top_layer; i++) {
+		BasicEntity* layer = new BasicEntity();
+		layers.push_back(layer);
+		this->addChild(layer);
+	}
+
+	//add text
+	for (unsigned int i = 0; i < 16; i++) {
+		Text* line = new Text();
+		line->scale = Point2(0.5f, 0.5f);
+
+		text.push_back(line);
+		layers[top_layer]->addChild(line);
+	}
+
 	t.start();
 
+	soldier = new UnitBase();
+	addChild(soldier);
+
+	//making a map
 	gridwidth = 7;
 	gridheight = 8;
 	cellwidth = 64;
 	cellheight = 64;
+	border = 1;
 
-	map = new BasicEntity();
+	grid = new BasicEntity();
+	int xgridpos = (SWIDTH / 2) - (gridwidth*(cellwidth + border) / 2);
+	int ygridpos = (SHEIGHT / 2) - (gridheight*(cellheight + border) / 2);
+	grid->position = Point2(xgridpos, ygridpos);
 
-	//map->addGrid("assets/defaultgray.tga", 8, 8, gridwidth, gridheight, cellwidth, cellheight);
+	// create cells
+	for (int x = 0; x<gridwidth; x++) {
+		for (int y = 0; y<gridheight; y++) {
+			Cell* cell = new Cell();
+			cell->position.x = x;
+			cell->position.y = y;
+
+			cell->entity = new BasicEntity();
+			cell->entity->addSprite(AUTOGENWHITE);
+			cell->entity->sprite()->size.x = cellwidth;
+			cell->entity->sprite()->size.y = cellheight;
+			cell->entity->sprite()->color = GRAY;
+
+			// initial position
+			cell->entity->position.x = x*(cellwidth + border);
+			cell->entity->position.y = y*(cellheight + border);
+
+			cells.push_back(cell);
+			grid->addChild(cell->entity);
+			layers[0]->addChild(grid);
+		}
+	}
+
 
 	// create a single instance of MyEntity in the middle of the screen.
 	// the Sprite is added in Constructor of MyEntity.
@@ -40,6 +87,7 @@ MyScene::~MyScene()
 
 	// delete myentity from the heap (there was a 'new' in the constructor)
 	delete myentity;
+	delete soldier;
 }
 
 void MyScene::update(float deltaTime)
@@ -47,6 +95,13 @@ void MyScene::update(float deltaTime)
 
 	//Move camera
 	moveCamera(deltaTime);
+
+	int mousex = input()->getMouseX() + camera()->position.x - SWIDTH / 2;
+	int mousey = input()->getMouseY() + camera()->position.y - SHEIGHT / 2;
+
+	if (mousey >= soldier->position.y + -32 && mousey <= soldier->position.y + 32 && mousex >= soldier->position.x + -32 && mousex <= soldier->position.x + 32) {
+		soldier->mouseOver();
+	}
 
 	// ###############################################################
 	// Escape key stops the Scene
