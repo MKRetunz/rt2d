@@ -32,6 +32,7 @@ struct Player
 class MyScene : public Scene
 {
 public:
+
 	/// @brief Constructor
 	MyScene();
 	/// @brief Destructor
@@ -58,6 +59,8 @@ private:
 
 	int border;
 
+	
+
 	/// @brief the rotating square in the middle of the screen
 	MyEntity* myentity;
 	/// @brief a Timer to rotate the color every n seconds
@@ -72,6 +75,9 @@ private:
 	int gridheight;
 	int cellwidth;
 	int cellheight;
+
+	bool turns = true;
+	bool check = false;
 };
 
 #endif /* SCENE00_H */

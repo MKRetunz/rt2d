@@ -6,6 +6,16 @@ UnitBase::UnitBase()
 	//Sprite
 	this->addSprite("assets/soldierv1.tga");
 
+}
+
+
+UnitBase::~UnitBase()
+{
+}
+
+void UnitBase::update(float deltaTime)
+{
+
 	//name
 	MsgName = "Name: ";
 	MsgName.append(name);
@@ -49,19 +59,45 @@ UnitBase::UnitBase()
 	//Move
 	MsgCON = "Constitution: ";
 	MsgCON.append(std::to_string(CON));
+
+	if (MovOver == 0) {
+		selected = false;
+	}
 }
 
-
-UnitBase::~UnitBase()
+void UnitBase::moveUp()
 {
+	if (this->selected == true && MovOver > 0) {
+		this->position.y -= 64;
+		this->MovOver--;
+	}
 }
 
-void UnitBase::update(float deltaTime)
+void UnitBase::moveLeft()
 {
-
+	if (this->selected == true == true && MovOver > 0) {
+		this->position.x -= 64;
+		this->MovOver--;
+	}
 }
 
-void UnitBase::mouseOver()
+void UnitBase::moveRight()
 {
-	this->position.x -= 64;
+	if (this->selected == true == true && MovOver > 0) {
+		this->position.x += 64;
+		this->MovOver--;
+	}
+}
+
+void UnitBase::moveDown()
+{
+	if (this->selected == true == true && MovOver > 0) {
+		this->position.y += 64;
+		this->MovOver--;
+	}
+}
+
+void UnitBase::refresh()
+{
+	this->MovOver = this->MOV;
 }

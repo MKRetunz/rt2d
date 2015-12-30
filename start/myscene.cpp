@@ -32,11 +32,13 @@ MyScene::MyScene() : Scene()
 	t.start();
 
 	soldier = new UnitBase();
-	addChild(soldier);
+	this->addChild(soldier);
+	soldier->position.x = 410;
+	soldier->position.y = 300;
 
 	//making a map
-	gridwidth = 7;
-	gridheight = 8;
+	gridwidth = 9;
+	gridheight = 10;
 	cellwidth = 64;
 	cellheight = 64;
 	border = 1;
@@ -59,6 +61,21 @@ MyScene::MyScene() : Scene()
 			cell->entity->sprite()->size.y = cellheight;
 			cell->entity->sprite()->color = GRAY;
 
+			//Top half of white tiles
+			if (y == 1 && x == 2 || y == 1 && x == 6 || y == 2 && x == 2 || y == 2 && x == 6 || y == 3 && x == 2 || y == 3 && x == 6 || y == 3 && x == 4 || y == 3 && x == 5) {
+				cell->entity->sprite()->color = WHITE;
+			}
+
+			//Bottom half
+			if (y == 8 && x == 2 || y == 8 && x == 6 || y == 7 && x == 2 || y == 7 && x == 6 || y == 6 && x == 2 || y == 6 && x == 6 || y == 6 && x == 4 || y == 6 && x == 3) {
+				cell->entity->sprite()->color = WHITE;
+			}
+
+			//Surrounding tiles
+			if (y == 0 || y == 9 || x == 0 || x == 8) {
+				cell->entity->sprite()->color = WHITE;
+			}
+
 			// initial position
 			cell->entity->position.x = x*(cellwidth + border);
 			cell->entity->position.y = y*(cellheight + border);
@@ -76,14 +93,15 @@ MyScene::MyScene() : Scene()
 
 	// create the scene 'tree'
 	// add myentity to this Scene as a child.
-	this->addChild(myentity);
+	//this->addChild(myentity);
 }
 
 
 MyScene::~MyScene()
 {
 	// deconstruct and delete the Tree
-	this->removeChild(myentity);
+	this->removeChild(soldier);
+
 
 	// delete myentity from the heap (there was a 'new' in the constructor)
 	delete myentity;
@@ -100,7 +118,27 @@ void MyScene::update(float deltaTime)
 	int mousey = input()->getMouseY() + camera()->position.y - SHEIGHT / 2;
 
 	if (mousey >= soldier->position.y + -32 && mousey <= soldier->position.y + 32 && mousex >= soldier->position.x + -32 && mousex <= soldier->position.x + 32) {
-		soldier->mouseOver();
+		text[0]->message("test");
+		soldier->selected = true;
+		
+	}
+
+	if (input()->getKeyDown(GLFW_KEY_W)) {
+		soldier->moveUp();
+	}
+	if (input()->getKeyDown(GLFW_KEY_A)) {
+		soldier->moveLeft();
+	}
+	if (input()->getKeyDown(GLFW_KEY_S)) {
+		soldier->moveDown();
+	}
+	if (input()->getKeyDown(GLFW_KEY_D)) {
+		soldier->moveRight();
+	}
+
+	unsigned int s = text.size();
+	for (unsigned int i = 0; i < s; i++) {
+		text[i]->position = Point2(camera()->position.x + 50 - SWIDTH / 2, camera()->position.y + 50 + (30 * i) - SHEIGHT / 2);
 	}
 
 	// ###############################################################
@@ -111,14 +149,22 @@ void MyScene::update(float deltaTime)
 	}
 
 	// ###############################################################
-	// Spacebar scales myentity
+	// Pressing the Right mouse button switches player turns
 	// ###############################################################
-	if (input()->getKeyDown( GLFW_KEY_SPACE )) {
-		myentity->scale = Point(0.5f, 0.5f);
+	if (input()->getMouseDown( 1 )) {
+		check = true;
+		if (turns == false && check == true) {
+			turns = true;
+			check = false;
+			soldier->refresh();
+		}
+
+		if (turns == true && check == true) {
+			turns = false;
+			check = false;
+		}
 	}
-	if (input()->getKeyUp( GLFW_KEY_SPACE )) {
-		myentity->scale = Point(1.0f, 1.0f);
-	}
+	
 
 	// ###############################################################
 	// Rotate color

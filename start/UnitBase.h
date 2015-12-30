@@ -17,7 +17,19 @@ public:
 	virtual ~UnitBase();
 
 	virtual void update(float deltaTime);
-	virtual void mouseOver();
+
+	//movement
+	virtual void moveUp();
+	virtual void moveLeft();
+	virtual void moveRight();
+	virtual void moveDown();
+	virtual void refresh();
+
+	int lastposX;
+	int lastposY;
+
+
+	//Statistics
 	std::string MsgName;
 	std::string MsgHP;
 	std::string MsgSTR;
@@ -71,6 +83,8 @@ public:
 	std::string name = "Paladius";
 
 	bool actionDone = false;
+	bool selected = false;
+
 	int MovOver = MOV;
 
 private:
