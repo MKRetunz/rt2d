@@ -29,8 +29,7 @@ MyScene::MyScene() : Scene()
 		layers[top_layer]->addChild(line);
 	}
 
-	t.start();
-
+	//unit creation
 	soldier = new UnitBase();
 	this->addChild(soldier);
 	soldier->position.x = 410;
@@ -63,17 +62,17 @@ MyScene::MyScene() : Scene()
 
 			//Top half of white tiles
 			if (y == 1 && x == 2 || y == 1 && x == 6 || y == 2 && x == 2 || y == 2 && x == 6 || y == 3 && x == 2 || y == 3 && x == 6 || y == 3 && x == 4 || y == 3 && x == 5) {
-				cell->entity->sprite()->color = WHITE;
+				cell->entity->sprite()->color = BLACK;
 			}
 
 			//Bottom half
 			if (y == 8 && x == 2 || y == 8 && x == 6 || y == 7 && x == 2 || y == 7 && x == 6 || y == 6 && x == 2 || y == 6 && x == 6 || y == 6 && x == 4 || y == 6 && x == 3) {
-				cell->entity->sprite()->color = WHITE;
+				cell->entity->sprite()->color = BLACK;
 			}
 
 			//Surrounding tiles
 			if (y == 0 || y == 9 || x == 0 || x == 8) {
-				cell->entity->sprite()->color = WHITE;
+				cell->entity->sprite()->color = BLACK;
 			}
 
 			// initial position
@@ -86,31 +85,22 @@ MyScene::MyScene() : Scene()
 		}
 	}
 
-
-	// create a single instance of MyEntity in the middle of the screen.
-	// the Sprite is added in Constructor of MyEntity.
-	myentity = new MyEntity();
-
-	// create the scene 'tree'
-	// add myentity to this Scene as a child.
-	//this->addChild(myentity);
+	text[1]->message("Blue turn.");
 }
 
 
 MyScene::~MyScene()
 {
-	// deconstruct and delete the Tree
+	// deconstruct and delete the soldier
 	this->removeChild(soldier);
 
 
-	// delete myentity from the heap (there was a 'new' in the constructor)
-	delete myentity;
+	// delete objects
 	delete soldier;
 }
 
 void MyScene::update(float deltaTime)
 {
-
 	//Move camera
 	moveCamera(deltaTime);
 
@@ -118,9 +108,18 @@ void MyScene::update(float deltaTime)
 	int mousey = input()->getMouseY() + camera()->position.y - SHEIGHT / 2;
 
 	if (mousey >= soldier->position.y + -32 && mousey <= soldier->position.y + 32 && mousex >= soldier->position.x + -32 && mousex <= soldier->position.x + 32) {
-		text[0]->message("test");
+		text[2]->message(soldier->MsgName);
+		text[3]->message(soldier->MsgHP);
+		text[4]->message(soldier->MsgSTR);
+		text[5]->message(soldier->MsgMAG);
+		text[6]->message(soldier->MsgSKL);
+		text[7]->message(soldier->MsgSPD);
+		text[8]->message(soldier->MsgLCK);
+		text[9]->message(soldier->MsgDEF);
+		text[10]->message(soldier->MsgRES);
+		text[11]->message(soldier->MsgMOV);
+		text[12]->message(soldier->MsgCON);
 		soldier->selected = true;
-		
 	}
 
 	if (input()->getKeyDown(GLFW_KEY_W)) {
@@ -136,6 +135,7 @@ void MyScene::update(float deltaTime)
 		soldier->moveRight();
 	}
 
+	//text follows camera
 	unsigned int s = text.size();
 	for (unsigned int i = 0; i < s; i++) {
 		text[i]->position = Point2(camera()->position.x + 50 - SWIDTH / 2, camera()->position.y + 50 + (30 * i) - SHEIGHT / 2);
@@ -157,23 +157,18 @@ void MyScene::update(float deltaTime)
 			turns = true;
 			check = false;
 			soldier->refresh();
+			text[1]->message("Blue turn.");
 		}
 
 		if (turns == true && check == true) {
 			turns = false;
 			check = false;
+			text[1]->message("Red turn.");
 		}
 	}
-	
 
-	// ###############################################################
-	// Rotate color
-	// ###############################################################
-	if (t.seconds() > 0.0333f) {
-		RGBAColor color = myentity->sprite()->color;
-		myentity->sprite()->color = Color::rotate(color, 0.03f);
-		t.start();
-	}
+	//Add unit over cell detection
+
 }
 
 void MyScene::moveCamera(float deltaTime)

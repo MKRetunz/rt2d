@@ -5,7 +5,6 @@ UnitBase::UnitBase()
 {
 	//Sprite
 	this->addSprite("assets/soldierv1.tga");
-
 }
 
 
@@ -68,14 +67,19 @@ void UnitBase::update(float deltaTime)
 void UnitBase::moveUp()
 {
 	if (this->selected == true && MovOver > 0) {
+		this->lastposX = this->position.x;
+		this->lastposY = this->position.y;
 		this->position.y -= 64;
 		this->MovOver--;
+		
 	}
 }
 
 void UnitBase::moveLeft()
 {
 	if (this->selected == true == true && MovOver > 0) {
+		this->lastposX = this->position.x;
+		this->lastposY = this->position.y;
 		this->position.x -= 64;
 		this->MovOver--;
 	}
@@ -84,6 +88,8 @@ void UnitBase::moveLeft()
 void UnitBase::moveRight()
 {
 	if (this->selected == true == true && MovOver > 0) {
+		this->lastposX = this->position.x;
+		this->lastposY = this->position.y;
 		this->position.x += 64;
 		this->MovOver--;
 	}
@@ -92,6 +98,8 @@ void UnitBase::moveRight()
 void UnitBase::moveDown()
 {
 	if (this->selected == true == true && MovOver > 0) {
+		this->lastposX = this->position.x;
+		this->lastposY = this->position.y;
 		this->position.y += 64;
 		this->MovOver--;
 	}

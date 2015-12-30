@@ -90,7 +90,6 @@ public:
 private:
 
 protected:
-
 };
 
 #endif /*UNITBASE_H*/
