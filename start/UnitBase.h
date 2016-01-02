@@ -77,10 +77,9 @@ public:
 	int Crit = (SKL / 2) + (LCK / 4) + wepCrit;
 	int Dodge = (SPD * 2) + (LCK);
 	int Damage = STR + wepMT;
-	int gridrange = MOV * 64;
 
 	//Name
-	std::string name = "Paladius";
+	std::string name = "Placeholder";
 
 	bool actionDone = false;
 	bool selected = false;

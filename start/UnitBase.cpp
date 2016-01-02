@@ -10,6 +10,7 @@ UnitBase::UnitBase()
 
 UnitBase::~UnitBase()
 {
+
 }
 
 void UnitBase::update(float deltaTime)
@@ -60,7 +61,36 @@ void UnitBase::update(float deltaTime)
 	MsgCON.append(std::to_string(CON));
 
 	if (MovOver == 0) {
-		selected = false;
+		this->selected = false;
+	}
+	
+	//############################################
+	//Positional Correction
+	//############################################
+
+	//Horizontal border walls
+	if (this->position.x <= 384 || this->position.x >= 832) {
+		this->position.x = this->lastposX;
+	}
+
+	//Vertical border walls
+	if (this->position.y <= 44 || this->position.y >= 620) {
+		this->position.y = this->lastposY;
+	}
+
+	//Walls in the stage
+	//Top half of stage
+	if (this->position.y >= 44 + -32 && this->position.y <= 236 + 32 && this->position.x >= 474 + -32 && this->position.x <= 474 + 32 || this->position.y >= 44 + -32 && this->position.y <= 236 + 32 && this->position.x >= 730 + -32 && this->position.x <= 730 + 32 || this->position.y >= 236 + -32 && this->position.y <= 236 + 32 && this->position.x >= 602 + -32 && this->position.x <= 730 + 32) {
+		this->position.y = this->lastposY;
+		this->position.x = this->lastposX;
+		MovOver++;
+	}
+
+	//Bottom half of stage
+	if (this->position.y >= 428 + -32 && this->position.y <= 620 + 32 && this->position.x >= 474 + -32 && this->position.x <= 474 + 32 || this->position.y >= 428 + -32 && this->position.y <= 620 + 32 && this->position.x >= 730 + -32 && this->position.x <= 730 + 32 || this->position.y >= 428 + -32 && this->position.y <= 428 + 32 && this->position.x >= 538 + -32 && this->position.x <= 602 + 32) {
+		this->position.y = this->lastposY;
+		this->position.x = this->lastposX;
+		MovOver++;
 	}
 }
 
