@@ -25,6 +25,10 @@ public:
 	virtual void moveDown();
 	virtual void refresh();
 
+	//combat
+	virtual void attack(UnitBase* other);
+	virtual void takeDamage(int amount);
+
 	int lastposX;
 	int lastposY;
 

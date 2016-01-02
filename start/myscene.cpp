@@ -29,11 +29,19 @@ MyScene::MyScene() : Scene()
 		layers[top_layer]->addChild(line);
 	}
 
-	//unit creation
+	//Blue unit creation
 	soldier = new UnitBase();
 	this->addChild(soldier);
+	soldier->name = "Blue";
 	soldier->position.x = 410;
 	soldier->position.y = 300;
+
+	//Red unit creation
+	Rsoldier = new UnitBase();
+	this->addChild(Rsoldier);
+	Rsoldier->name = "Red";
+	Rsoldier->position.x = 474;
+	Rsoldier->position.y = 300;
 
 	//making a map
 	gridwidth = 9;
@@ -60,7 +68,7 @@ MyScene::MyScene() : Scene()
 			cell->entity->sprite()->size.y = cellheight;
 			cell->entity->sprite()->color = GRAY;
 
-			//Top half of white tiles
+			//Top half of black tiles
 			if (y == 1 && x == 2 || y == 1 && x == 6 || y == 2 && x == 2 || y == 2 && x == 6 || y == 3 && x == 2 || y == 3 && x == 6 || y == 3 && x == 4 || y == 3 && x == 5) {
 				cell->entity->sprite()->color = BLACK;
 			}
@@ -92,11 +100,15 @@ MyScene::MyScene() : Scene()
 MyScene::~MyScene()
 {
 	// deconstruct and delete the soldier
+	this->addChild(soldier);
 	this->removeChild(soldier);
 
+	this->addChild(Rsoldier);
+	this->removeChild(Rsoldier);
 
 	// delete objects
 	delete soldier;
+	delete Rsoldier;
 }
 
 void MyScene::update(float deltaTime)
@@ -106,6 +118,21 @@ void MyScene::update(float deltaTime)
 
 	int mousex = input()->getMouseX() + camera()->position.x - SWIDTH / 2;
 	int mousey = input()->getMouseY() + camera()->position.y - SHEIGHT / 2;
+
+	if (mousey >= Rsoldier->position.y + -32 && mousey <= Rsoldier->position.y + 32 && mousex >= Rsoldier->position.x + -32 && mousex <= Rsoldier->position.x + 32) {
+		text[2]->message(Rsoldier->MsgName);
+		text[3]->message(Rsoldier->MsgHP);
+		text[4]->message(Rsoldier->MsgSTR);
+		text[5]->message(Rsoldier->MsgMAG);
+		text[6]->message(Rsoldier->MsgSKL);
+		text[7]->message(Rsoldier->MsgSPD);
+		text[8]->message(Rsoldier->MsgLCK);
+		text[9]->message(Rsoldier->MsgDEF);
+		text[10]->message(Rsoldier->MsgRES);
+		text[11]->message(Rsoldier->MsgMOV);
+		text[12]->message(Rsoldier->MsgCON);
+		Rsoldier->selected = true;
+	}
 
 	if (mousey >= soldier->position.y + -32 && mousey <= soldier->position.y + 32 && mousex >= soldier->position.x + -32 && mousex <= soldier->position.x + 32) {
 		text[2]->message(soldier->MsgName);
@@ -122,17 +149,31 @@ void MyScene::update(float deltaTime)
 		soldier->selected = true;
 	}
 
+	//Temporary attacking
+
 	if (input()->getKeyDown(GLFW_KEY_W)) {
 		soldier->moveUp();
+		if (soldier->position == Rsoldier->position) {
+			soldier->attack(Rsoldier);
+		}
 	}
 	if (input()->getKeyDown(GLFW_KEY_A)) {
 		soldier->moveLeft();
+		if (soldier->position == Rsoldier->position) {
+			soldier->attack(Rsoldier);
+		}
 	}
 	if (input()->getKeyDown(GLFW_KEY_S)) {
 		soldier->moveDown();
+		if (soldier->position == Rsoldier->position) {
+			soldier->attack(Rsoldier);
+		}
 	}
 	if (input()->getKeyDown(GLFW_KEY_D)) {
 		soldier->moveRight();
+		if (soldier->position == Rsoldier->position) {
+			soldier->attack(Rsoldier);
+		}
 	}
 
 	//text follows camera
@@ -165,9 +206,21 @@ void MyScene::update(float deltaTime)
 			check = false;
 			text[1]->message("Red turn.");
 		}
+		//Empty text
+		text[2]->message("");
+		text[3]->message("");
+		text[4]->message("");
+		text[5]->message("");
+		text[6]->message("");
+		text[7]->message("");
+		text[8]->message("");
+		text[9]->message("");
+		text[10]->message("");
+		text[11]->message("");
+		text[12]->message("");
 	}
 
-	//Add unit over cell detection
+	
 
 }
 

@@ -66,6 +66,7 @@ private:
 	Sprite* heightmapsprite;
 
 	UnitBase* soldier;
+	UnitBase* Rsoldier;
 
 	int gridwidth;
 	int gridheight;

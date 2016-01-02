@@ -15,7 +15,6 @@ UnitBase::~UnitBase()
 
 void UnitBase::update(float deltaTime)
 {
-
 	//name
 	MsgName = "Name: ";
 	MsgName.append(name);
@@ -92,6 +91,12 @@ void UnitBase::update(float deltaTime)
 		this->position.x = this->lastposX;
 		MovOver++;
 	}
+
+	//Dying
+	if (this->HP <= 0) {
+		this->position.x = 100000;
+		removeChild(this);
+	}
 }
 
 void UnitBase::moveUp()
@@ -138,4 +143,21 @@ void UnitBase::moveDown()
 void UnitBase::refresh()
 {
 	this->MovOver = this->MOV;
+}
+
+void UnitBase::attack(UnitBase* other)
+{
+	other->takeDamage(this->Damage);
+	this->position.x = this->lastposX;
+	this->position.y = this->lastposY;
+	this->MovOver = 0;
+}
+
+void UnitBase::takeDamage(int amount)
+{
+	amount -= this->DEF;
+	if (amount <= 0) {
+		amount = 0;
+	}
+	this->HP -= amount;
 }
