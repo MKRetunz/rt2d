@@ -131,7 +131,9 @@ void MyScene::update(float deltaTime)
 		text[10]->message(Rsoldier->MsgRES);
 		text[11]->message(Rsoldier->MsgMOV);
 		text[12]->message(Rsoldier->MsgCON);
-		Rsoldier->selected = true;
+		if (turns == false) {
+			Rsoldier->selected = true;
+		}
 	}
 
 	if (mousey >= soldier->position.y + -32 && mousey <= soldier->position.y + 32 && mousex >= soldier->position.x + -32 && mousex <= soldier->position.x + 32) {
@@ -146,35 +148,41 @@ void MyScene::update(float deltaTime)
 		text[10]->message(soldier->MsgRES);
 		text[11]->message(soldier->MsgMOV);
 		text[12]->message(soldier->MsgCON);
-		soldier->selected = true;
+		if (turns == true) {
+			soldier->selected = true;
+		}
 	}
 
-	//Temporary attacking
+	//Movement
 
 	if (input()->getKeyDown(GLFW_KEY_W)) {
 		soldier->moveUp();
-		if (soldier->position == Rsoldier->position) {
-			soldier->attack(Rsoldier);
-		}
+		Rsoldier->moveUp();
 	}
 	if (input()->getKeyDown(GLFW_KEY_A)) {
 		soldier->moveLeft();
-		if (soldier->position == Rsoldier->position) {
-			soldier->attack(Rsoldier);
-		}
+		Rsoldier->moveLeft();
 	}
 	if (input()->getKeyDown(GLFW_KEY_S)) {
 		soldier->moveDown();
-		if (soldier->position == Rsoldier->position) {
-			soldier->attack(Rsoldier);
-		}
+		Rsoldier->moveDown();
 	}
 	if (input()->getKeyDown(GLFW_KEY_D)) {
 		soldier->moveRight();
-		if (soldier->position == Rsoldier->position) {
-			soldier->attack(Rsoldier);
-		}
+		Rsoldier->moveRight();
 	}
+
+	//Temporary attacking
+	/*if (turns == true && soldier->position == Rsoldier->position) {
+		soldier->attack(Rsoldier);
+	}
+
+	if (turns == false && Rsoldier->position == soldier->position) {
+		Rsoldier->attack(soldier);
+	}*/
+
+	//Attacking test
+	soldier->attack(Rsoldier);
 
 	//text follows camera
 	unsigned int s = text.size();
@@ -198,12 +206,15 @@ void MyScene::update(float deltaTime)
 			turns = true;
 			check = false;
 			soldier->refresh();
+			Rsoldier->refresh();
 			text[1]->message("Blue turn.");
 		}
 
 		if (turns == true && check == true) {
 			turns = false;
 			check = false;
+			soldier->refresh();
+			Rsoldier->refresh();
 			text[1]->message("Red turn.");
 		}
 		//Empty text
@@ -219,9 +230,6 @@ void MyScene::update(float deltaTime)
 		text[11]->message("");
 		text[12]->message("");
 	}
-
-	
-
 }
 
 void MyScene::moveCamera(float deltaTime)

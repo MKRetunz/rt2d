@@ -143,14 +143,36 @@ void UnitBase::moveDown()
 void UnitBase::refresh()
 {
 	this->MovOver = this->MOV;
+	this->selected = false;
 }
 
 void UnitBase::attack(UnitBase* other)
 {
-	other->takeDamage(this->Damage);
-	this->position.x = this->lastposX;
-	this->position.y = this->lastposY;
-	this->MovOver = 0;
+	if (this->position == other->position) {
+		if (rand() % 100 + 1 <= this->Hit - other->Dodge) {
+			other->takeDamage(this->Damage);
+		}
+		if (other->HP >= 0) {
+			if (rand() % 100 + 1 <= other->Hit - this->Dodge) {
+				this->takeDamage(other->Damage);
+			}
+			if (this->HP >= 0) {
+				if (this->SPD >= other->SPD + 4) {
+					if (rand() % 100 + 1 <= this->Hit - other->Dodge) {
+						other->takeDamage(this->Damage);
+					}
+				}	
+				if (other->SPD >= this->SPD + 4) {
+					if (rand() % 100 + 1 <= other->Hit - this->Dodge) {
+						this->takeDamage(other->Damage);
+					}
+				}
+			}
+		}
+		this->position.x = this->lastposX;
+		this->position.y = this->lastposY;
+		this->MovOver = 0;
+	}
 }
 
 void UnitBase::takeDamage(int amount)
