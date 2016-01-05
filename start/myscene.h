@@ -51,6 +51,7 @@ protected:
 
 	std::vector<BasicEntity*> layers;
 	void moveCamera(float deltaTime);
+	void displayStats(UnitBase* unit);
 
 private:
 	BasicEntity* grid;

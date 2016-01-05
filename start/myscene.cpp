@@ -11,6 +11,10 @@
 
 MyScene::MyScene() : Scene()
 {
+	// #############################################################
+	// Setting up for text and map creation
+	// #############################################################
+
 	top_layer = 7; // 8 layers (0-7)
 
 	//add layers
@@ -29,6 +33,10 @@ MyScene::MyScene() : Scene()
 		layers[top_layer]->addChild(line);
 	}
 
+	// #############################################################
+	// Unit creation
+	// #############################################################
+
 	//Blue unit creation
 	soldier = new UnitBase();
 	this->addChild(soldier);
@@ -44,6 +52,10 @@ MyScene::MyScene() : Scene()
 	Rsoldier->position.x = 474;
 	Rsoldier->position.y = 300;
 	Rsoldier->team = true;
+
+	// #############################################################
+	// Map creation
+	// #############################################################
 
 	//making a map
 	gridwidth = 9;
@@ -101,7 +113,11 @@ MyScene::MyScene() : Scene()
 
 MyScene::~MyScene()
 {
-	// deconstruct and delete the soldier
+	// #############################################################
+	// Cleaning up once scene is closed
+	// #############################################################
+
+	// deconstruct and delete the units
 	this->addChild(soldier);
 	this->removeChild(soldier);
 
@@ -118,45 +134,32 @@ void MyScene::update(float deltaTime)
 	//Move camera
 	moveCamera(deltaTime);
 
+	// #############################################################
+	// Holding mouse over units
+	// #############################################################
+
 	int mousex = input()->getMouseX() + camera()->position.x - SWIDTH / 2;
 	int mousey = input()->getMouseY() + camera()->position.y - SHEIGHT / 2;
 
 	if (mousey >= Rsoldier->position.y + -32 && mousey <= Rsoldier->position.y + 32 && mousex >= Rsoldier->position.x + -32 && mousex <= Rsoldier->position.x + 32) {
-		text[2]->message(Rsoldier->MsgName);
-		text[3]->message(Rsoldier->MsgHP);
-		text[4]->message(Rsoldier->MsgSTR);
-		text[5]->message(Rsoldier->MsgMAG);
-		text[6]->message(Rsoldier->MsgSKL);
-		text[7]->message(Rsoldier->MsgSPD);
-		text[8]->message(Rsoldier->MsgLCK);
-		text[9]->message(Rsoldier->MsgDEF);
-		text[10]->message(Rsoldier->MsgRES);
-		text[11]->message(Rsoldier->MsgMOV);
-		text[12]->message(Rsoldier->MsgCON);
+		displayStats(Rsoldier);
 		if (turns == false) {
 			Rsoldier->selected = true;
 		}
 	}
 
 	if (mousey >= soldier->position.y + -32 && mousey <= soldier->position.y + 32 && mousex >= soldier->position.x + -32 && mousex <= soldier->position.x + 32) {
-		text[2]->message(soldier->MsgName);
-		text[3]->message(soldier->MsgHP);
-		text[4]->message(soldier->MsgSTR);
-		text[5]->message(soldier->MsgMAG);
-		text[6]->message(soldier->MsgSKL);
-		text[7]->message(soldier->MsgSPD);
-		text[8]->message(soldier->MsgLCK);
-		text[9]->message(soldier->MsgDEF);
-		text[10]->message(soldier->MsgRES);
-		text[11]->message(soldier->MsgMOV);
-		text[12]->message(soldier->MsgCON);
+		displayStats(soldier);
 		if (turns == true) {
 			soldier->selected = true;
 		}
 	}
 
-	//Movement
+	// #############################################################
+	// Button presses
+	// #############################################################
 
+	//Movement
 	if (input()->getKeyDown(GLFW_KEY_W)) {
 		soldier->moveUp();
 		Rsoldier->moveUp();
@@ -174,19 +177,23 @@ void MyScene::update(float deltaTime)
 		Rsoldier->moveRight();
 	}
 
-	//Temporary attacking
-	/*if (turns == true && soldier->position == Rsoldier->position) {
+	// #############################################################
+	// Attacking
+	// #############################################################
+
+	//Attacking is called on every frame, but only activates if units colide
+	if (turns == true) {
 		soldier->attack(Rsoldier);
 	}
-
-	if (turns == false && Rsoldier->position == soldier->position) {
+	if (turns == false)
+	{
 		Rsoldier->attack(soldier);
-	}*/
+	}
 
-	//Attacking test
-	soldier->attack(Rsoldier);
+	// #############################################################
+	// Text follows camera
+	// #############################################################
 
-	//text follows camera
 	unsigned int s = text.size();
 	for (unsigned int i = 0; i < s; i++) {
 		text[i]->position = Point2(camera()->position.x + 50 - SWIDTH / 2, camera()->position.y + 50 + (30 * i) - SHEIGHT / 2);
@@ -231,6 +238,7 @@ void MyScene::update(float deltaTime)
 		text[10]->clearMessage();
 		text[11]->clearMessage();
 		text[12]->clearMessage();
+		text[13]->clearMessage();
 	}
 }
 
@@ -262,4 +270,23 @@ void MyScene::moveCamera(float deltaTime)
 	direction.normalize();
 	direction *= deltaTime * speed;
 	camera()->position += direction;
+}
+
+void MyScene::displayStats(UnitBase * unit)
+{
+	// #############################################################
+	// Statistic display
+	// #############################################################
+	text[2]->message(unit->MsgName);
+	text[3]->message(unit->MsgHP);
+	text[4]->message(unit->MsgSTR);
+	text[5]->message(unit->MsgMAG);
+	text[6]->message(unit->MsgSKL);
+	text[7]->message(unit->MsgSPD);
+	text[8]->message(unit->MsgLCK);
+	text[9]->message(unit->MsgDEF);
+	text[10]->message(unit->MsgRES);
+	text[11]->message(unit->MsgMOV);
+	text[12]->message(unit->MsgCON);
+	text[13]->message(unit->MsgMOVO);
 }

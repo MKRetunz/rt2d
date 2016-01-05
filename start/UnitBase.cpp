@@ -15,13 +15,23 @@ UnitBase::~UnitBase()
 
 void UnitBase::update(float deltaTime)
 {
+	// #############################################################
+	// Sprites
+	// #############################################################
+
+	//Team red
 	if (this->team == true) {
 		this->addSprite("assets/soldierv1.tga");
 	}
 
+	//Team blue
 	if (this->team == false) {
 		this->addSprite("assets/soldierv2.tga");
 	}
+
+	// #############################################################
+	// Text display
+	// #############################################################
 
 	//name
 	MsgName = "Name: ";
@@ -63,9 +73,17 @@ void UnitBase::update(float deltaTime)
 	MsgMOV = "Move: ";
 	MsgMOV.append(std::to_string(MOV));
 
-	//Move
+	//Con
 	MsgCON = "Constitution: ";
 	MsgCON.append(std::to_string(CON));
+
+	//Movement actions
+	MsgMOVO = "Moves left: ";
+	MsgMOVO.append(std::to_string(MovOver));
+
+	// #############################################################
+	// Preventing movement after movement has been depleted
+	// #############################################################
 
 	if (MovOver == 0) {
 		this->selected = false;
@@ -100,12 +118,19 @@ void UnitBase::update(float deltaTime)
 		MovOver++;
 	}
 
-	//Dying
+	// #############################################################
+	// Dying
+	// #############################################################
+
 	if (this->HP <= 0) {
 		this->position.x = 100000;
 		removeChild(this);
 	}
 }
+
+// ################################################################
+// Movement functions
+// ################################################################
 
 void UnitBase::moveUp()
 {
@@ -148,11 +173,19 @@ void UnitBase::moveDown()
 	}
 }
 
+// #################################################################
+// Refill movement and unselect
+// #################################################################
+
 void UnitBase::refresh()
 {
 	this->MovOver = this->MOV;
 	this->selected = false;
 }
+
+// #################################################################
+// Combat functions
+// #################################################################
 
 void UnitBase::attack(UnitBase* other)
 {
