@@ -85,6 +85,9 @@ public:
 	//Name
 	std::string name = "Placeholder";
 
+	//Color
+	bool team;
+
 	bool actionDone = false;
 	bool selected = false;
 

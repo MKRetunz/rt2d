@@ -179,8 +179,6 @@ file(
 ####################################################################
 add_executable(start
 	start/main.cpp
-	start/myentity.cpp
-	start/myentity.h
 	start/myscene.cpp
 	start/myscene.h
 	start/UnitBase.cpp

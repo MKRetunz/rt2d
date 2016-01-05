@@ -12,7 +12,6 @@
 #include <vector>
 #include <rt2d/scene.h>
 #include <rt2d/text.h>
-#include "myentity.h"
 #include "UnitBase.h"
 #include "basicentity.h"
 
@@ -59,12 +58,7 @@ private:
 
 	int border;
 
-	/// @brief a Timer to rotate the color every n seconds
-	Timer t;
-
-	BasicEntity* map;
-	Sprite* heightmapsprite;
-
+	// Making units
 	UnitBase* soldier;
 	UnitBase* Rsoldier;
 

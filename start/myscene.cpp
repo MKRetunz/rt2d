@@ -35,6 +35,7 @@ MyScene::MyScene() : Scene()
 	soldier->name = "Blue";
 	soldier->position.x = 410;
 	soldier->position.y = 300;
+	soldier->team = false;
 
 	//Red unit creation
 	Rsoldier = new UnitBase();
@@ -42,6 +43,7 @@ MyScene::MyScene() : Scene()
 	Rsoldier->name = "Red";
 	Rsoldier->position.x = 474;
 	Rsoldier->position.y = 300;
+	Rsoldier->team = true;
 
 	//making a map
 	gridwidth = 9;
@@ -218,17 +220,17 @@ void MyScene::update(float deltaTime)
 			text[1]->message("Red turn.");
 		}
 		//Empty text
-		text[2]->message("");
-		text[3]->message("");
-		text[4]->message("");
-		text[5]->message("");
-		text[6]->message("");
-		text[7]->message("");
-		text[8]->message("");
-		text[9]->message("");
-		text[10]->message("");
-		text[11]->message("");
-		text[12]->message("");
+		text[2]->clearMessage();
+		text[3]->clearMessage();
+		text[4]->clearMessage();
+		text[5]->clearMessage();
+		text[6]->clearMessage();
+		text[7]->clearMessage();
+		text[8]->clearMessage();
+		text[9]->clearMessage();
+		text[10]->clearMessage();
+		text[11]->clearMessage();
+		text[12]->clearMessage();
 	}
 }
 
@@ -239,7 +241,7 @@ void MyScene::moveCamera(float deltaTime)
 	// ###############################################################
 	float speed = 600.0f; // 600 units / second
 
-						  // Right and Down vector
+    // Right and Down vector
 	Point2 right = Point2(1, 0);
 	Point2 up = Point2(0, 1);
 	// Direction

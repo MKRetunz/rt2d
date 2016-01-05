@@ -4,7 +4,7 @@
 UnitBase::UnitBase()
 {
 	//Sprite
-	this->addSprite("assets/soldierv1.tga");
+	//
 }
 
 
@@ -15,6 +15,14 @@ UnitBase::~UnitBase()
 
 void UnitBase::update(float deltaTime)
 {
+	if (this->team == true) {
+		this->addSprite("assets/soldierv1.tga");
+	}
+
+	if (this->team == false) {
+		this->addSprite("assets/soldierv2.tga");
+	}
+
 	//name
 	MsgName = "Name: ";
 	MsgName.append(name);
