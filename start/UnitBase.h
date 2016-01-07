@@ -18,12 +18,16 @@ public:
 
 	virtual void update(float deltaTime);
 
+	//specifics
+	int UnitClass; // 1 = soldier, 2 = mercenary, 3 = fighter
+
 	//movement
 	virtual void moveUp();
 	virtual void moveLeft();
 	virtual void moveRight();
 	virtual void moveDown();
 	virtual void refresh();
+	virtual void unSelect();
 
 	//combat
 	virtual void attack(UnitBase* other);

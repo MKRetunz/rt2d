@@ -19,16 +19,16 @@ void UnitBase::update(float deltaTime)
 	// Sprites
 	// #############################################################
 
-	//Team red
-	if (this->team == true) {
-		this->addSprite("assets/soldierv1.tga");
-	}
+	//Soldier
+	if (this->UnitClass == 1) {
+		if (this->team == true) {
+			this->addSprite("assets/soldierv1.tga");
+		}
 
-	//Team blue
-	if (this->team == false) {
-		this->addSprite("assets/soldierv2.tga");
+		if (this->team == false) {
+			this->addSprite("assets/soldierv2.tga");
+		}
 	}
-
 	// #############################################################
 	// Text display
 	// #############################################################
@@ -180,6 +180,11 @@ void UnitBase::moveDown()
 void UnitBase::refresh()
 {
 	this->MovOver = this->MOV;
+	this->selected = false;
+}
+
+void UnitBase::unSelect()
+{
 	this->selected = false;
 }
 

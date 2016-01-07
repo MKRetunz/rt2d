@@ -40,18 +40,27 @@ MyScene::MyScene() : Scene()
 	//Blue unit creation
 	soldier = new UnitBase();
 	this->addChild(soldier);
-	soldier->name = "Blue";
+	soldier->name = "Blue soldier";
 	soldier->position.x = 410;
 	soldier->position.y = 300;
 	soldier->team = false;
+	soldier->UnitClass = 1;
+
+	mercenary = new UnitBase();
+	this->addChild(mercenary);
+	mercenary->name = "Blue mercenary";
+	mercenary->position.x = 410;
+	mercenary->position.y = 364;
+	mercenary->team = false;
 
 	//Red unit creation
 	Rsoldier = new UnitBase();
 	this->addChild(Rsoldier);
-	Rsoldier->name = "Red";
-	Rsoldier->position.x = 474;
+	Rsoldier->name = "Red soldier";
+	Rsoldier->position.x = 794;
 	Rsoldier->position.y = 300;
 	Rsoldier->team = true;
+	Rsoldier->UnitClass = 1;
 
 	// #############################################################
 	// Map creation
@@ -135,25 +144,12 @@ void MyScene::update(float deltaTime)
 	moveCamera(deltaTime);
 
 	// #############################################################
-	// Holding mouse over units
+	// Selecting units
 	// #############################################################
 
-	int mousex = input()->getMouseX() + camera()->position.x - SWIDTH / 2;
-	int mousey = input()->getMouseY() + camera()->position.y - SHEIGHT / 2;
-
-	if (mousey >= Rsoldier->position.y + -32 && mousey <= Rsoldier->position.y + 32 && mousex >= Rsoldier->position.x + -32 && mousex <= Rsoldier->position.x + 32) {
-		displayStats(Rsoldier);
-		if (turns == false) {
-			Rsoldier->selected = true;
-		}
-	}
-
-	if (mousey >= soldier->position.y + -32 && mousey <= soldier->position.y + 32 && mousex >= soldier->position.x + -32 && mousex <= soldier->position.x + 32) {
-		displayStats(soldier);
-		if (turns == true) {
-			soldier->selected = true;
-		}
-	}
+	selectUnit(soldier);
+	selectUnit(Rsoldier);
+	selectUnit(mercenary);
 
 	// #############################################################
 	// Button presses
@@ -163,18 +159,29 @@ void MyScene::update(float deltaTime)
 	if (input()->getKeyDown(GLFW_KEY_W)) {
 		soldier->moveUp();
 		Rsoldier->moveUp();
+		mercenary->moveUp();
 	}
 	if (input()->getKeyDown(GLFW_KEY_A)) {
 		soldier->moveLeft();
 		Rsoldier->moveLeft();
+		mercenary->moveLeft();
 	}
 	if (input()->getKeyDown(GLFW_KEY_S)) {
 		soldier->moveDown();
 		Rsoldier->moveDown();
+		mercenary->moveDown();
 	}
 	if (input()->getKeyDown(GLFW_KEY_D)) {
 		soldier->moveRight();
 		Rsoldier->moveRight();
+		mercenary->moveRight();
+	}
+
+	//Unselect all units
+	if (input()->getMouseDown( 1 )) {
+		soldier->unSelect();
+		Rsoldier->unSelect();
+		mercenary->unSelect();
 	}
 
 	// #############################################################
@@ -209,7 +216,7 @@ void MyScene::update(float deltaTime)
 	// ###############################################################
 	// Pressing the Right mouse button switches player turns
 	// ###############################################################
-	if (input()->getMouseDown( 1 )) {
+	if (input()->getKeyUp( GLFW_KEY_M )) {
 		check = true;
 		if (turns == false && check == true) {
 			turns = true;
@@ -289,4 +296,21 @@ void MyScene::displayStats(UnitBase * unit)
 	text[11]->message(unit->MsgMOV);
 	text[12]->message(unit->MsgCON);
 	text[13]->message(unit->MsgMOVO);
+}
+
+void MyScene::selectUnit(UnitBase * unit)
+{
+	int mousex = input()->getMouseX() + camera()->position.x - SWIDTH / 2;
+	int mousey = input()->getMouseY() + camera()->position.y - SHEIGHT / 2;
+
+	if (mousey >= unit->position.y + -32 && mousey <= unit->position.y + 32 && mousex >= unit->position.x + -32 && mousex <= unit->position.x + 32) {
+		displayStats(unit);
+		if (turns == false && unit->team == true && input()->getMouseDown( 0 )) {
+			unit->selected = true;
+		}
+		if (turns == true && unit->team == false && input()->getMouseDown( 0 )) {
+			unit->selected = true;
+		}
+	}
+
 }

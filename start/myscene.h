@@ -52,6 +52,7 @@ protected:
 	std::vector<BasicEntity*> layers;
 	void moveCamera(float deltaTime);
 	void displayStats(UnitBase* unit);
+	void selectUnit(UnitBase* unit);
 
 private:
 	BasicEntity* grid;
@@ -61,6 +62,7 @@ private:
 
 	// Making units
 	UnitBase* soldier;
+	UnitBase* mercenary;
 	UnitBase* Rsoldier;
 
 	int gridwidth;
