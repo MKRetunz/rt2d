@@ -47,7 +47,7 @@ MyScene::MyScene() : Scene()
 	soldier->UnitClass = 1;
 
 	mercenary = new UnitBase();
-	this->addChild(mercenary);
+	//this->addChild(mercenary);
 	mercenary->name = "Blue mercenary";
 	mercenary->position.x = 410;
 	mercenary->position.y = 364;
@@ -245,7 +245,6 @@ void MyScene::update(float deltaTime)
 		text[10]->clearMessage();
 		text[11]->clearMessage();
 		text[12]->clearMessage();
-		text[13]->clearMessage();
 	}
 }
 
@@ -295,7 +294,6 @@ void MyScene::displayStats(UnitBase * unit)
 	text[10]->message(unit->MsgRES);
 	text[11]->message(unit->MsgMOV);
 	text[12]->message(unit->MsgCON);
-	text[13]->message(unit->MsgMOVO);
 }
 
 void MyScene::selectUnit(UnitBase * unit)
@@ -312,5 +310,4 @@ void MyScene::selectUnit(UnitBase * unit)
 			unit->selected = true;
 		}
 	}
-
 }

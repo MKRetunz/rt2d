@@ -77,10 +77,6 @@ void UnitBase::update(float deltaTime)
 	MsgCON = "Constitution: ";
 	MsgCON.append(std::to_string(CON));
 
-	//Movement actions
-	MsgMOVO = "Moves left: ";
-	MsgMOVO.append(std::to_string(MovOver));
-
 	// #############################################################
 	// Preventing movement after movement has been depleted
 	// #############################################################

@@ -49,7 +49,6 @@ public:
 	std::string MsgRES;
 	std::string MsgMOV;
 	std::string MsgCON;
-	std::string MsgMOVO;
 
 	//Base stats
 	int HP = 28;
