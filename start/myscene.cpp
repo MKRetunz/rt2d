@@ -47,11 +47,12 @@ MyScene::MyScene() : Scene()
 	soldier->UnitClass = 1;
 
 	mercenary = new UnitBase();
-	//this->addChild(mercenary);
+	this->addChild(mercenary);
 	mercenary->name = "Blue mercenary";
 	mercenary->position.x = 410;
 	mercenary->position.y = 364;
 	mercenary->team = false;
+	mercenary->UnitClass = 2;
 
 	//Red unit creation
 	Rsoldier = new UnitBase();
@@ -61,6 +62,14 @@ MyScene::MyScene() : Scene()
 	Rsoldier->position.y = 300;
 	Rsoldier->team = true;
 	Rsoldier->UnitClass = 1;
+
+	Rmercenary = new UnitBase();
+	this->addChild(Rmercenary);
+	Rmercenary->name = "Red mercenary";
+	Rmercenary->position.x = 794;
+	Rmercenary->position.y = 364;
+	Rmercenary->team = true;
+	Rmercenary->UnitClass = 2;
 
 	// #############################################################
 	// Map creation
@@ -127,15 +136,26 @@ MyScene::~MyScene()
 	// #############################################################
 
 	// deconstruct and delete the units
+
+	//Blue team
 	this->addChild(soldier);
 	this->removeChild(soldier);
 
+	this->addChild(mercenary);
+	this->removeChild(mercenary);
+
+	//Red team
 	this->addChild(Rsoldier);
 	this->removeChild(Rsoldier);
 
+	this->addChild(Rmercenary);
+	this->removeChild(Rmercenary);
+
 	// delete objects
 	delete soldier;
+	delete mercenary;
 	delete Rsoldier;
+	delete Rmercenary;
 }
 
 void MyScene::update(float deltaTime)
@@ -150,6 +170,7 @@ void MyScene::update(float deltaTime)
 	selectUnit(soldier);
 	selectUnit(Rsoldier);
 	selectUnit(mercenary);
+	selectUnit(Rmercenary);
 
 	// #############################################################
 	// Button presses
@@ -160,21 +181,25 @@ void MyScene::update(float deltaTime)
 		soldier->moveUp();
 		Rsoldier->moveUp();
 		mercenary->moveUp();
+		Rmercenary->moveUp();
 	}
 	if (input()->getKeyDown(GLFW_KEY_A)) {
 		soldier->moveLeft();
 		Rsoldier->moveLeft();
 		mercenary->moveLeft();
+		Rmercenary->moveLeft();
 	}
 	if (input()->getKeyDown(GLFW_KEY_S)) {
 		soldier->moveDown();
 		Rsoldier->moveDown();
 		mercenary->moveDown();
+		Rmercenary->moveDown();
 	}
 	if (input()->getKeyDown(GLFW_KEY_D)) {
 		soldier->moveRight();
 		Rsoldier->moveRight();
 		mercenary->moveRight();
+		Rmercenary->moveRight();
 	}
 
 	//Unselect all units
@@ -182,6 +207,7 @@ void MyScene::update(float deltaTime)
 		soldier->unSelect();
 		Rsoldier->unSelect();
 		mercenary->unSelect();
+		Rmercenary->unSelect();
 	}
 
 	// #############################################################
@@ -191,10 +217,16 @@ void MyScene::update(float deltaTime)
 	//Attacking is called on every frame, but only activates if units colide
 	if (turns == true) {
 		soldier->attack(Rsoldier);
+		soldier->attack(Rmercenary);
+		mercenary->attack(Rsoldier);
+		mercenary->attack(Rmercenary);
 	}
 	if (turns == false)
 	{
 		Rsoldier->attack(soldier);
+		Rsoldier->attack(mercenary);
+		Rmercenary->attack(soldier);
+		Rmercenary->attack(mercenary);
 	}
 
 	// #############################################################
@@ -222,15 +254,15 @@ void MyScene::update(float deltaTime)
 			turns = true;
 			check = false;
 			soldier->refresh();
-			Rsoldier->refresh();
+			mercenary->refresh();
 			text[1]->message("Blue turn.");
 		}
 
 		if (turns == true && check == true) {
 			turns = false;
 			check = false;
-			soldier->refresh();
 			Rsoldier->refresh();
+			Rmercenary->refresh();
 			text[1]->message("Red turn.");
 		}
 		//Empty text

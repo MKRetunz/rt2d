@@ -17,6 +17,7 @@ public:
 	virtual ~UnitBase();
 
 	virtual void update(float deltaTime);
+	virtual void setStats(int Uclass);
 
 	//specifics
 	int UnitClass; // 1 = soldier, 2 = mercenary, 3 = fighter
@@ -52,33 +53,33 @@ public:
 
 	//Base stats
 	int HP = 28;
-	int STR = 15;
-	int MAG = 4;
-	int SKL = 12;
-	int SPD = 12;
-	int LCK = 12;
-	int DEF = 10;
-	int RES = 7;
+	int STR;
+	int MAG;
+	int SKL;
+	int SPD;
+	int LCK;
+	int DEF;
+	int RES;
 	int MOV = 6;
-	int CON = 11;
+	int CON;
 
 	//Weapon stats
-	std::string wepName = "Iron lance";
-	int uses = 45;
-	int wepMT = 7;
-	int wepHit = 80;
-	int wepCrit = 0;
-	int wepWT = 7;
+	std::string wepName = "Placeholder";
+	int uses;
+	int wepMT;
+	int wepHit;
+	int wepCrit;
+	int wepWT;
 
 	//Stat growths
-	int HPGrow = 70;
-	int STRGrow = 65;
-	int MAGGrow = 5;
-	int SKLGrow = 45;
-	int SPDGrow = 60;
-	int LCKGrow = 40;
-	int DEFGrow = 35;
-	int RESGrow = 25;
+	int HPGrow;
+	int STRGrow;
+	int MAGGrow;
+	int SKLGrow;
+	int SPDGrow;
+	int LCKGrow;
+	int DEFGrow;
+	int RESGrow;
 
 	//Calculations
 	int Hit = (SKL * 2) + (LCK / 2) + wepHit;
@@ -92,6 +93,7 @@ public:
 	//Color
 	bool team;
 
+	bool statsSet = false;
 	bool actionDone = false;
 	bool selected = false;
 

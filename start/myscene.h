@@ -64,6 +64,7 @@ private:
 	UnitBase* soldier;
 	UnitBase* mercenary;
 	UnitBase* Rsoldier;
+	UnitBase* Rmercenary;
 
 	int gridwidth;
 	int gridheight;

@@ -3,8 +3,7 @@
 
 UnitBase::UnitBase()
 {
-	//Sprite
-	//
+	
 }
 
 
@@ -16,7 +15,7 @@ UnitBase::~UnitBase()
 void UnitBase::update(float deltaTime)
 {
 	// #############################################################
-	// Sprites
+	// Sprites and classes
 	// #############################################################
 
 	//Soldier
@@ -29,6 +28,19 @@ void UnitBase::update(float deltaTime)
 			this->addSprite("assets/soldierv2.tga");
 		}
 	}
+
+	if (this->UnitClass == 2) {
+		if (this->team == true) {
+			this->addSprite("assets/mercenaryv1.tga");
+		}
+
+		if (this->team == false) {
+			this->addSprite("assets/mercenaryv2.tga");
+		}
+	}
+
+	this->setStats(UnitClass);
+
 	// #############################################################
 	// Text display
 	// #############################################################
@@ -78,6 +90,16 @@ void UnitBase::update(float deltaTime)
 	MsgCON.append(std::to_string(CON));
 
 	// #############################################################
+	// Calculations
+	// #############################################################
+
+	//Calculations
+	this->Hit = (SKL * 2) + (LCK / 2) + wepHit;
+	this->Crit = (SKL / 2) + (LCK / 4) + wepCrit;
+	this->Dodge = (SPD * 2) + (LCK);
+	this->Damage = STR + wepMT;
+
+	// #############################################################
 	// Preventing movement after movement has been depleted
 	// #############################################################
 
@@ -122,6 +144,73 @@ void UnitBase::update(float deltaTime)
 		this->position.x = 100000;
 		removeChild(this);
 	}
+}
+
+// ################################################################
+// Change stats depending on class
+// ################################################################
+
+void UnitBase::setStats(int Uclass)
+{
+		if (Uclass == 1) {
+			//Base stats
+			this->STR = 15;
+			this->MAG = 4;
+			this->SKL = 12;
+			this->SPD = 12;
+			this->LCK = 12;
+			this->DEF = 10;
+			this->RES = 7;
+			this->CON = 11;
+
+			//Weapon stats
+			this->wepName = "Iron lance";
+			this->uses = 45;
+			this->wepMT = 7;
+			this->wepHit = 80;
+			this->wepCrit = 0;
+			this->wepWT = 7;
+
+			//Stat growths
+			this->HPGrow = 70;
+			this->STRGrow = 65;
+			this->MAGGrow = 5;
+			this->SKLGrow = 45;
+			this->SPDGrow = 60;
+			this->LCKGrow = 40;
+			this->DEFGrow = 35;
+			this->RESGrow = 25;
+		}
+
+		if (Uclass == 2) {
+			//Base stats
+			this->STR = 16;
+			this->MAG = 2;
+			this->SKL = 12;
+			this->SPD = 13;
+			this->LCK = 8;
+			this->DEF = 13;
+			this->RES = 3;
+			this->CON = 13;
+
+			//Weapon stats
+			this->wepName = "Iron sword";
+			this->uses = 46;
+			this->wepMT = 5;
+			this->wepHit = 90;
+			this->wepCrit = 0;
+			this->wepWT = 5;
+
+			//Stat growths
+			this->HPGrow = 80;
+			this->STRGrow = 60;
+			this->MAGGrow = 10;
+			this->SKLGrow = 50;
+			this->SPDGrow = 55;
+			this->LCKGrow = 35;
+			this->DEFGrow = 45;
+			this->RESGrow = 10;
+		}
 }
 
 // ################################################################
