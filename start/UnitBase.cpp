@@ -3,7 +3,7 @@
 
 UnitBase::UnitBase()
 {
-	
+	selectorC = new selector();
 }
 
 
@@ -39,6 +39,16 @@ void UnitBase::update(float deltaTime)
 		}
 	}
 
+	if (this->UnitClass == 3) {
+		if (this->team == true) {
+			this->addSprite("assets/fighterv1.tga");
+		}
+
+		if (this->team == false) {
+			this->addSprite("assets/fighterv2.tga");
+		}
+	}
+
 	this->setStats(UnitClass);
 
 	// #############################################################
@@ -57,10 +67,6 @@ void UnitBase::update(float deltaTime)
 	MsgSTR = "Strength: ";
 	MsgSTR.append(std::to_string(STR));
 
-	//Magic
-	MsgMAG = "Magic: ";
-	MsgMAG.append(std::to_string(MAG));
-
 	//Skill
 	MsgSKL = "Skill: ";
 	MsgSKL.append(std::to_string(SKL));
@@ -77,10 +83,6 @@ void UnitBase::update(float deltaTime)
 	MsgDEF = "Defense: ";
 	MsgDEF.append(std::to_string(DEF));
 
-	//Resistance
-	MsgRES = "Resistance: ";
-	MsgRES.append(std::to_string(RES));
-
 	//Move
 	MsgMOV = "Move: ";
 	MsgMOV.append(std::to_string(MOV));
@@ -88,6 +90,22 @@ void UnitBase::update(float deltaTime)
 	//Con
 	MsgCON = "Constitution: ";
 	MsgCON.append(std::to_string(CON));
+
+	//Hit
+	MsgHIT = "Hit: ";
+	MsgHIT.append(std::to_string(Hit));
+
+	//Crit
+	MsgCRT = "Crit: ";
+	MsgCRT.append(std::to_string(Crit));
+
+	//Dodge
+	MsgDGD = "Dodge: ";
+	MsgDGD.append(std::to_string(Dodge));
+
+	MsgDMG = "Damage: ";
+	MsgDMG.append(std::to_string(Damage));
+
 
 	// #############################################################
 	// Calculations
@@ -144,6 +162,18 @@ void UnitBase::update(float deltaTime)
 		this->position.x = 100000;
 		removeChild(this);
 	}
+
+	// ############################################################
+	// Selector
+	// ############################################################
+
+	if (this->selected == true) {
+		this->addChild(selectorC);
+	}
+	if (this->selected == false) {
+		this->addChild(selectorC);
+		this->removeChild(selectorC);
+	}
 }
 
 // ################################################################
@@ -155,13 +185,12 @@ void UnitBase::setStats(int Uclass)
 		if (Uclass == 1) {
 			//Base stats
 			this->STR = 15;
-			this->MAG = 4;
-			this->SKL = 12;
-			this->SPD = 12;
-			this->LCK = 12;
-			this->DEF = 10;
-			this->RES = 7;
+			this->SKL = 11;
+			this->SPD = 11;
+			this->LCK = 8;
+			this->DEF = 13;
 			this->CON = 11;
+			//Total: 80
 
 			//Weapon stats
 			this->wepName = "Iron lance";
@@ -173,25 +202,23 @@ void UnitBase::setStats(int Uclass)
 
 			//Stat growths
 			this->HPGrow = 70;
-			this->STRGrow = 65;
-			this->MAGGrow = 5;
+			this->STRGrow = 55;
 			this->SKLGrow = 45;
-			this->SPDGrow = 60;
+			this->SPDGrow = 55;
 			this->LCKGrow = 40;
 			this->DEFGrow = 35;
-			this->RESGrow = 25;
+			//Total: 300
 		}
 
 		if (Uclass == 2) {
 			//Base stats
 			this->STR = 16;
-			this->MAG = 2;
 			this->SKL = 12;
-			this->SPD = 13;
+			this->SPD = 12;
 			this->LCK = 8;
-			this->DEF = 13;
-			this->RES = 3;
-			this->CON = 13;
+			this->DEF = 12;
+			this->CON = 10;
+			//Total: 80
 
 			//Weapon stats
 			this->wepName = "Iron sword";
@@ -202,14 +229,41 @@ void UnitBase::setStats(int Uclass)
 			this->wepWT = 5;
 
 			//Stat growths
-			this->HPGrow = 80;
-			this->STRGrow = 60;
-			this->MAGGrow = 10;
+			this->HPGrow = 65;
+			this->STRGrow = 50;
 			this->SKLGrow = 50;
 			this->SPDGrow = 55;
 			this->LCKGrow = 35;
 			this->DEFGrow = 45;
-			this->RESGrow = 10;
+			//Total: 300
+		}
+
+		if (Uclass == 3) {
+			//Base stats
+			this->STR = 17;
+			this->SKL = 16;
+			this->SPD = 8;
+			this->LCK = 10;
+			this->DEF = 11;
+			this->CON = 14;
+			//total: 80
+
+			//Weapon stats
+			this->wepName = "Iron axe";
+			this->uses = 45;
+			this->wepMT = 8;
+			this->wepHit = 75;
+			this->wepCrit = 0;
+			this->wepWT = 10;
+
+			//Stat growths
+			this->HPGrow = 80;
+			this->STRGrow = 70;
+			this->SKLGrow = 50;
+			this->SPDGrow = 20;
+			this->LCKGrow = 25;
+			this->DEFGrow = 55;
+			//total 300
 		}
 }
 
@@ -282,20 +336,32 @@ void UnitBase::attack(UnitBase* other)
 	if (this->position == other->position) {
 		if (rand() % 100 + 1 <= this->Hit - other->Dodge) {
 			other->takeDamage(this->Damage);
+			if (rand() % 100 + 1 <= this->Crit) {
+				other->takeDamage(this->Damage);
+			}
 		}
-		if (other->HP >= 0) {
+		if (other->HP > 0) {
 			if (rand() % 100 + 1 <= other->Hit - this->Dodge) {
 				this->takeDamage(other->Damage);
+				if (rand() % 100 + 1 <= other->Crit) {
+					this->takeDamage(other->Damage);
+				}
 			}
-			if (this->HP >= 0) {
-				if (this->SPD >= other->SPD + 4) {
+			if (this->HP > 0) {
+				if (this->SPD >= (other->SPD + 4)) {
 					if (rand() % 100 + 1 <= this->Hit - other->Dodge) {
 						other->takeDamage(this->Damage);
+						if (rand() % 100 + 1 <= this->Crit) {
+							other->takeDamage(this->Damage);
+						}
 					}
 				}	
-				if (other->SPD >= this->SPD + 4) {
+				if (other->SPD >= (this->SPD + 4)) {
 					if (rand() % 100 + 1 <= other->Hit - this->Dodge) {
 						this->takeDamage(other->Damage);
+						if (rand() % 100 + 1 <= other->Crit) {
+							this->takeDamage(other->Damage);
+						}
 					}
 				}
 			}

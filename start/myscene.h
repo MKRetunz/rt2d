@@ -63,8 +63,10 @@ private:
 	// Making units
 	UnitBase* soldier;
 	UnitBase* mercenary;
+	UnitBase* fighter;
 	UnitBase* Rsoldier;
 	UnitBase* Rmercenary;
+	UnitBase* Rfighter;
 
 	int gridwidth;
 	int gridheight;

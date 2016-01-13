@@ -185,6 +185,8 @@ add_executable(start
 	start/UnitBase.h
 	start/basicentity.cpp
 	start/basicentity.h
+	start/selector.cpp
+	start/selector.h
 )
 target_link_libraries(start
 	${ALL_LIBS}

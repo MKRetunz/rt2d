@@ -8,6 +8,7 @@
 #include <string>
 #include <sstream>
 #include <rt2d/text.h>
+#include "selector.h"
 
 
 class UnitBase : public Entity
@@ -50,16 +51,18 @@ public:
 	std::string MsgRES;
 	std::string MsgMOV;
 	std::string MsgCON;
+	std::string MsgHIT;
+	std::string MsgCRT;
+	std::string MsgDGD;
+	std::string MsgDMG;
 
 	//Base stats
 	int HP = 28;
 	int STR;
-	int MAG;
 	int SKL;
 	int SPD;
 	int LCK;
 	int DEF;
-	int RES;
 	int MOV = 6;
 	int CON;
 
@@ -74,12 +77,10 @@ public:
 	//Stat growths
 	int HPGrow;
 	int STRGrow;
-	int MAGGrow;
 	int SKLGrow;
 	int SPDGrow;
 	int LCKGrow;
 	int DEFGrow;
-	int RESGrow;
 
 	//Calculations
 	int Hit = (SKL * 2) + (LCK / 2) + wepHit;
@@ -100,6 +101,7 @@ public:
 	int MovOver = MOV;
 
 private:
+	selector* selectorC;
 
 protected:
 };

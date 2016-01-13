@@ -50,16 +50,24 @@ MyScene::MyScene() : Scene()
 	this->addChild(mercenary);
 	mercenary->name = "Blue mercenary";
 	mercenary->position.x = 410;
-	mercenary->position.y = 364;
+	mercenary->position.y = 236;
 	mercenary->team = false;
 	mercenary->UnitClass = 2;
+
+	fighter = new UnitBase();
+	this->addChild(fighter);
+	fighter->name = "Blue fighter";
+	fighter->position.x = 410;
+	fighter->position.y = 428;
+	fighter->team = false;
+	fighter->UnitClass = 3;
 
 	//Red unit creation
 	Rsoldier = new UnitBase();
 	this->addChild(Rsoldier);
 	Rsoldier->name = "Red soldier";
 	Rsoldier->position.x = 794;
-	Rsoldier->position.y = 300;
+	Rsoldier->position.y = 364;
 	Rsoldier->team = true;
 	Rsoldier->UnitClass = 1;
 
@@ -67,9 +75,17 @@ MyScene::MyScene() : Scene()
 	this->addChild(Rmercenary);
 	Rmercenary->name = "Red mercenary";
 	Rmercenary->position.x = 794;
-	Rmercenary->position.y = 364;
+	Rmercenary->position.y = 428;
 	Rmercenary->team = true;
 	Rmercenary->UnitClass = 2;
+
+	Rfighter = new UnitBase();
+	this->addChild(Rfighter);
+	Rfighter->name = "Red fighter";
+	Rfighter->position.x = 794;
+	Rfighter->position.y = 236;
+	Rfighter->team = true;
+	Rfighter->UnitClass = 3;
 
 	// #############################################################
 	// Map creation
@@ -125,7 +141,10 @@ MyScene::MyScene() : Scene()
 		}
 	}
 
-	text[1]->message("Blue turn.");
+	text[0]->message("Blue turn.");
+	text[14]->message("Hit chance is Hit - enemy dodge");
+	text[15]->message("Final damage is Damage - enemy defense");
+
 }
 
 
@@ -144,6 +163,9 @@ MyScene::~MyScene()
 	this->addChild(mercenary);
 	this->removeChild(mercenary);
 
+	this->addChild(fighter);
+	this->removeChild(fighter);
+
 	//Red team
 	this->addChild(Rsoldier);
 	this->removeChild(Rsoldier);
@@ -151,11 +173,16 @@ MyScene::~MyScene()
 	this->addChild(Rmercenary);
 	this->removeChild(Rmercenary);
 
+	this->addChild(Rfighter);
+	this->removeChild(Rfighter);
+
 	// delete objects
 	delete soldier;
 	delete mercenary;
+	delete fighter;
 	delete Rsoldier;
 	delete Rmercenary;
+	delete Rfighter;
 }
 
 void MyScene::update(float deltaTime)
@@ -169,8 +196,10 @@ void MyScene::update(float deltaTime)
 
 	selectUnit(soldier);
 	selectUnit(Rsoldier);
+	selectUnit(Rfighter);
 	selectUnit(mercenary);
 	selectUnit(Rmercenary);
+	selectUnit(fighter);
 
 	// #############################################################
 	// Button presses
@@ -182,24 +211,32 @@ void MyScene::update(float deltaTime)
 		Rsoldier->moveUp();
 		mercenary->moveUp();
 		Rmercenary->moveUp();
+		fighter->moveUp();
+		Rfighter->moveUp();
 	}
 	if (input()->getKeyDown(GLFW_KEY_A)) {
 		soldier->moveLeft();
 		Rsoldier->moveLeft();
 		mercenary->moveLeft();
 		Rmercenary->moveLeft();
+		fighter->moveLeft();
+		Rfighter->moveLeft();
 	}
 	if (input()->getKeyDown(GLFW_KEY_S)) {
 		soldier->moveDown();
 		Rsoldier->moveDown();
 		mercenary->moveDown();
 		Rmercenary->moveDown();
+		fighter->moveDown();
+		Rfighter->moveDown();
 	}
 	if (input()->getKeyDown(GLFW_KEY_D)) {
 		soldier->moveRight();
 		Rsoldier->moveRight();
 		mercenary->moveRight();
 		Rmercenary->moveRight();
+		fighter->moveRight();
+		Rfighter->moveRight();
 	}
 
 	//Unselect all units
@@ -208,6 +245,8 @@ void MyScene::update(float deltaTime)
 		Rsoldier->unSelect();
 		mercenary->unSelect();
 		Rmercenary->unSelect();
+		fighter->unSelect();
+		Rfighter->unSelect();
 	}
 
 	// #############################################################
@@ -218,15 +257,25 @@ void MyScene::update(float deltaTime)
 	if (turns == true) {
 		soldier->attack(Rsoldier);
 		soldier->attack(Rmercenary);
+		soldier->attack(Rfighter);
 		mercenary->attack(Rsoldier);
 		mercenary->attack(Rmercenary);
+		mercenary->attack(Rfighter);
+		fighter->attack(Rsoldier);
+		fighter->attack(Rmercenary);
+		fighter->attack(Rfighter);
 	}
 	if (turns == false)
 	{
 		Rsoldier->attack(soldier);
 		Rsoldier->attack(mercenary);
+		Rsoldier->attack(fighter);
 		Rmercenary->attack(soldier);
 		Rmercenary->attack(mercenary);
+		Rmercenary->attack(fighter);
+		Rfighter->attack(soldier);
+		Rfighter->attack(mercenary);
+		Rfighter->attack(fighter);
 	}
 
 	// #############################################################
@@ -250,11 +299,18 @@ void MyScene::update(float deltaTime)
 	// ###############################################################
 	if (input()->getKeyUp( GLFW_KEY_M )) {
 		check = true;
+		soldier->unSelect();
+		Rsoldier->unSelect();
+		mercenary->unSelect();
+		Rmercenary->unSelect();
+		fighter->unSelect();
+		Rfighter->unSelect();
 		if (turns == false && check == true) {
 			turns = true;
 			check = false;
 			soldier->refresh();
 			mercenary->refresh();
+			fighter->refresh();
 			text[1]->message("Blue turn.");
 		}
 
@@ -263,9 +319,11 @@ void MyScene::update(float deltaTime)
 			check = false;
 			Rsoldier->refresh();
 			Rmercenary->refresh();
+			Rfighter->refresh();
 			text[1]->message("Red turn.");
 		}
 		//Empty text
+		text[1]->clearMessage();
 		text[2]->clearMessage();
 		text[3]->clearMessage();
 		text[4]->clearMessage();
@@ -277,6 +335,7 @@ void MyScene::update(float deltaTime)
 		text[10]->clearMessage();
 		text[11]->clearMessage();
 		text[12]->clearMessage();
+		text[13]->clearMessage();
 	}
 }
 
@@ -315,17 +374,19 @@ void MyScene::displayStats(UnitBase * unit)
 	// #############################################################
 	// Statistic display
 	// #############################################################
-	text[2]->message(unit->MsgName);
-	text[3]->message(unit->MsgHP);
-	text[4]->message(unit->MsgSTR);
-	text[5]->message(unit->MsgMAG);
-	text[6]->message(unit->MsgSKL);
-	text[7]->message(unit->MsgSPD);
-	text[8]->message(unit->MsgLCK);
-	text[9]->message(unit->MsgDEF);
-	text[10]->message(unit->MsgRES);
-	text[11]->message(unit->MsgMOV);
-	text[12]->message(unit->MsgCON);
+	text[1]->message(unit->MsgName);
+	text[2]->message(unit->MsgHP);
+	text[3]->message(unit->MsgSTR);
+	text[4]->message(unit->MsgSKL);
+	text[5]->message(unit->MsgSPD);
+	text[6]->message(unit->MsgLCK);
+	text[7]->message(unit->MsgDEF);
+	text[8]->message(unit->MsgMOV);
+	text[9]->message(unit->MsgCON);
+	text[10]->message(unit->MsgHIT);
+	text[11]->message(unit->MsgCRT);
+	text[12]->message(unit->MsgDGD);
+	text[13]->message(unit->MsgDMG);
 }
 
 void MyScene::selectUnit(UnitBase * unit)
