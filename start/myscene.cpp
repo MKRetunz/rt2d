@@ -255,27 +255,40 @@ void MyScene::update(float deltaTime)
 
 	//Attacking is called on every frame, but only activates if units colide
 	if (turns == true) {
-		soldier->attack(Rsoldier);
-		soldier->attack(Rmercenary);
-		soldier->attack(Rfighter);
-		mercenary->attack(Rsoldier);
-		mercenary->attack(Rmercenary);
-		mercenary->attack(Rfighter);
-		fighter->attack(Rsoldier);
-		fighter->attack(Rmercenary);
-		fighter->attack(Rfighter);
+		//Simplify if possible
+		soldier->collide(Rsoldier);
+		soldier->collide(Rmercenary);
+		soldier->collide(Rfighter);
+		soldier->collide(mercenary);
+		soldier->collide(fighter);
+		mercenary->collide(Rsoldier);
+		mercenary->collide(Rmercenary);
+		mercenary->collide(Rfighter);
+		mercenary->collide(soldier);
+		mercenary->collide(fighter);
+		fighter->collide(Rsoldier);
+		fighter->collide(Rmercenary);
+		fighter->collide(Rfighter);
+		fighter->collide(soldier);
+		fighter->collide(mercenary);
 	}
 	if (turns == false)
 	{
-		Rsoldier->attack(soldier);
-		Rsoldier->attack(mercenary);
-		Rsoldier->attack(fighter);
-		Rmercenary->attack(soldier);
-		Rmercenary->attack(mercenary);
-		Rmercenary->attack(fighter);
-		Rfighter->attack(soldier);
-		Rfighter->attack(mercenary);
-		Rfighter->attack(fighter);
+		Rsoldier->collide(soldier);
+		Rsoldier->collide(mercenary);
+		Rsoldier->collide(fighter);
+		Rsoldier->collide(Rmercenary);
+		Rsoldier->collide(Rfighter);
+		Rmercenary->collide(soldier);
+		Rmercenary->collide(mercenary);
+		Rmercenary->collide(fighter);
+		Rmercenary->collide(Rsoldier);
+		Rmercenary->collide(Rfighter);
+		Rfighter->collide(soldier);
+		Rfighter->collide(mercenary);
+		Rfighter->collide(fighter);
+		Rfighter->collide(Rsoldier);
+		Rfighter->collide(Rmercenary);
 	}
 
 	// #############################################################

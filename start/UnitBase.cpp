@@ -174,6 +174,7 @@ void UnitBase::update(float deltaTime)
 		this->addChild(selectorC);
 		this->removeChild(selectorC);
 	}
+
 }
 
 // ################################################################
@@ -327,15 +328,30 @@ void UnitBase::unSelect()
 	this->selected = false;
 }
 
+void UnitBase::collide(UnitBase * other)
+{
+	if (this->position == other->position && this->selected == true) {
+		if (this->team != other->team) {
+			this->attack(other);
+		}
+		if (this->team == other->team) {
+			this->position.x = this->lastposX;
+			this->position.y = this->lastposY;
+			this->MovOver++;
+		}
+	}
+}
+
 // #################################################################
 // Combat functions
 // #################################################################
 
 void UnitBase::attack(UnitBase* other)
 {
-	if (this->position == other->position) {
+	if (this->uses < 0) {
 		if (rand() % 100 + 1 <= this->Hit - other->Dodge) {
 			other->takeDamage(this->Damage);
+			this->uses -= 1;
 			if (rand() % 100 + 1 <= this->Crit) {
 				other->takeDamage(this->Damage);
 			}
@@ -343,6 +359,7 @@ void UnitBase::attack(UnitBase* other)
 		if (other->HP > 0) {
 			if (rand() % 100 + 1 <= other->Hit - this->Dodge) {
 				this->takeDamage(other->Damage);
+				other->uses -= 1;
 				if (rand() % 100 + 1 <= other->Crit) {
 					this->takeDamage(other->Damage);
 				}
@@ -366,10 +383,10 @@ void UnitBase::attack(UnitBase* other)
 				}
 			}
 		}
-		this->position.x = this->lastposX;
-		this->position.y = this->lastposY;
 		this->MovOver = 0;
 	}
+	this->position.x = this->lastposX;
+	this->position.y = this->lastposY;
 }
 
 void UnitBase::takeDamage(int amount)

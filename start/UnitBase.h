@@ -30,6 +30,7 @@ public:
 	virtual void moveDown();
 	virtual void refresh();
 	virtual void unSelect();
+	virtual void collide(UnitBase* other);
 
 	//combat
 	virtual void attack(UnitBase* other);
@@ -87,6 +88,7 @@ public:
 	int Crit = (SKL / 2) + (LCK / 4) + wepCrit;
 	int Dodge = (SPD * 2) + (LCK);
 	int Damage = STR + wepMT;
+	int EXP = 0;
 
 	//Name
 	std::string name = "Placeholder";
