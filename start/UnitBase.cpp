@@ -59,6 +59,13 @@ void UnitBase::update(float deltaTime)
 	MsgName = "Name: ";
 	MsgName.append(name);
 
+	//Level
+	MsgLVL = "Level: ";
+	MsgLVL.append(std::to_string(Level));
+	MsgLVL.append(", Experience: ");
+	MsgLVL.append(std::to_string(EXP));
+	MsgLVL.append("/50");
+
 	//Hit Points
 	MsgHP = "Hit points: ";
 	MsgHP.append(std::to_string(HP));
@@ -175,22 +182,33 @@ void UnitBase::update(float deltaTime)
 		this->removeChild(selectorC);
 	}
 
+	// ############################################################
+	// Level up
+	// ############################################################
+
+	if (this->EXP >= 50) {
+		this->EXP -= 50;
+		this->levelUp();
+	}
 }
 
 // ################################################################
-// Change stats depending on class
+// Class stats & level ups
 // ################################################################
 
 void UnitBase::setStats(int Uclass)
 {
+	if (statsSet == false) {
 		if (Uclass == 1) {
 			//Base stats
+			this->HP = 28;
 			this->STR = 15;
 			this->SKL = 11;
 			this->SPD = 11;
 			this->LCK = 8;
 			this->DEF = 13;
-			this->CON = 11;
+			this->CON = 11; //x2 = 22
+			//this->MOV = 6; //x3 = 18
 			//Total: 80
 
 			//Weapon stats
@@ -213,12 +231,14 @@ void UnitBase::setStats(int Uclass)
 
 		if (Uclass == 2) {
 			//Base stats
-			this->STR = 16;
-			this->SKL = 12;
-			this->SPD = 12;
-			this->LCK = 8;
-			this->DEF = 12;
-			this->CON = 10;
+			this->HP = 31;
+			this->STR = 13;
+			this->SKL = 13;
+			this->SPD = 14;
+			this->LCK = 9;
+			this->DEF = 11;
+			this->CON = 10; //x2 = 20
+			//this->MOV = 5; //x3 = 15
 			//Total: 80
 
 			//Weapon stats
@@ -241,12 +261,14 @@ void UnitBase::setStats(int Uclass)
 
 		if (Uclass == 3) {
 			//Base stats
+			this->HP = 34;
 			this->STR = 17;
-			this->SKL = 16;
+			this->SKL = 13;
 			this->SPD = 8;
 			this->LCK = 10;
 			this->DEF = 11;
-			this->CON = 14;
+			this->CON = 14; //x2 = 28
+			//this->MOV = 5; //x3 = 15
 			//total: 80
 
 			//Weapon stats
@@ -266,6 +288,30 @@ void UnitBase::setStats(int Uclass)
 			this->DEFGrow = 55;
 			//total 300
 		}
+		statsSet = true;
+	}
+}
+
+void UnitBase::levelUp()
+{
+	if (rand() % 100 + 1 <= this->HPGrow) {
+		this->HP += 1;
+	}
+	if (rand() % 100 + 1 <= this->STRGrow) {
+		this->STR += 1;
+	}
+	if (rand() % 100 + 1 <= this->SKLGrow) {
+		this->SKL += 1;
+	}
+	if (rand() % 100 + 1 <= this->SPDGrow) {
+		this->SPD += 1;
+	}
+	if (rand() % 100 + 1 <= this->LCKGrow) {
+		this->LCK += 1;
+	}
+	if (rand() % 100 + 1 <= this->DEFGrow) {
+		this->DEF += 1;
+	}
 }
 
 // ################################################################
@@ -348,43 +394,21 @@ void UnitBase::collide(UnitBase * other)
 
 void UnitBase::attack(UnitBase* other)
 {
-	if (this->uses < 0) {
-		if (rand() % 100 + 1 <= this->Hit - other->Dodge) {
-			other->takeDamage(this->Damage);
-			this->uses -= 1;
-			if (rand() % 100 + 1 <= this->Crit) {
-				other->takeDamage(this->Damage);
+	this->MovOver++;
+
+	this->fight(other);
+	if (other->HP > 0) {
+		other->fight(this);
+		if (this->HP > 0) {
+			if (this->SPD > other->SPD + 4) {
+				this->fight(other);
+			}
+			if (other->SPD > this->SPD + 4) {
+				other->fight(this);
 			}
 		}
-		if (other->HP > 0) {
-			if (rand() % 100 + 1 <= other->Hit - this->Dodge) {
-				this->takeDamage(other->Damage);
-				other->uses -= 1;
-				if (rand() % 100 + 1 <= other->Crit) {
-					this->takeDamage(other->Damage);
-				}
-			}
-			if (this->HP > 0) {
-				if (this->SPD >= (other->SPD + 4)) {
-					if (rand() % 100 + 1 <= this->Hit - other->Dodge) {
-						other->takeDamage(this->Damage);
-						if (rand() % 100 + 1 <= this->Crit) {
-							other->takeDamage(this->Damage);
-						}
-					}
-				}	
-				if (other->SPD >= (this->SPD + 4)) {
-					if (rand() % 100 + 1 <= other->Hit - this->Dodge) {
-						this->takeDamage(other->Damage);
-						if (rand() % 100 + 1 <= other->Crit) {
-							this->takeDamage(other->Damage);
-						}
-					}
-				}
-			}
-		}
-		this->MovOver = 0;
 	}
+	
 	this->position.x = this->lastposX;
 	this->position.y = this->lastposY;
 }
@@ -396,4 +420,19 @@ void UnitBase::takeDamage(int amount)
 		amount = 0;
 	}
 	this->HP -= amount;
+}
+
+void UnitBase::fight(UnitBase * other)
+{
+	if (this->uses > 0) {
+		if (rand() % 100 + 1 <= this->Hit - other->Dodge) {
+			other->takeDamage(this->Damage);
+			this->uses -= 1;
+			this->EXP += 10;
+			if (rand() % 100 + 1 <= this->Crit) {
+				other->takeDamage(this->Damage);
+			}
+		}
+		this->MovOver = 0;
+	}
 }

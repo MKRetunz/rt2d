@@ -25,7 +25,7 @@ MyScene::MyScene() : Scene()
 	}
 
 	//add text
-	for (unsigned int i = 0; i < 16; i++) {
+	for (unsigned int i = 0; i < 18; i++) {
 		Text* line = new Text();
 		line->scale = Point2(0.5f, 0.5f);
 
@@ -142,8 +142,9 @@ MyScene::MyScene() : Scene()
 	}
 
 	text[0]->message("Blue turn.");
-	text[14]->message("Hit chance is Hit - enemy dodge");
-	text[15]->message("Final damage is Damage - enemy defense");
+	text[15]->message("Hit chance is Hit - enemy dodge.");
+	text[16]->message("Final damage is Damage - enemy defense.");
+	text[17]->message("If you have 5 speed more than the enemy attack twice.");
 
 }
 
@@ -324,7 +325,7 @@ void MyScene::update(float deltaTime)
 			soldier->refresh();
 			mercenary->refresh();
 			fighter->refresh();
-			text[1]->message("Blue turn.");
+			text[0]->message("Blue turn.");
 		}
 
 		if (turns == true && check == true) {
@@ -333,7 +334,7 @@ void MyScene::update(float deltaTime)
 			Rsoldier->refresh();
 			Rmercenary->refresh();
 			Rfighter->refresh();
-			text[1]->message("Red turn.");
+			text[0]->message("Red turn.");
 		}
 		//Empty text
 		text[1]->clearMessage();
@@ -349,6 +350,7 @@ void MyScene::update(float deltaTime)
 		text[11]->clearMessage();
 		text[12]->clearMessage();
 		text[13]->clearMessage();
+		text[14]->clearMessage();
 	}
 }
 
@@ -388,21 +390,22 @@ void MyScene::displayStats(UnitBase * unit)
 	// Statistic display
 	// #############################################################
 	text[1]->message(unit->MsgName);
-	text[2]->message(unit->MsgHP);
-	text[3]->message(unit->MsgSTR);
-	text[4]->message(unit->MsgSKL);
-	text[5]->message(unit->MsgSPD);
-	text[6]->message(unit->MsgLCK);
-	text[7]->message(unit->MsgDEF);
-	text[8]->message(unit->MsgMOV);
-	text[9]->message(unit->MsgCON);
-	text[10]->message(unit->MsgHIT);
-	text[11]->message(unit->MsgCRT);
-	text[12]->message(unit->MsgDGD);
-	text[13]->message(unit->MsgDMG);
+	text[2]->message(unit->MsgLVL);
+	text[3]->message(unit->MsgHP);
+	text[4]->message(unit->MsgSTR);
+	text[5]->message(unit->MsgSKL);
+	text[6]->message(unit->MsgSPD);
+	text[7]->message(unit->MsgLCK);
+	text[8]->message(unit->MsgDEF);
+	text[9]->message(unit->MsgMOV);
+	text[10]->message(unit->MsgCON);
+	text[11]->message(unit->MsgHIT);
+	text[12]->message(unit->MsgCRT);
+	text[13]->message(unit->MsgDGD);
+	text[14]->message(unit->MsgDMG);
 }
 
-void MyScene::selectUnit(UnitBase * unit)
+void MyScene::selectUnit(UnitBase* unit)
 {
 	int mousex = input()->getMouseX() + camera()->position.x - SWIDTH / 2;
 	int mousey = input()->getMouseY() + camera()->position.y - SHEIGHT / 2;

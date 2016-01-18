@@ -18,7 +18,10 @@ public:
 	virtual ~UnitBase();
 
 	virtual void update(float deltaTime);
+
+	//Stats
 	virtual void setStats(int Uclass);
+	virtual void levelUp();
 
 	//specifics
 	int UnitClass; // 1 = soldier, 2 = mercenary, 3 = fighter
@@ -35,6 +38,7 @@ public:
 	//combat
 	virtual void attack(UnitBase* other);
 	virtual void takeDamage(int amount);
+	virtual void fight(UnitBase* other);
 
 	int lastposX;
 	int lastposY;
@@ -42,6 +46,7 @@ public:
 
 	//Statistics
 	std::string MsgName;
+	std::string MsgLVL;
 	std::string MsgHP;
 	std::string MsgSTR;
 	std::string MsgMAG;
@@ -58,7 +63,7 @@ public:
 	std::string MsgDMG;
 
 	//Base stats
-	int HP = 28;
+	int HP;
 	int STR;
 	int SKL;
 	int SPD;
@@ -89,6 +94,7 @@ public:
 	int Dodge = (SPD * 2) + (LCK);
 	int Damage = STR + wepMT;
 	int EXP = 0;
+	int Level = 1;
 
 	//Name
 	std::string name = "Placeholder";
