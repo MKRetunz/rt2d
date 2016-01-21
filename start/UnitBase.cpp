@@ -31,11 +31,12 @@ void UnitBase::update(float deltaTime)
 
 	if (this->UnitClass == 2) {
 		if (this->team == true) {
-			this->addSprite("assets/mercenaryv1.tga");
+			this->addSpriteSheet("assets/MercAnimation.tga", 2, 2);
+
 		}
 
 		if (this->team == false) {
-			this->addSprite("assets/mercenaryv2.tga");
+			this->addSpriteSheet("assets/MercAnimation2.tga", 2, 2);
 		}
 	}
 
@@ -50,6 +51,19 @@ void UnitBase::update(float deltaTime)
 	}
 
 	this->setStats(UnitClass);
+
+	if (this->attacking == true) {
+		scounter += deltaTime;
+		if (frame > 2) { frame = 0; }
+		if (scounter > 1.0f && fcounter < 3) {
+			this->animation();
+		}
+		if (fcounter == 3) {
+			this->attacking = false;
+			frame = 0;
+		}
+	}
+	this->sprite()->frame(frame);
 
 	// #############################################################
 	// Text display
@@ -429,10 +443,19 @@ void UnitBase::fight(UnitBase * other)
 			other->takeDamage(this->Damage);
 			this->uses -= 1;
 			this->EXP += 10;
+			this->attacking = true;
 			if (rand() % 100 + 1 <= this->Crit) {
 				other->takeDamage(this->Damage);
 			}
 		}
 		this->MovOver = 0;
 	}
+}
+
+void UnitBase::animation()
+{
+	frame++;
+	scounter = 0.0f;
+	fcounter++;
+	this->sprite()->frame(frame);
 }

@@ -14,6 +14,7 @@
 class UnitBase : public Entity
 {
 public:
+
 	UnitBase();
 	virtual ~UnitBase();
 
@@ -39,6 +40,7 @@ public:
 	virtual void attack(UnitBase* other);
 	virtual void takeDamage(int amount);
 	virtual void fight(UnitBase* other);
+	virtual void animation();
 
 	int lastposX;
 	int lastposY;
@@ -105,8 +107,14 @@ public:
 	bool statsSet = false;
 	bool actionDone = false;
 	bool selected = false;
+	bool attacking = false;
 
 	int MovOver = MOV;
+
+	//Animation
+	int frame = 0;
+	float scounter = 0.0f;
+	int fcounter = 0;
 
 private:
 	selector* selectorC;

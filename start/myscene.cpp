@@ -184,6 +184,24 @@ MyScene::~MyScene()
 	delete Rsoldier;
 	delete Rmercenary;
 	delete Rfighter;
+	
+	//Text and layers
+
+	int ls = layers.size();
+	for (int i = 0; i<ls; i++) {
+		this->removeChild(layers[i]);
+		delete layers[i];
+		layers[i] = NULL;
+	}
+	layers.clear();
+
+	int ts = text.size();
+	for (int i = 0; i<ts; i++) {
+		this->removeChild(text[i]);
+		delete text[i];
+		text[i] = NULL;
+	}
+	text.clear();
 }
 
 void MyScene::update(float deltaTime)
