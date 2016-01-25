@@ -9,7 +9,7 @@ UnitBase::UnitBase()
 
 UnitBase::~UnitBase()
 {
-
+	delete selectorC;
 }
 
 void UnitBase::update(float deltaTime)
@@ -61,6 +61,7 @@ void UnitBase::update(float deltaTime)
 		if (fcounter == 3) {
 			this->attacking = false;
 			frame = 0;
+			fcounter = 0;
 		}
 	}
 	this->sprite()->frame(frame);
@@ -457,5 +458,4 @@ void UnitBase::animation()
 	frame++;
 	scounter = 0.0f;
 	fcounter++;
-	this->sprite()->frame(frame);
 }
