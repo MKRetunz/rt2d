@@ -21,11 +21,11 @@ void UnitBase::update(float deltaTime)
 	//Soldier
 	if (this->UnitClass == 1) {
 		if (this->team == true) {
-			this->addSprite("assets/soldierv1.tga");
+			this->addSpriteSheet("assets/SoldierAnimation.tga", 2, 2);
 		}
 
 		if (this->team == false) {
-			this->addSprite("assets/soldierv2.tga");
+			this->addSpriteSheet("assets/soldierAnimation2.tga", 2, 2);
 		}
 	}
 
@@ -42,11 +42,11 @@ void UnitBase::update(float deltaTime)
 
 	if (this->UnitClass == 3) {
 		if (this->team == true) {
-			this->addSprite("assets/fighterv1.tga");
+			this->addSpriteSheet("assets/fighAnimation.tga", 2, 2);
 		}
 
 		if (this->team == false) {
-			this->addSprite("assets/fighterv2.tga");
+			this->addSpriteSheet("assets/fighAnimation2.tga", 2, 2);
 		}
 	}
 
@@ -418,7 +418,7 @@ void UnitBase::attack(UnitBase* other)
 			if (this->SPD > other->SPD + 4) {
 				this->fight(other);
 			}
-			if (other->SPD > this->SPD + 4) {
+			else if (other->SPD > this->SPD + 4) {
 				other->fight(this);
 			}
 		}

@@ -19,12 +19,14 @@ struct Cell
 {
 	BasicEntity* entity; // visual representation
 	Point_t<int> position; // x/y in grid
+	bool CB = false;
+	float csize;
 };
 
 
 struct Player
 {
-	int mouseclicks = 0;
+	//int mouseclicks = 0;
 };
 
 /// @brief The MyScene class is the Scene implementation.
@@ -41,6 +43,7 @@ public:
 	/// @param deltaTime the elapsed time in seconds
 	/// @return void
 	virtual void update(float deltaTime);
+	
 
 	void addPlayer(Player* p) { player = p; };
 
@@ -53,6 +56,8 @@ protected:
 	void moveCamera(float deltaTime);
 	void displayStats(UnitBase* unit);
 	void selectUnit(UnitBase* unit);
+	virtual void selection(UnitBase* unit);
+	virtual void unselection();
 
 private:
 	BasicEntity* grid;

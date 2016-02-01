@@ -119,16 +119,19 @@ MyScene::MyScene() : Scene()
 			//Top half of black tiles
 			if (y == 1 && x == 2 || y == 1 && x == 6 || y == 2 && x == 2 || y == 2 && x == 6 || y == 3 && x == 2 || y == 3 && x == 6 || y == 3 && x == 4 || y == 3 && x == 5) {
 				cell->entity->sprite()->color = BLACK;
+				cell->CB = true;
 			}
 
 			//Bottom half
 			if (y == 8 && x == 2 || y == 8 && x == 6 || y == 7 && x == 2 || y == 7 && x == 6 || y == 6 && x == 2 || y == 6 && x == 6 || y == 6 && x == 4 || y == 6 && x == 3) {
 				cell->entity->sprite()->color = BLACK;
+				cell->CB = true;
 			}
 
 			//Surrounding tiles
 			if (y == 0 || y == 9 || x == 0 || x == 8) {
 				cell->entity->sprite()->color = BLACK;
+				cell->CB = true;
 			}
 
 			// initial position
@@ -154,6 +157,19 @@ MyScene::~MyScene()
 	// #############################################################
 	// Cleaning up once scene is closed
 	// #############################################################
+
+	// Remove Grid
+
+	int s = cells.size();
+	for (int i = 0; i<s; i++) {
+		layers[0]->removeChild(cells[i]->entity);
+		delete cells[i]->entity;
+		delete cells[i];
+		cells[i] = NULL;
+	}
+	cells.clear();
+
+	delete grid;
 
 	// deconstruct and delete the units
 
@@ -266,6 +282,7 @@ void MyScene::update(float deltaTime)
 		Rmercenary->unSelect();
 		fighter->unSelect();
 		Rfighter->unSelect();
+		unselection();
 	}
 
 	// #############################################################
@@ -337,6 +354,7 @@ void MyScene::update(float deltaTime)
 		Rmercenary->unSelect();
 		fighter->unSelect();
 		Rfighter->unSelect();
+		unselection();
 		if (turns == false && check == true) {
 			turns = true;
 			check = false;
@@ -369,6 +387,38 @@ void MyScene::update(float deltaTime)
 		text[12]->clearMessage();
 		text[13]->clearMessage();
 		text[14]->clearMessage();
+	}
+}
+
+void MyScene::selection(UnitBase * unit)
+{
+	int s = cells.size();
+	for (int i = 0; i < s; i++) {
+		Cell* c = cells[i];
+		//Point2 pos = c->entity->worldpos();
+
+		float subX = (unit->position.x - c->position.x * c->position.x);
+		float subY = (unit->position.y - c->position.y * c->position.y);
+
+		float distance = sqrt((subX * subX) + (subY * subY));
+
+		std::cout << distance << std::endl;
+
+		if (distance > 454 * unit->MovOver && c->CB == false) {
+			c->entity->sprite()->color = BLUE;
+		}
+	}
+}
+
+void MyScene::unselection()
+{
+	int s = cells.size();
+	for (int i = 0; i < s; i++) {
+		Cell* c = cells[i];
+		Point2 pos = c->entity->worldpos();
+		if (c->CB == false) {
+			c->entity->sprite()->color = GRAY;
+		}
 	}
 }
 
@@ -410,17 +460,14 @@ void MyScene::displayStats(UnitBase * unit)
 	text[1]->message(unit->MsgName);
 	text[2]->message(unit->MsgLVL);
 	text[3]->message(unit->MsgHP);
-	text[4]->message(unit->MsgSTR);
-	text[5]->message(unit->MsgSKL);
-	text[6]->message(unit->MsgSPD);
-	text[7]->message(unit->MsgLCK);
-	text[8]->message(unit->MsgDEF);
-	text[9]->message(unit->MsgMOV);
-	text[10]->message(unit->MsgCON);
-	text[11]->message(unit->MsgHIT);
-	text[12]->message(unit->MsgCRT);
-	text[13]->message(unit->MsgDGD);
-	text[14]->message(unit->MsgDMG);
+	text[4]->message(unit->MsgDMG);
+	text[5]->message(unit->MsgSPD);
+	text[6]->message(unit->MsgDEF);
+	text[7]->message(unit->MsgMOV);
+	text[8]->message(unit->MsgHIT);
+	text[9]->message(unit->MsgCRT);
+	text[10]->message(unit->MsgDGD);
+
 }
 
 void MyScene::selectUnit(UnitBase* unit)
@@ -432,9 +479,11 @@ void MyScene::selectUnit(UnitBase* unit)
 		displayStats(unit);
 		if (turns == false && unit->team == true && input()->getMouseDown( 0 )) {
 			unit->selected = true;
+			selection(unit);
 		}
 		if (turns == true && unit->team == false && input()->getMouseDown( 0 )) {
 			unit->selected = true;
+			selection(unit);
 		}
 	}
 }
