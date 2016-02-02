@@ -14,6 +14,7 @@
 #include <rt2d/text.h>
 #include "UnitBase.h"
 #include "basicentity.h"
+#include "mainMenu.h"
 
 struct Cell
 {
@@ -53,7 +54,7 @@ protected:
 	std::vector<Text*> text;
 
 	std::vector<BasicEntity*> layers;
-	void moveCamera(float deltaTime);
+	//void moveCamera(float deltaTime);
 	void displayStats(UnitBase* unit);
 	void selectUnit(UnitBase* unit);
 	virtual void selection(UnitBase* unit);

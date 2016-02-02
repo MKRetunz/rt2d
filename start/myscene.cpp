@@ -11,6 +11,12 @@
 
 MyScene::MyScene() : Scene()
 {
+	//##############################################################
+	//Camera
+	//##############################################################
+
+	camera()->position.x -= 100;
+
 	// #############################################################
 	// Setting up for text and map creation
 	// #############################################################
@@ -25,7 +31,7 @@ MyScene::MyScene() : Scene()
 	}
 
 	//add text
-	for (unsigned int i = 0; i < 18; i++) {
+	for (unsigned int i = 0; i < 26; i++) {
 		Text* line = new Text();
 		line->scale = Point2(0.5f, 0.5f);
 
@@ -145,10 +151,12 @@ MyScene::MyScene() : Scene()
 	}
 
 	text[0]->message("Blue turn.");
-	text[15]->message("Hit chance is Hit - enemy dodge.");
-	text[16]->message("Final damage is Damage - enemy defense.");
-	text[17]->message("If you have 5 speed more than the enemy attack twice.");
-
+	text[16]->message("Press M to switch turns.");
+	text[17]->message("Use the mouse to select.");
+	text[18]->message("Use WASD to move units.");
+	text[19]->message("Hit chance is Hit - enemy Dodge.");
+	text[20]->message("Final damage is Damage - enemy Defense.");
+	text[21]->message("If you have 5 speed more than the enemy attack twice.");
 }
 
 
@@ -223,7 +231,7 @@ MyScene::~MyScene()
 void MyScene::update(float deltaTime)
 {
 	//Move camera
-	moveCamera(deltaTime);
+	//moveCamera(deltaTime);
 
 	// #############################################################
 	// Selecting units
@@ -402,8 +410,6 @@ void MyScene::selection(UnitBase * unit)
 
 		float distance = sqrt((subX * subX) + (subY * subY));
 
-		std::cout << distance << std::endl;
-
 		if (distance > 454 * unit->MovOver && c->CB == false) {
 			c->entity->sprite()->color = BLUE;
 		}
@@ -422,7 +428,7 @@ void MyScene::unselection()
 	}
 }
 
-void MyScene::moveCamera(float deltaTime)
+/*void MyScene::moveCamera(float deltaTime)
 {
 	// ###############################################################
 	// Move Camera (Arrow up, down, left, right)
@@ -450,7 +456,7 @@ void MyScene::moveCamera(float deltaTime)
 	direction.normalize();
 	direction *= deltaTime * speed;
 	camera()->position += direction;
-}
+}*/
 
 void MyScene::displayStats(UnitBase * unit)
 {
@@ -459,13 +465,13 @@ void MyScene::displayStats(UnitBase * unit)
 	// #############################################################
 	text[1]->message(unit->MsgName);
 	text[2]->message(unit->MsgLVL);
-	text[3]->message(unit->MsgHP);
-	text[4]->message(unit->MsgDMG);
-	text[5]->message(unit->MsgSPD);
-	text[6]->message(unit->MsgDEF);
-	text[7]->message(unit->MsgMOV);
-	text[8]->message(unit->MsgHIT);
-	text[9]->message(unit->MsgCRT);
+	text[3]->message(unit->MsgEXP);
+	text[4]->message(unit->MsgHP);
+	text[5]->message(unit->MsgDMG);
+	text[6]->message(unit->MsgSPD);
+	text[7]->message(unit->MsgDEF);
+	text[8]->message(unit->MsgMOV);
+	text[9]->message(unit->MsgHIT);
 	text[10]->message(unit->MsgDGD);
 
 }
@@ -479,11 +485,9 @@ void MyScene::selectUnit(UnitBase* unit)
 		displayStats(unit);
 		if (turns == false && unit->team == true && input()->getMouseDown( 0 )) {
 			unit->selected = true;
-			selection(unit);
 		}
 		if (turns == true && unit->team == false && input()->getMouseDown( 0 )) {
 			unit->selected = true;
-			selection(unit);
 		}
 	}
 }

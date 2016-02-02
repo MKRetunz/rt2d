@@ -77,9 +77,11 @@ void UnitBase::update(float deltaTime)
 	//Level
 	MsgLVL = "Level: ";
 	MsgLVL.append(std::to_string(Level));
-	MsgLVL.append(", Experience: ");
-	MsgLVL.append(std::to_string(EXP));
-	MsgLVL.append("/50");
+
+	//EXperience
+	MsgEXP = "Experience: ";
+	MsgEXP.append(std::to_string(EXP));
+	MsgEXP.append("/50");
 
 	//Hit Points
 	MsgHP = "Hit points: ";
@@ -117,10 +119,6 @@ void UnitBase::update(float deltaTime)
 	MsgHIT = "Hit: ";
 	MsgHIT.append(std::to_string(Hit));
 
-	//Crit
-	MsgCRT = "Crit: ";
-	MsgCRT.append(std::to_string(Crit));
-
 	//Dodge
 	MsgDGD = "Dodge: ";
 	MsgDGD.append(std::to_string(Dodge));
@@ -135,7 +133,6 @@ void UnitBase::update(float deltaTime)
 
 	//Calculations
 	this->Hit = (SKL * 2) + (LCK / 2) + wepHit;
-	this->Crit = (SKL / 2) + (LCK / 4) + wepCrit;
 	this->Dodge = (SPD * 2) + (LCK);
 	this->Damage = STR + wepMT;
 
@@ -231,7 +228,6 @@ void UnitBase::setStats(int Uclass)
 			this->uses = 45;
 			this->wepMT = 7;
 			this->wepHit = 80;
-			this->wepCrit = 0;
 			this->wepWT = 7;
 
 			//Stat growths
@@ -259,9 +255,8 @@ void UnitBase::setStats(int Uclass)
 			//Weapon stats
 			this->wepName = "Iron sword";
 			this->uses = 46;
-			this->wepMT = 5;
+			this->wepMT = 3;
 			this->wepHit = 90;
-			this->wepCrit = 0;
 			this->wepWT = 5;
 
 			//Stat growths
@@ -276,12 +271,12 @@ void UnitBase::setStats(int Uclass)
 
 		if (Uclass == 3) {
 			//Base stats
-			this->HP = 34;
-			this->STR = 17;
+			this->HP = 35;
+			this->STR = 18;
 			this->SKL = 13;
 			this->SPD = 8;
-			this->LCK = 10;
-			this->DEF = 11;
+			this->LCK = 11;
+			this->DEF = 8;
 			this->CON = 14; //x2 = 28
 			//this->MOV = 5; //x3 = 15
 			//total: 80
@@ -289,9 +284,8 @@ void UnitBase::setStats(int Uclass)
 			//Weapon stats
 			this->wepName = "Iron axe";
 			this->uses = 45;
-			this->wepMT = 8;
-			this->wepHit = 75;
-			this->wepCrit = 0;
+			this->wepMT = 10;
+			this->wepHit = 65;
 			this->wepWT = 10;
 
 			//Stat growths
@@ -415,12 +409,12 @@ void UnitBase::attack(UnitBase* other)
 	if (other->HP > 0) {
 		other->fight(this);
 		if (this->HP > 0) {
-			if (this->SPD > other->SPD + 4) {
-				this->fight(other);
-			}
-			else if (other->SPD > this->SPD + 4) {
+			/*if (other->SPD > this->SPD + 4) {
 				other->fight(this);
 			}
+			else if (this->SPD > other->SPD + 4) {
+				this->fight(other);
+			}*/
 		}
 	}
 	
@@ -445,9 +439,6 @@ void UnitBase::fight(UnitBase * other)
 			this->uses -= 1;
 			this->EXP += 10;
 			this->attacking = true;
-			if (rand() % 100 + 1 <= this->Crit) {
-				other->takeDamage(this->Damage);
-			}
 		}
 		this->MovOver = 0;
 	}

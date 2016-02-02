@@ -49,6 +49,7 @@ public:
 	//Statistics
 	std::string MsgName;
 	std::string MsgLVL;
+	std::string MsgEXP;
 	std::string MsgHP;
 	std::string MsgSTR;
 	std::string MsgMAG;
@@ -60,7 +61,6 @@ public:
 	std::string MsgMOV;
 	std::string MsgCON;
 	std::string MsgHIT;
-	std::string MsgCRT;
 	std::string MsgDGD;
 	std::string MsgDMG;
 
@@ -79,7 +79,6 @@ public:
 	int uses;
 	int wepMT;
 	int wepHit;
-	int wepCrit;
 	int wepWT;
 
 	//Stat growths
@@ -92,7 +91,6 @@ public:
 
 	//Calculations
 	int Hit = (SKL * 2) + (LCK / 2) + wepHit;
-	int Crit = (SKL / 2) + (LCK / 4) + wepCrit;
 	int Dodge = (SPD * 2) + (LCK);
 	int Damage = STR + wepMT;
 	int EXP = 0;
