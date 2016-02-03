@@ -14,7 +14,6 @@
 #include <rt2d/text.h>
 #include "UnitBase.h"
 #include "basicentity.h"
-#include "mainMenu.h"
 
 struct Cell
 {

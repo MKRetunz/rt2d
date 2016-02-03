@@ -409,12 +409,12 @@ void UnitBase::attack(UnitBase* other)
 	if (other->HP > 0) {
 		other->fight(this);
 		if (this->HP > 0) {
-			/*if (other->SPD > this->SPD + 4) {
+			if (other->SPD > this->SPD + 4) {
 				other->fight(this);
 			}
 			else if (this->SPD > other->SPD + 4) {
 				this->fight(other);
-			}*/
+			}
 		}
 	}
 	
