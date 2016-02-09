@@ -87,8 +87,6 @@ void UnitBase::update(float deltaTime)
 
 	this->sprite()->frame(frame);
 
-	
-
 	selectorHit->position.y = - 32;
 	selectorMiss->position.y = + 32;
 

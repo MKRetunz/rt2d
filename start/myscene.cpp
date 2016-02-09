@@ -44,6 +44,7 @@ MyScene::MyScene() : Scene()
 	// #############################################################
 
 	//Blue unit creation
+	//Add list of UnitBases
 	soldier = new UnitBase();
 	this->addChild(soldier);
 	soldier->name = "Blue soldier";
@@ -182,23 +183,17 @@ MyScene::~MyScene()
 	// deconstruct and delete the units
 
 	//Blue team
-	this->addChild(soldier);
 	this->removeChild(soldier);
 
-	this->addChild(mercenary);
 	this->removeChild(mercenary);
 
-	this->addChild(fighter);
 	this->removeChild(fighter);
 
 	//Red team
-	this->addChild(Rsoldier);
 	this->removeChild(Rsoldier);
 
-	this->addChild(Rmercenary);
 	this->removeChild(Rmercenary);
 
-	this->addChild(Rfighter);
 	this->removeChild(Rfighter);
 
 	// delete objects
@@ -378,20 +373,9 @@ void MyScene::update(float deltaTime)
 			text[0]->message("Red turn.");
 		}
 		//Empty text
-		text[1]->clearMessage();
-		text[2]->clearMessage();
-		text[3]->clearMessage();
-		text[4]->clearMessage();
-		text[5]->clearMessage();
-		text[6]->clearMessage();
-		text[7]->clearMessage();
-		text[8]->clearMessage();
-		text[9]->clearMessage();
-		text[10]->clearMessage();
-		text[11]->clearMessage();
-		text[12]->clearMessage();
-		text[13]->clearMessage();
-		text[14]->clearMessage();
+		for (int i = 0; i < 15; i++) {
+			text[i]->clearMessage();
+		}
 	}
 }
 
