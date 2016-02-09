@@ -230,9 +230,6 @@ MyScene::~MyScene()
 
 void MyScene::update(float deltaTime)
 {
-	//Move camera
-	//moveCamera(deltaTime);
-
 	// #############################################################
 	// Selecting units
 	// #############################################################

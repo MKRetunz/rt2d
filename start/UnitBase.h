@@ -118,6 +118,7 @@ public:
 private:
 	selector* selectorC;
 	selector* selectorHit;
+	selector* selectorMiss;
 
 protected:
 };

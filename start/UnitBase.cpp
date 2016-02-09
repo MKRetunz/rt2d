@@ -8,6 +8,9 @@ UnitBase::UnitBase()
 
 	selectorHit = new selector();
 	selectorHit->addSprite("assets/hitScreen.tga");
+
+	selectorMiss = new selector();
+	selectorMiss->addSprite("assets/missScreen.tga");
 }
 
 
@@ -68,10 +71,12 @@ void UnitBase::update(float deltaTime)
 			this->attacking = false;
 			frame = 0;
 			fcounter = 0;
-			if (this->hitdetector == false) {
-				this->addChild(selectorHit);
-				this->removeChild(selectorHit);
-			}
+			this->addChild(selectorHit);
+			this->removeChild(selectorHit);
+
+			this->addChild(selectorMiss);
+			this->removeChild(selectorMiss);
+		
 			
 			this->hitdetector = false;
 		}
@@ -81,6 +86,7 @@ void UnitBase::update(float deltaTime)
 	
 
 	selectorHit->position.y = - 32;
+	selectorMiss->position.y = + 32;
 
 	// #############################################################
 	// Text display
@@ -459,6 +465,9 @@ void UnitBase::fight(UnitBase * other)
 			this->hitdetector = false;
 		}
 		this->MovOver = 0;
+		if (hitdetector = true) {
+			this->addChild(selectorMiss);
+		}
 	}
 }
 
