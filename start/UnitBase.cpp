@@ -73,14 +73,18 @@ void UnitBase::update(float deltaTime)
 			fcounter = 0;
 			this->addChild(selectorHit);
 			this->removeChild(selectorHit);
-
-			this->addChild(selectorMiss);
-			this->removeChild(selectorMiss);
-		
-			
-			this->hitdetector = false;
 		}
 	}
+	if (this->hitdetector == true) {
+		missTimer += deltaTime;
+		if (missTimer > 3.0f) {
+			this->addChild(selectorMiss);
+			this->removeChild(selectorMiss);
+
+			hitdetector = false;
+		}
+	}
+
 	this->sprite()->frame(frame);
 
 	
@@ -467,6 +471,7 @@ void UnitBase::fight(UnitBase * other)
 		this->MovOver = 0;
 		if (hitdetector = true) {
 			this->addChild(selectorMiss);
+			missTimer = 0.0f;
 		}
 	}
 }

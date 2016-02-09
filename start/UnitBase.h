@@ -114,6 +114,7 @@ public:
 	int frame = 0;
 	float scounter = 0.0f;
 	int fcounter = 0;
+	float missTimer = 0.0f;
 
 private:
 	selector* selectorC;
