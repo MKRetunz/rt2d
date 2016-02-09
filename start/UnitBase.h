@@ -106,6 +106,7 @@ public:
 	bool actionDone = false;
 	bool selected = false;
 	bool attacking = false;
+	bool hitdetector = true;
 
 	int MovOver = MOV;
 
@@ -116,6 +117,7 @@ public:
 
 private:
 	selector* selectorC;
+	selector* selectorHit;
 
 protected:
 };

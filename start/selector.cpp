@@ -4,7 +4,6 @@
 
 selector::selector()
 {
-	this->addSprite("assets/Selection.tga");
 }
 
 
