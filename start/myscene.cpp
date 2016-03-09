@@ -46,20 +46,22 @@ MyScene::MyScene() : Scene()
 	//Blue unit creation
 	//Add list of UnitBases
 	soldier = new UnitBase();
-	this->addChild(soldier);
 	soldier->name = "Blue soldier";
 	soldier->position.x = 410;
 	soldier->position.y = 300;
 	soldier->team = false;
 	soldier->UnitClass = 1;
+	units.push_back(soldier);
+	this->addChild(soldier);
 
 	mercenary = new UnitBase();
-	this->addChild(mercenary);
 	mercenary->name = "Blue mercenary";
 	mercenary->position.x = 410;
 	mercenary->position.y = 236;
 	mercenary->team = false;
 	mercenary->UnitClass = 2;
+	units.push_back(mercenary);
+	this->addChild(mercenary);
 
 	fighter = new UnitBase();
 	this->addChild(fighter);
@@ -68,31 +70,36 @@ MyScene::MyScene() : Scene()
 	fighter->position.y = 428;
 	fighter->team = false;
 	fighter->UnitClass = 3;
+	units.push_back(fighter);
+	this->addChild(fighter);
 
 	//Red unit creation
 	Rsoldier = new UnitBase();
-	this->addChild(Rsoldier);
 	Rsoldier->name = "Red soldier";
 	Rsoldier->position.x = 794;
 	Rsoldier->position.y = 364;
 	Rsoldier->team = true;
 	Rsoldier->UnitClass = 1;
+	units.push_back(Rsoldier);
+	this->addChild(Rsoldier);
 
 	Rmercenary = new UnitBase();
-	this->addChild(Rmercenary);
 	Rmercenary->name = "Red mercenary";
 	Rmercenary->position.x = 794;
 	Rmercenary->position.y = 428;
 	Rmercenary->team = true;
 	Rmercenary->UnitClass = 2;
+	units.push_back(Rmercenary);
+	this->addChild(Rmercenary);
 
 	Rfighter = new UnitBase();
-	this->addChild(Rfighter);
 	Rfighter->name = "Red fighter";
 	Rfighter->position.x = 794;
 	Rfighter->position.y = 236;
 	Rfighter->team = true;
 	Rfighter->UnitClass = 3;
+	units.push_back(Rfighter);
+	this->addChild(Rfighter);
 
 	// #############################################################
 	// Map creation
@@ -181,28 +188,13 @@ MyScene::~MyScene()
 	delete grid;
 
 	// deconstruct and delete the units
-
-	//Blue team
-	this->removeChild(soldier);
-
-	this->removeChild(mercenary);
-
-	this->removeChild(fighter);
-
-	//Red team
-	this->removeChild(Rsoldier);
-
-	this->removeChild(Rmercenary);
-
-	this->removeChild(Rfighter);
-
-	// delete objects
-	delete soldier;
-	delete mercenary;
-	delete fighter;
-	delete Rsoldier;
-	delete Rmercenary;
-	delete Rfighter;
+	int us = units.size();
+	for (int u = 0; u < us; u++) {
+		this->removeChild(units[u]);
+		delete units[u];
+		units[u] = NULL;
+	}
+	units.clear();
 	
 	//Text and layers
 
@@ -229,12 +221,10 @@ void MyScene::update(float deltaTime)
 	// Selecting units
 	// #############################################################
 
-	selectUnit(soldier);
-	selectUnit(Rsoldier);
-	selectUnit(Rfighter);
-	selectUnit(mercenary);
-	selectUnit(Rmercenary);
-	selectUnit(fighter);
+	int us = units.size();
+	for (int u = 0; u<us ; u++) {
+		selectUnit(units[u]);
+	}
 
 	// #############################################################
 	// Button presses
@@ -242,46 +232,31 @@ void MyScene::update(float deltaTime)
 
 	//Movement
 	if (input()->getKeyDown(GLFW_KEY_W)) {
-		soldier->moveUp();
-		Rsoldier->moveUp();
-		mercenary->moveUp();
-		Rmercenary->moveUp();
-		fighter->moveUp();
-		Rfighter->moveUp();
+		for (int u = 0; u<us; u++) {
+			units[u]->moveUp();
+		}
 	}
 	if (input()->getKeyDown(GLFW_KEY_A)) {
-		soldier->moveLeft();
-		Rsoldier->moveLeft();
-		mercenary->moveLeft();
-		Rmercenary->moveLeft();
-		fighter->moveLeft();
-		Rfighter->moveLeft();
+		for (int u = 0; u<us; u++) {
+			units[u]->moveLeft();
+		}
 	}
 	if (input()->getKeyDown(GLFW_KEY_S)) {
-		soldier->moveDown();
-		Rsoldier->moveDown();
-		mercenary->moveDown();
-		Rmercenary->moveDown();
-		fighter->moveDown();
-		Rfighter->moveDown();
+		for (int u = 0; u<us; u++) {
+			units[u]->moveDown();
+		}
 	}
 	if (input()->getKeyDown(GLFW_KEY_D)) {
-		soldier->moveRight();
-		Rsoldier->moveRight();
-		mercenary->moveRight();
-		Rmercenary->moveRight();
-		fighter->moveRight();
-		Rfighter->moveRight();
+		for (int u = 0; u<us; u++) {
+			units[u]->moveRight();
+		}
 	}
 
 	//Unselect all units
 	if (input()->getMouseDown( 1 )) {
-		soldier->unSelect();
-		Rsoldier->unSelect();
-		mercenary->unSelect();
-		Rmercenary->unSelect();
-		fighter->unSelect();
-		Rfighter->unSelect();
+		for (int u = 0; u<us; u++) {
+			units[u]->unSelect();
+		}
 		unselection();
 	}
 
@@ -292,39 +267,31 @@ void MyScene::update(float deltaTime)
 	//Attacking is called on every frame, but only activates if units colide
 	if (turns == true) {
 		//Simplify if possible
-		soldier->collide(Rsoldier);
-		soldier->collide(Rmercenary);
-		soldier->collide(Rfighter);
-		soldier->collide(mercenary);
-		soldier->collide(fighter);
-		mercenary->collide(Rsoldier);
-		mercenary->collide(Rmercenary);
-		mercenary->collide(Rfighter);
-		mercenary->collide(soldier);
-		mercenary->collide(fighter);
-		fighter->collide(Rsoldier);
-		fighter->collide(Rmercenary);
-		fighter->collide(Rfighter);
-		fighter->collide(soldier);
-		fighter->collide(mercenary);
+
+		for (int u = 0; u<us; u++) {
+			for (int o = 0; o<us; o++) {
+				if (u == o) {
+					//Left blank to do nothing.
+				}
+				else {
+					units[u]->collide(units[o]);
+				}
+			}			
+		}
 	}
 	if (turns == false)
 	{
-		Rsoldier->collide(soldier);
-		Rsoldier->collide(mercenary);
-		Rsoldier->collide(fighter);
-		Rsoldier->collide(Rmercenary);
-		Rsoldier->collide(Rfighter);
-		Rmercenary->collide(soldier);
-		Rmercenary->collide(mercenary);
-		Rmercenary->collide(fighter);
-		Rmercenary->collide(Rsoldier);
-		Rmercenary->collide(Rfighter);
-		Rfighter->collide(soldier);
-		Rfighter->collide(mercenary);
-		Rfighter->collide(fighter);
-		Rfighter->collide(Rsoldier);
-		Rfighter->collide(Rmercenary);
+
+		for (int u = 0; u<us; u++) {
+			for (int o = 0; o<us; o++) {
+				if (u == o) {
+					//Left blank to do nothing.
+				}
+				else {
+					units[u]->collide(units[o]);
+				}
+			}
+		}
 	}
 
 	// #############################################################
@@ -348,13 +315,11 @@ void MyScene::update(float deltaTime)
 	// ###############################################################
 	if (input()->getKeyUp( GLFW_KEY_M )) {
 		check = true;
-		soldier->unSelect();
-		Rsoldier->unSelect();
-		mercenary->unSelect();
-		Rmercenary->unSelect();
-		fighter->unSelect();
-		Rfighter->unSelect();
+		for (int u = 0; u<us; u++) {
+			units[u]->unSelect();
+		}
 		unselection();
+
 		if (turns == false && check == true) {
 			turns = true;
 			check = false;
@@ -373,7 +338,7 @@ void MyScene::update(float deltaTime)
 			text[0]->message("Red turn.");
 		}
 		//Empty text
-		for (int i = 0; i < 15; i++) {
+		for (int i = 1; i < 15; i++) {
 			text[i]->clearMessage();
 		}
 	}

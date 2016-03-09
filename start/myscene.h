@@ -12,6 +12,7 @@
 #include <vector>
 #include <rt2d/scene.h>
 #include <rt2d/text.h>
+#include <array>
 #include "UnitBase.h"
 #include "basicentity.h"
 
@@ -62,6 +63,7 @@ protected:
 private:
 	BasicEntity* grid;
 	std::vector<Cell*> cells;
+	std::vector<UnitBase*> units;
 
 	int border;
 
@@ -77,6 +79,7 @@ private:
 	int gridheight;
 	int cellwidth;
 	int cellheight;
+	int maxUnits;
 
 	bool turns = true;
 	bool check = false;
