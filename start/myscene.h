@@ -45,20 +45,16 @@ public:
 	/// @return void
 	virtual void update(float deltaTime);
 	
-
 	void addPlayer(Player* p) { player = p; };
 
 protected:
 	unsigned int top_layer;
 	Player* player;
 	std::vector<Text*> text;
-
 	std::vector<BasicEntity*> layers;
-	//void moveCamera(float deltaTime);
+
 	void displayStats(UnitBase* unit);
 	void selectUnit(UnitBase* unit);
-	virtual void selection(UnitBase* unit);
-	virtual void unselection();
 
 private:
 	BasicEntity* grid;

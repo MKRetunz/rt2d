@@ -257,7 +257,6 @@ void MyScene::update(float deltaTime)
 		for (int u = 0; u<us; u++) {
 			units[u]->unSelect();
 		}
-		unselection();
 	}
 
 	// #############################################################
@@ -265,34 +264,17 @@ void MyScene::update(float deltaTime)
 	// #############################################################
 
 	//Attacking is called on every frame, but only activates if units colide
-	if (turns == true) {
-		//Simplify if possible
-
-		for (int u = 0; u<us; u++) {
-			for (int o = 0; o<us; o++) {
-				if (u == o) {
-					//Left blank to do nothing.
-				}
-				else {
-					units[u]->collide(units[o]);
-				}
-			}			
-		}
-	}
-	if (turns == false)
-	{
-
-		for (int u = 0; u<us; u++) {
-			for (int o = 0; o<us; o++) {
-				if (u == o) {
-					//Left blank to do nothing.
-				}
-				else {
-					units[u]->collide(units[o]);
-				}
+	for (int u = 0; u<us; u++) {
+		for (int o = 0; o<us; o++) {
+			if (u == o) {
+				//Left blank to do nothing.
 			}
-		}
+			else {
+				units[u]->collide(units[o]);
+			}
+		}			
 	}
+
 
 	// #############################################################
 	// Text follows camera
@@ -318,7 +300,6 @@ void MyScene::update(float deltaTime)
 		for (int u = 0; u<us; u++) {
 			units[u]->unSelect();
 		}
-		unselection();
 
 		if (turns == false && check == true) {
 			turns = true;
@@ -339,36 +320,6 @@ void MyScene::update(float deltaTime)
 		//Empty text
 		for (int i = 1; i < 15; i++) {
 			text[i]->clearMessage();
-		}
-	}
-}
-
-void MyScene::selection(UnitBase * unit)
-{
-	int s = cells.size();
-	for (int i = 0; i < s; i++) {
-		Cell* c = cells[i];
-		//Point2 pos = c->entity->worldpos();
-
-		float subX = (unit->position.x - c->position.x * c->position.x);
-		float subY = (unit->position.y - c->position.y * c->position.y);
-
-		float distance = sqrt((subX * subX) + (subY * subY));
-
-		if (distance > 454 * unit->MovOver && c->CB == false) {
-			c->entity->sprite()->color = BLUE;
-		}
-	}
-}
-
-void MyScene::unselection()
-{
-	int s = cells.size();
-	for (int i = 0; i < s; i++) {
-		Cell* c = cells[i];
-		Point2 pos = c->entity->worldpos();
-		if (c->CB == false) {
-			c->entity->sprite()->color = GRAY;
 		}
 	}
 }
