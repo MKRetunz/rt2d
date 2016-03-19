@@ -323,20 +323,19 @@ void MyScene::update(float deltaTime)
 		if (turns == false && check == true) {
 			turns = true;
 			check = false;
-			soldier->refresh();
-			mercenary->refresh();
-			fighter->refresh();
 			text[0]->message("Blue turn.");
 		}
 
 		if (turns == true && check == true) {
 			turns = false;
 			check = false;
-			Rsoldier->refresh();
-			Rmercenary->refresh();
-			Rfighter->refresh();
 			text[0]->message("Red turn.");
 		}
+
+		for (int u = 0; u<us; u++) {
+			units[u]->refresh();
+		}
+
 		//Empty text
 		for (int i = 1; i < 15; i++) {
 			text[i]->clearMessage();
@@ -373,36 +372,6 @@ void MyScene::unselection()
 		}
 	}
 }
-
-/*void MyScene::moveCamera(float deltaTime)
-{
-	// ###############################################################
-	// Move Camera (Arrow up, down, left, right)
-	// ###############################################################
-	float speed = 600.0f; // 600 units / second
-
-    // Right and Down vector
-	Point2 right = Point2(1, 0);
-	Point2 up = Point2(0, 1);
-	// Direction
-	Vector2 direction = Vector2(0, 0);
-
-	if (input()->getKey(GLFW_KEY_UP)) {
-		direction -= up;
-	}
-	if (input()->getKey(GLFW_KEY_DOWN)) {
-		direction += up;
-	}
-	if (input()->getKey(GLFW_KEY_RIGHT)) {
-		direction += right;
-	}
-	if (input()->getKey(GLFW_KEY_LEFT)) {
-		direction -= right;
-	}
-	direction.normalize();
-	direction *= deltaTime * speed;
-	camera()->position += direction;
-}*/
 
 void MyScene::displayStats(UnitBase * unit)
 {
