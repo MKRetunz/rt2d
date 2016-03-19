@@ -47,8 +47,8 @@ MyScene::MyScene() : Scene()
 	//Add list of UnitBases
 	soldier = new UnitBase();
 	soldier->name = "Blue soldier";
-	soldier->position.x = 410;
-	soldier->position.y = 300;
+	soldier->position.x = 416;
+	soldier->position.y = 296;
 	soldier->team = false;
 	soldier->UnitClass = 1;
 	units.push_back(soldier);
@@ -56,8 +56,8 @@ MyScene::MyScene() : Scene()
 
 	mercenary = new UnitBase();
 	mercenary->name = "Blue mercenary";
-	mercenary->position.x = 410;
-	mercenary->position.y = 236;
+	mercenary->position.x = 416;
+	mercenary->position.y = 232;
 	mercenary->team = false;
 	mercenary->UnitClass = 2;
 	units.push_back(mercenary);
@@ -66,8 +66,8 @@ MyScene::MyScene() : Scene()
 	fighter = new UnitBase();
 	this->addChild(fighter);
 	fighter->name = "Blue fighter";
-	fighter->position.x = 410;
-	fighter->position.y = 428;
+	fighter->position.x = 416;
+	fighter->position.y = 424;
 	fighter->team = false;
 	fighter->UnitClass = 3;
 	units.push_back(fighter);
@@ -76,8 +76,8 @@ MyScene::MyScene() : Scene()
 	//Red unit creation
 	Rsoldier = new UnitBase();
 	Rsoldier->name = "Red soldier";
-	Rsoldier->position.x = 794;
-	Rsoldier->position.y = 364;
+	Rsoldier->position.x = 800;
+	Rsoldier->position.y = 360;
 	Rsoldier->team = true;
 	Rsoldier->UnitClass = 1;
 	units.push_back(Rsoldier);
@@ -85,8 +85,8 @@ MyScene::MyScene() : Scene()
 
 	Rmercenary = new UnitBase();
 	Rmercenary->name = "Red mercenary";
-	Rmercenary->position.x = 794;
-	Rmercenary->position.y = 428;
+	Rmercenary->position.x = 800;
+	Rmercenary->position.y = 424;
 	Rmercenary->team = true;
 	Rmercenary->UnitClass = 2;
 	units.push_back(Rmercenary);
@@ -94,8 +94,8 @@ MyScene::MyScene() : Scene()
 
 	Rfighter = new UnitBase();
 	Rfighter->name = "Red fighter";
-	Rfighter->position.x = 794;
-	Rfighter->position.y = 236;
+	Rfighter->position.x = 800;
+	Rfighter->position.y = 232;
 	Rfighter->team = true;
 	Rfighter->UnitClass = 3;
 	units.push_back(Rfighter);
@@ -108,9 +108,9 @@ MyScene::MyScene() : Scene()
 	//making a map
 	gridwidth = 9;
 	gridheight = 10;
-	cellwidth = 64;
-	cellheight = 64;
-	border = 1;
+	cellwidth = 62;
+	cellheight = 62;
+	border = 2;
 
 	grid = new BasicEntity();
 	int xgridpos = (SWIDTH / 2) - (gridwidth*(cellwidth + border) / 2);
@@ -133,19 +133,16 @@ MyScene::MyScene() : Scene()
 			//Top half of black tiles
 			if (y == 1 && x == 2 || y == 1 && x == 6 || y == 2 && x == 2 || y == 2 && x == 6 || y == 3 && x == 2 || y == 3 && x == 6 || y == 3 && x == 4 || y == 3 && x == 5) {
 				cell->entity->sprite()->color = BLACK;
-				cell->CB = true;
 			}
 
 			//Bottom half
 			if (y == 8 && x == 2 || y == 8 && x == 6 || y == 7 && x == 2 || y == 7 && x == 6 || y == 6 && x == 2 || y == 6 && x == 6 || y == 6 && x == 4 || y == 6 && x == 3) {
 				cell->entity->sprite()->color = BLACK;
-				cell->CB = true;
 			}
 
 			//Surrounding tiles
 			if (y == 0 || y == 9 || x == 0 || x == 8) {
 				cell->entity->sprite()->color = BLACK;
-				cell->CB = true;
 			}
 
 			// initial position
@@ -175,7 +172,6 @@ MyScene::~MyScene()
 	// #############################################################
 
 	// Remove Grid
-
 	int s = cells.size();
 	for (int i = 0; i<s; i++) {
 		layers[0]->removeChild(cells[i]->entity);
@@ -272,7 +268,7 @@ void MyScene::update(float deltaTime)
 			else {
 				units[u]->collide(units[o]);
 			}
-		}			
+		}
 	}
 
 
@@ -339,7 +335,6 @@ void MyScene::displayStats(UnitBase * unit)
 	text[8]->message(unit->MsgMOV);
 	text[9]->message(unit->MsgHIT);
 	text[10]->message(unit->MsgDGD);
-
 }
 
 void MyScene::selectUnit(UnitBase* unit)

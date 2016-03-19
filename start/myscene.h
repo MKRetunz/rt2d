@@ -20,14 +20,12 @@ struct Cell
 {
 	BasicEntity* entity; // visual representation
 	Point_t<int> position; // x/y in grid
-	bool CB = false;
 	float csize;
 };
 
 
 struct Player
 {
-	//int mouseclicks = 0;
 };
 
 /// @brief The MyScene class is the Scene implementation.
