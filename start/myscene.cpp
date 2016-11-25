@@ -42,13 +42,4 @@ void MyScene::update(float deltaTime)
 	if (input()->getKeyUp( GLFW_KEY_ESCAPE )) {
 		this->stop();
 	}
-
-	// ###############################################################
-	// Rotate color
-	// ###############################################################
-	if (t.seconds() > 0.0333f) {
-		RGBAColor color = gridMaker->sprite()->color;
-		gridMaker->sprite()->color = Color::rotate(color, 0.01f);
-		t.start();
-	}
 }
