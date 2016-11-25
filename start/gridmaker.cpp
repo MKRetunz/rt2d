@@ -16,6 +16,11 @@ GridMaker::~GridMaker()
 
 }
 
+void GridMaker::update(float deltaTime)
+{
+
+}
+
 void GridMaker::MakeGrid(int GW, int GH, int CW, int CH) 
 {
 	// create grid depending on input
