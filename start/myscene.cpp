@@ -44,16 +44,6 @@ void MyScene::update(float deltaTime)
 	}
 
 	// ###############################################################
-	// Spacebar scales GridMaker
-	// ###############################################################
-	if (input()->getKeyDown( GLFW_KEY_SPACE )) {
-		gridMaker->scale = Point(0.5f, 0.5f);
-	}
-	if (input()->getKeyUp( GLFW_KEY_SPACE )) {
-		gridMaker->scale = Point(1.0f, 1.0f);
-	}
-
-	// ###############################################################
 	// Rotate color
 	// ###############################################################
 	if (t.seconds() > 0.0333f) {
