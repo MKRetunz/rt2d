@@ -14,24 +14,24 @@ MyScene::MyScene() : Scene()
 	// start the timer.
 	t.start();
 
-	// create a single instance of MyEntity in the middle of the screen.
-	// the Sprite is added in Constructor of MyEntity.
-	myentity = new MyEntity();
-	myentity->position = Point2(SWIDTH/2, SHEIGHT/2);
+	// create a single instance of GridMaker in the middle of the screen.
+	// the Sprite is added in Constructor of GridMaker.
+	gridMaker = new GridMaker();
+	gridMaker->position = Point2(SWIDTH/2, SHEIGHT/2);
 
 	// create the scene 'tree'
-	// add myentity to this Scene as a child.
-	this->addChild(myentity);
+	// add GridMaker to this Scene as a child.
+	this->addChild(gridMaker);
 }
 
 
 MyScene::~MyScene()
 {
 	// deconstruct and delete the Tree
-	this->removeChild(myentity);
+	this->removeChild(gridMaker);
 
-	// delete myentity from the heap (there was a 'new' in the constructor)
-	delete myentity;
+	// delete GridMaker from the heap (there was a 'new' in the constructor)
+	delete gridMaker;
 }
 
 void MyScene::update(float deltaTime)
@@ -44,21 +44,21 @@ void MyScene::update(float deltaTime)
 	}
 
 	// ###############################################################
-	// Spacebar scales myentity
+	// Spacebar scales GridMaker
 	// ###############################################################
 	if (input()->getKeyDown( GLFW_KEY_SPACE )) {
-		myentity->scale = Point(0.5f, 0.5f);
+		gridMaker->scale = Point(0.5f, 0.5f);
 	}
 	if (input()->getKeyUp( GLFW_KEY_SPACE )) {
-		myentity->scale = Point(1.0f, 1.0f);
+		gridMaker->scale = Point(1.0f, 1.0f);
 	}
 
 	// ###############################################################
 	// Rotate color
 	// ###############################################################
 	if (t.seconds() > 0.0333f) {
-		RGBAColor color = myentity->sprite()->color;
-		myentity->sprite()->color = Color::rotate(color, 0.01f);
+		RGBAColor color = gridMaker->sprite()->color;
+		gridMaker->sprite()->color = Color::rotate(color, 0.01f);
 		t.start();
 	}
 }

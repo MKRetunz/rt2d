@@ -1,23 +1,23 @@
 /**
- * This class describes MyEntity behavior.
+ * This class describes GridMaker behavior.
  *
  * Copyright 2015 Your Name <you@yourhost.com>
  */
 
-#include "myentity.h"
+#include "gridmaker.h"
 
-MyEntity::MyEntity() : Entity()
+GridMaker::GridMaker() : Entity()
 {
 	this->addSprite("assets/square.tga");
 	this->sprite()->color = RED;
 }
 
-MyEntity::~MyEntity()
+GridMaker::~GridMaker()
 {
 
 }
 
-void MyEntity::update(float deltaTime)
+void GridMaker::update(float deltaTime)
 {
 	// ###############################################################
 	// Rotate

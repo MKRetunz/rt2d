@@ -1,24 +1,24 @@
 /**
  * Copyright 2015 Your Name <you@yourhost.com>
  *
- * @file myentity.h
+ * @file GridMaker.h
  *
- * @brief description of MyEntity behavior.
+ * @brief description of GridMaker behavior.
  */
 
-#ifndef MYENTITY_H
-#define MYENTITY_H
+#ifndef GridMaker_H
+#define GridMaker_H
 
 #include <rt2d/entity.h>
 
-/// @brief The MyEntity class is the Entity implementation.
-class MyEntity : public Entity
+/// @brief The GridMaker class is the Entity implementation.
+class GridMaker : public Entity
 {
 public:
 	/// @brief Constructor
-	MyEntity();
+	GridMaker();
 	/// @brief Destructor
-	virtual ~MyEntity();
+	virtual ~GridMaker();
 
 	/// @brief update is automatically called every frame
 	/// @param deltaTime the elapsed time in seconds
@@ -29,4 +29,4 @@ private:
 	/* add your private declarations */
 };
 
-#endif /* MYENTITY_H */
+#endif /* GridMaker_H */
