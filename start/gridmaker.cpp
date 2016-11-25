@@ -28,10 +28,10 @@ void GridMaker::MakeGrid(int GW, int GH, int CW, int CH)
 	cellwidth = CW;
 	cellheight = CH;
 
-	// create grid
+	// create grid depending on input
 	addGrid("assets/default.tga", 8, 8, gridwidth, gridheight, cellwidth, cellheight);
 
-	// fill Sprites with random number
+	// fill Sprites with random numbers for now
 	int counter = 0;
 	for (int x = 0; x<gridwidth; x++) {
 		for (int y = 0; y<gridheight; y++) {
