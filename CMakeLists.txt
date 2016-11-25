@@ -179,8 +179,8 @@ file(
 ####################################################################
 add_executable(start
 	start/main.cpp
-	start/myentity.cpp
-	start/myentity.h
+	start/gridmaker.cpp
+	start/gridmaker.h
 	start/myscene.cpp
 	start/myscene.h
 )
