@@ -30,10 +30,6 @@ public:
 	void MakeGrid(int GW, int GH, int CW, int CH);
 
 private:
-	int gridwidth;
-	int gridheight;
-	int cellwidth;
-	int cellheight;
 };
 
 #endif /* GridMaker_H */
