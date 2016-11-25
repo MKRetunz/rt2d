@@ -25,8 +25,13 @@ public:
 	/// @return void
 	virtual void update(float deltaTime);
 
+	void MakeGrid(int GW, int GH, int CW, int CH);
+
 private:
-	/* add your private declarations */
+	int gridwidth;
+	int gridheight;
+	int cellwidth;
+	int cellheight;
 };
 
 #endif /* GridMaker_H */

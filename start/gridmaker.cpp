@@ -20,3 +20,8 @@ void GridMaker::update(float deltaTime)
 {
 
 }
+
+void GridMaker::MakeGrid(int GW, int GH, int CW, int CH) 
+{
+
+}
