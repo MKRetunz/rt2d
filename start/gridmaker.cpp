@@ -23,5 +23,20 @@ void GridMaker::update(float deltaTime)
 
 void GridMaker::MakeGrid(int GW, int GH, int CW, int CH) 
 {
+	gridwidth = GW;
+	gridheight = GH;
+	cellwidth = CW;
+	cellheight = CH;
 
+	// create grid
+	addGrid("assets/default.tga", 8, 8, gridwidth, gridheight, cellwidth, cellheight);
+
+	// fill Sprites with random number
+	int counter = 0;
+	for (int x = 0; x<gridwidth; x++) {
+		for (int y = 0; y<gridheight; y++) {
+			spritebatch()[counter]->frame(rand() % 16);
+			counter++;
+		}
+	}
 }
