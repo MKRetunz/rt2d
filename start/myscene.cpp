@@ -17,6 +17,7 @@ MyScene::MyScene() : Scene()
 	// create a single instance of GridMaker in the middle of the screen.
 	// the Sprite is added in Constructor of GridMaker.
 	gridMaker = new GridMaker();
+	gridMaker->MakeGrid(1, 1, 10, 10);
 	gridMaker->position = Point2(SWIDTH/2, SHEIGHT/2);
 
 	// create the scene 'tree'
