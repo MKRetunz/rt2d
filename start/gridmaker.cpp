@@ -8,8 +8,7 @@
 
 GridMaker::GridMaker() : Entity()
 {
-	this->addSprite("assets/square.tga");
-	this->sprite()->color = RED;
+
 }
 
 GridMaker::~GridMaker()
@@ -19,11 +18,5 @@ GridMaker::~GridMaker()
 
 void GridMaker::update(float deltaTime)
 {
-	// ###############################################################
-	// Rotate
-	// ###############################################################
-	this->rotation += HALF_PI * deltaTime; // 90 deg/sec
-	if (this->rotation > TWO_PI) {
-		this->rotation -= TWO_PI;
-	}
+
 }
