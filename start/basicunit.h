@@ -2,12 +2,12 @@
 #define BASICUNIT_H
 
 #include "entity.h"
-class basicunit :
+class BasicUnit :
 	public Entity
 {
 public:
-	basicunit();
-	virtual ~basicunit();
+	BasicUnit();
+	virtual ~BasicUnit();
 
 	void update(float deltaTime);
 };

@@ -1,16 +1,17 @@
 #include "basicunit.h"
 
-basicunit::basicunit() : Entity()
+BasicUnit::BasicUnit() : Entity()
 {
 
 }
 
 
-basicunit::~basicunit()
+BasicUnit::~BasicUnit()
 {
+
 }
 
-void basicunit::update(float deltaTime)
+void BasicUnit::update(float deltaTime)
 {
 
 }
