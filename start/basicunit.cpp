@@ -2,7 +2,7 @@
 
 BasicUnit::BasicUnit() : Entity()
 {
-
+	this->addSprite("assets/grayscale.tga");
 }
 
 
