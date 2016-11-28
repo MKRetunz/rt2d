@@ -12,6 +12,7 @@
 #include <rt2d/scene.h>
 
 #include "gridmaker.h"
+#include "basicunit.h"
 
 /// @brief The MyScene class is the Scene implementation.
 class MyScene : public Scene
@@ -30,6 +31,7 @@ public:
 private:
 	/// @brief the grid which makes the level.
 	GridMaker* gridMaker;
+	BasicUnit* basicunit;
 };
 
 #endif /* SCENE00_H */

@@ -16,12 +16,18 @@ MyScene::MyScene() : Scene()
 	gridMaker->position = Point2(SWIDTH/2, SHEIGHT/2);
 
 	this->addChild(gridMaker);
+
+	basicunit = new BasicUnit();
+	this->addChild(basicunit);
 }
 
 MyScene::~MyScene()
 {
 	this->removeChild(gridMaker);
 	delete gridMaker;
+
+	this->removeChild(basicunit);
+	delete basicunit;
 }
 
 void MyScene::update(float deltaTime)
