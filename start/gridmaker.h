@@ -38,7 +38,7 @@ public:
 
 private:
 	int halfwidth;
-	int halfheight
+	int halfheight;
 
 };
 
