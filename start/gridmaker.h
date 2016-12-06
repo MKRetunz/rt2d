@@ -29,7 +29,17 @@ public:
 	/// @param four ints for Grid width, height and Cell width and height respectively
 	void MakeGrid(int GW, int GH, int CW, int CH);
 
+	void HighlightGrid(int i);
+
+	int gridwidth;
+	int gridheight;
+	int cellwidth;
+	int cellheight;
+
 private:
+	int halfwidth;
+	int halfheight
+
 };
 
 #endif /* GridMaker_H */

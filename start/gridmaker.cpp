@@ -8,7 +8,6 @@
 
 GridMaker::GridMaker() : Entity()
 {
-
 }
 
 GridMaker::~GridMaker()
@@ -18,11 +17,17 @@ GridMaker::~GridMaker()
 
 void GridMaker::update(float deltaTime)
 {
-
+	
 }
 
 void GridMaker::MakeGrid(int GW, int GH, int CW, int CH) 
 {
+	//Set variables based on cell info
+	gridwidth = GW;
+	gridheight = GH;
+	cellwidth = CW;
+	cellheight = CH;
+
 	// create grid depending on input
 	addGrid("assets/default.tga", 8, 8, GW, GH, CW, CH);
 
@@ -33,5 +38,15 @@ void GridMaker::MakeGrid(int GW, int GH, int CW, int CH)
 			spritebatch()[counter]->frame(rand() % 16);
 			counter++;
 		}
+	}
+}
+
+void GridMaker::HighlightGrid(int range) 
+{
+	halfwidth = cellwidth / 2;
+	halfheight = cellheight / 2;
+
+	for (int i; i < range; i++) {
+
 	}
 }
