@@ -31,6 +31,8 @@ public:
 
 	void HighlightGrid(int range, int target);
 
+	void ResetGrid();
+
 	int gridwidth;
 	int gridheight;
 	int cellwidth;

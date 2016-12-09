@@ -40,7 +40,7 @@ void GridMaker::MakeGrid(int GW, int GH, int CW, int CH)
 		}
 	}
 
-	HighlightGrid(3, 15);
+	//HighlightGrid(3, 15);
 }
 
 void GridMaker::HighlightGrid(int range, int target)
@@ -51,7 +51,6 @@ void GridMaker::HighlightGrid(int range, int target)
 	int counter = 0;
 	for (int x = 0; x < gridwidth; x++) {
 		for (int y = 0; y < gridheight; y++) {
-
 			if (counter >= negReach && counter <= posReach)
 			{
 				int counterRow = counter / gridwidth;
@@ -74,3 +73,15 @@ void GridMaker::HighlightGrid(int range, int target)
 		HighlightGrid(newRange, newTarget);
 	}
 }
+
+void GridMaker::ResetGrid()
+{
+	int counter = 0;
+	for (int x = 0; x < gridwidth; x++) {
+		for (int y = 0; y < gridheight; y++) {
+			this->spritebatch()[counter]->frame(0);
+			counter++;
+		}
+	}
+}
+
