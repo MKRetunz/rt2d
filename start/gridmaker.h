@@ -37,8 +37,6 @@ public:
 	int cellheight;
 
 private:
-	int halfwidth;
-	int halfheight;
 
 };
 
