@@ -40,7 +40,7 @@ void GridMaker::MakeGrid(int GW, int GH, int CW, int CH)
 		}
 	}
 
-	HighlightGrid(1, 15);
+	HighlightGrid(3, 15);
 }
 
 void GridMaker::HighlightGrid(int range, int target)
