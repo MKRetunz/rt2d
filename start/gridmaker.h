@@ -29,7 +29,7 @@ public:
 	/// @param four ints for Grid width, height and Cell width and height respectively
 	void MakeGrid(int GW, int GH, int CW, int CH);
 
-	void HighlightGrid(int i);
+	void HighlightGrid(int range, int target);
 
 	int gridwidth;
 	int gridheight;

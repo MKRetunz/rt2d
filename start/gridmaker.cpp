@@ -40,17 +40,17 @@ void GridMaker::MakeGrid(int GW, int GH, int CW, int CH)
 		}
 	}
 
-	HighlightGrid(1);
+	HighlightGrid(1, 15);
 }
 
-void GridMaker::HighlightGrid(int range)
+void GridMaker::HighlightGrid(int range, int target)
 {
 	std::vector<Sprite*> spritebatch = this->spritebatch();
 	int counter = 0;
 	for (int x = 0; x < gridwidth; x++) {
 		for (int y = 0; y < gridheight; y++) {
 
-			if (counter == 15)
+			if (counter == target)
 			{
 				spritebatch[counter]->frame(1);
 			}
