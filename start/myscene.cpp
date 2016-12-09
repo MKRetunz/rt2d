@@ -12,8 +12,8 @@
 MyScene::MyScene() : Scene()
 {
 	gridMaker = new GridMaker();
-	gridMaker->MakeGrid(5, 5, 64, 64);
-	gridMaker->position = Point2(SWIDTH/3, SHEIGHT/3);
+	gridMaker->MakeGrid(10, 10, 64, 64);
+	gridMaker->position = Point2(SWIDTH/4, SHEIGHT/4);
 
 	this->addChild(gridMaker);
 
@@ -50,5 +50,36 @@ void MyScene::update(float deltaTime)
 	}
 	if (input()->getKeyUp(GLFW_KEY_D)) {
 		basicunit->moveUnit(3);
+	}
+
+	int mousex = input()->getMouseX() + camera()->position.x - SWIDTH / 2;
+	int mousey = input()->getMouseY() + camera()->position.y - SHEIGHT / 2;
+
+	std::cout << mousex << " " << mousey << std::endl;
+
+	int counter = 0;
+	for (int x = 0; x<gridMaker->gridwidth; x++) {
+		for (int y = 0; y<gridMaker->gridheight; y++) {
+			Point2 pos = gridMaker->spritebatch()[counter]->spriteposition;
+
+			int halfwidth = gridMaker->cellwidth / 2;
+			int halfheight = gridMaker->cellheight / 2;
+			int left = pos.x - halfwidth;
+			int right = pos.x + halfwidth;
+			int top = pos.y - halfheight;
+			int bottom = pos.y + halfheight;
+
+			if (mousex > left && mousex < right && mousey > top && mousey < bottom) {
+				gridMaker->spritebatch()[counter]->color.a = 192;
+				if (input()->getMouseDown(0)) {
+					gridMaker->ResetGrid();
+					gridMaker->HighlightGrid(6, counter);
+				}
+			}
+			else {
+				gridMaker->spritebatch()[counter]->color.a = 255;
+			}
+			counter++;
+		}
 	}
 }
