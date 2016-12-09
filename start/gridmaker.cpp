@@ -57,16 +57,16 @@ void GridMaker::HighlightGrid(int range, int target)
 			{
 				int counterRow = counter / gridwidth;
 				if (counterRow != targetRow) {
-					//Do nothing if the tile is in another row then the target.
+					//Do nothing if the tile is in another row than the target.
 				}
 				else {
 					spritebatch[counter]->frame(1);
 				}
 			}
-
 			counter++;
 		}
 	}
+	//After finishing one row move on to the next and check if there are any tiles that need to be drawn.
 	int newTarget = target - gridwidth;
 	int newRange = range - 1;
 	if (newRange >= 0) {
