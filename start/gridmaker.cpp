@@ -29,7 +29,7 @@ void GridMaker::MakeGrid(int GW, int GH, int CW, int CH)
 	cellheight = CH;
 
 	// create grid depending on input
-	addGrid("assets/default.tga", 8, 8, GW, GH, CW, CH);
+	addGrid("assets/mapcolors.tga", 2, 2, GW, GH, CW, CH);
 
 	// fill Sprites with random numbers for now
 	int counter = 0;
