@@ -13,7 +13,7 @@ MyScene::MyScene() : Scene()
 {
 	gridMaker = new GridMaker();
 	gridMaker->MakeGrid(5, 5, 64, 64);
-	gridMaker->position = Point2(SWIDTH/2, SHEIGHT/2);
+	gridMaker->position = Point2(SWIDTH/3, SHEIGHT/3);
 
 	this->addChild(gridMaker);
 
