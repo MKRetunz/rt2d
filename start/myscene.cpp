@@ -38,4 +38,17 @@ void MyScene::update(float deltaTime)
 	if (input()->getKeyUp( GLFW_KEY_ESCAPE )) {
 		this->stop();
 	}
+
+	if (input()->getKeyUp(GLFW_KEY_W)) {
+		basicunit->moveUnit(0);
+	}
+	if (input()->getKeyUp(GLFW_KEY_A)) {
+		basicunit->moveUnit(1);
+	}
+	if (input()->getKeyUp(GLFW_KEY_S)) {
+		basicunit->moveUnit(2);
+	}
+	if (input()->getKeyUp(GLFW_KEY_D)) {
+		basicunit->moveUnit(3);
+	}
 }
