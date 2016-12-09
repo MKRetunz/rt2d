@@ -10,6 +10,8 @@ public:
 	virtual ~BasicUnit();
 
 	void update(float deltaTime);
+
+	void moveUnit(int input);
 };
 
 #endif /* BASICUNIT_H */
