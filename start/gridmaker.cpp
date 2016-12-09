@@ -35,18 +35,27 @@ void GridMaker::MakeGrid(int GW, int GH, int CW, int CH)
 	int counter = 0;
 	for (int x = 0; x<GW; x++) {
 		for (int y = 0; y<GH; y++) {
-			spritebatch()[counter]->frame(rand() % 16);
+			spritebatch()[counter]->frame(0);
 			counter++;
 		}
 	}
+
+	HighlightGrid(1);
 }
 
-void GridMaker::HighlightGrid(int range) 
+void GridMaker::HighlightGrid(int range)
 {
-	halfwidth = cellwidth / 2;
-	halfheight = cellheight / 2;
+	std::vector<Sprite*> spritebatch = this->spritebatch();
+	int counter = 0;
+	for (int x = 0; x < gridwidth; x++) {
+		for (int y = 0; y < gridheight; y++) {
 
-	for (int i; i < range; i++) {
+			if (counter == 15)
+			{
+				spritebatch[counter]->frame(1);
+			}
 
+			counter++;
+		}
 	}
 }
