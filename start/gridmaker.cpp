@@ -48,7 +48,6 @@ void GridMaker::HighlightGrid(int range, int target)
 	int posReach = target + range;
 	int negReach = target - range;
 	int targetRow = target / gridwidth;
-	std::vector<Sprite*> spritebatch = this->spritebatch();
 	int counter = 0;
 	for (int x = 0; x < gridwidth; x++) {
 		for (int y = 0; y < gridheight; y++) {
@@ -60,7 +59,7 @@ void GridMaker::HighlightGrid(int range, int target)
 					//Do nothing if the tile is in another row than the target.
 				}
 				else {
-					spritebatch[counter]->frame(1);
+					this->spritebatch()[counter]->frame(1);
 				}
 			}
 			counter++;
