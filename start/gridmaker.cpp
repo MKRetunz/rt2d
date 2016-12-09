@@ -67,4 +67,11 @@ void GridMaker::HighlightGrid(int range, int target)
 			counter++;
 		}
 	}
+	int newTarget = target - gridwidth;
+	int newRange = range - 1;
+	if (newRange > 0) {
+		HighlightGrid(newRange, newTarget);
+		newTarget = target + gridwidth;
+		HighlightGrid(newRange, newTarget);
+	}
 }
