@@ -62,12 +62,14 @@ void MyScene::update(float deltaTime)
 		for (int y = 0; y<gridMaker->gridheight; y++) {
 			Point2 pos = gridMaker->spritebatch()[counter]->spriteposition;
 
+			pos += gridMaker->position;
+
 			int halfwidth = gridMaker->cellwidth / 2;
 			int halfheight = gridMaker->cellheight / 2;
-			int left = pos.x - halfwidth + SWIDTH / 4;
-			int right = pos.x + halfwidth + SWIDTH / 4;
-			int top = pos.y - halfheight + SHEIGHT / 4;
-			int bottom = pos.y + halfheight + SHEIGHT / 4;
+			int left = pos.x - halfwidth;
+			int right = pos.x + halfwidth;
+			int top = pos.y - halfheight;
+			int bottom = pos.y + halfheight;
 
 			if (mousex > left && mousex < right && mousey > top && mousey < bottom) {
 				gridMaker->spritebatch()[counter]->color.a = 192;
