@@ -45,32 +45,34 @@ void GridMaker::MakeGrid(int GW, int GH, int CW, int CH)
 
 void GridMaker::HighlightGrid(int range, int target)
 {
-	int posReach = target + range;
-	int negReach = target - range;
-	int targetRow = target / gridwidth;
-	int counter = 0;
-	for (int x = 0; x < gridwidth; x++) {
-		for (int y = 0; y < gridheight; y++) {
-			if (counter >= negReach && counter <= posReach)
-			{
-				int counterRow = counter / gridwidth;
-				if (counterRow != targetRow) {
-					//Do nothing if the tile is in another row than the target.
+	if (target > 0) {
+		int posReach = target + range;
+		int negReach = target - range;
+		int targetRow = target / gridwidth;
+		int counter = 0;
+		for (int x = 0; x < gridwidth; x++) {
+			for (int y = 0; y < gridheight; y++) {
+				if (counter >= negReach && counter <= posReach)
+				{
+					int counterRow = counter / gridwidth;
+					if (counterRow != targetRow) {
+						//Do nothing if the tile is in another row than the target.
+					}
+					else {
+						this->spritebatch()[counter]->frame(1);
+					}
 				}
-				else {
-					this->spritebatch()[counter]->frame(1);
-				}
+				counter++;
 			}
-			counter++;
 		}
-	}
-	//After finishing one row move on to the next and check if there are any tiles that need to be drawn.
-	int newTarget = target - gridwidth;
-	int newRange = range - 1;
-	if (newRange >= 0) {
-		HighlightGrid(newRange, newTarget);
-		newTarget = target + gridwidth;
-		HighlightGrid(newRange, newTarget);
+		//After finishing one row move on to the next and check if there are any tiles that need to be drawn.
+		int newTarget = target - gridwidth;
+		int newRange = range - 1;
+		if (newRange >= 0) {
+			HighlightGrid(newRange, newTarget);
+			newTarget = target + gridwidth;
+			HighlightGrid(newRange, newTarget);
+		}
 	}
 }
 
