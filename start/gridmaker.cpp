@@ -45,7 +45,7 @@ void GridMaker::MakeGrid(int GW, int GH, int CW, int CH)
 
 void GridMaker::HighlightGrid(int range, int target)
 {
-	if (target > 0) {
+	if (target >= 0) {
 		int posReach = target + range;	
 		int negReach = target - range;
 		int targetRow = target / gridwidth;
