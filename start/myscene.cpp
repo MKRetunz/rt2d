@@ -19,6 +19,8 @@ MyScene::MyScene() : Scene()
 
 	basicunit = new BasicUnit();
 	this->addChild(basicunit);
+
+	basicunit->position = gridMaker->position;
 }
 
 MyScene::~MyScene()
