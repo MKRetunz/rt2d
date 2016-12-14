@@ -46,7 +46,7 @@ void GridMaker::MakeGrid(int GW, int GH, int CW, int CH)
 void GridMaker::HighlightGrid(int range, int target)
 {
 	if (target > 0) {
-		int posReach = target + range;
+		int posReach = target + range;	
 		int negReach = target - range;
 		int targetRow = target / gridwidth;
 		int counter = 0;
@@ -55,10 +55,7 @@ void GridMaker::HighlightGrid(int range, int target)
 				if (counter >= negReach && counter <= posReach)
 				{
 					int counterRow = counter / gridwidth;
-					if (counterRow != targetRow) {
-						//Do nothing if the tile is in another row than the target.
-					}
-					else {
+					if (counterRow == targetRow) {
 						this->spritebatch()[counter]->frame(1);
 					}
 				}
