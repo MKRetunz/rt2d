@@ -83,7 +83,7 @@ void MyScene::update(float deltaTime)
 
 				//gridMaker->HighlightGrid(6, counter);
 				if (input()->getMouseDown(0)) {
-					if (gridMaker->isHighlighting == false && mousex < unitspriteR && mousex > unitspriteL && mousey > unitspriteT && mousey < unitspriteD) {
+					if (!gridMaker->isHighlighting && mousex < unitspriteR && mousex > unitspriteL && mousey > unitspriteT && mousey < unitspriteD) {
 						gridMaker->ResetGrid();
 						gridMaker->HighlightGrid(6, counter);
 						gridMaker->isHighlighting = true;					
@@ -91,7 +91,7 @@ void MyScene::update(float deltaTime)
 					else if (gridMaker->isHighlighting && gridMaker->spritebatch()[counter]->frame() == 1) {				
 						gridMaker->MoveUnit(basicunit, pos);
 						gridMaker->ResetGrid();
-						gridMaker->isHighlighting == false;
+						gridMaker->isHighlighting = false;
 					}
 				}
 			}
