@@ -3,6 +3,8 @@
 BasicUnit::BasicUnit() : Entity()
 {
 	this->addSprite("assets/mercenaryv1.tga");
+
+	selected = false;
 }
 
 
