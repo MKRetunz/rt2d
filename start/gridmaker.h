@@ -33,10 +33,14 @@ public:
 
 	void ResetGrid();
 
+	void MoveUnit(Entity* e, Point2 p);
+
 	int gridwidth;
 	int gridheight;
 	int cellwidth;
 	int cellheight;
+
+	bool isHighlighting;
 
 private:
 

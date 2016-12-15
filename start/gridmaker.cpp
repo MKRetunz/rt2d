@@ -8,6 +8,12 @@
 
 GridMaker::GridMaker() : Entity()
 {
+	gridwidth = 0;
+	gridheight = 0;
+	cellwidth = 0;
+	cellheight = 0;
+
+	isHighlighting = false;
 }
 
 GridMaker::~GridMaker()
@@ -83,4 +89,10 @@ void GridMaker::ResetGrid()
 		}
 	}
 }
+
+void GridMaker::MoveUnit(Entity * e, Point2 p)
+{
+}
+
+
 
