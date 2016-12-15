@@ -92,7 +92,6 @@ void GridMaker::ResetGrid()
 
 void GridMaker::MoveUnit(Entity * e, Point2 p)
 {
+	e->position = p;
 }
-
-
 
