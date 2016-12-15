@@ -57,8 +57,6 @@ void MyScene::update(float deltaTime)
 	int mousex = input()->getMouseX() + camera()->position.x - SWIDTH / 2;
 	int mousey = input()->getMouseY() + camera()->position.y - SHEIGHT / 2;
 
-	std::cout << mousex << " " << mousey << std::endl;
-
 	int counter = 0;
 	for (int x = 0; x<gridMaker->gridwidth; x++) {
 		for (int y = 0; y<gridMaker->gridheight; y++) {
@@ -80,13 +78,20 @@ void MyScene::update(float deltaTime)
 				int unitspriteL = basicunit->position.x - 32;
 				int unitspriteD = basicunit->position.y + 32;
 				int unitspriteT = basicunit->position.y - 32;
+				
+				std::cout << basicunit->position << mousex << " " << mousey << std::endl;
 
 				//gridMaker->HighlightGrid(6, counter);
-				if (gridMaker->isHighlighting == false && mousex < unitspriteR && mousex > unitspriteL && mousey > unitspriteT && mousey < unitspriteD) {
-					if (input()->getMouseDown(0)) {
+				if (input()->getMouseDown(0)) {
+					if (gridMaker->isHighlighting == false && mousex < unitspriteR && mousex > unitspriteL && mousey > unitspriteT && mousey < unitspriteD) {
 						gridMaker->ResetGrid();
 						gridMaker->HighlightGrid(6, counter);
-						gridMaker->isHighlighting = true;
+						gridMaker->isHighlighting = true;					
+					}
+					else if (gridMaker->isHighlighting && gridMaker->spritebatch()[counter]->frame() == 1) {				
+						gridMaker->MoveUnit(basicunit, pos);
+						gridMaker->ResetGrid();
+						gridMaker->isHighlighting == false;
 					}
 				}
 			}
