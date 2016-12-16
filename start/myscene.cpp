@@ -93,6 +93,10 @@ void MyScene::update(float deltaTime)
 						gridMaker->ResetGrid();
 						gridMaker->isHighlighting = false;
 					}
+					else if (gridMaker->isHighlighting && gridMaker->spritebatch()[counter]->frame() == 0) {
+						gridMaker->ResetGrid();
+						gridMaker->isHighlighting = false;
+					}
 				}
 			}
 			else {
