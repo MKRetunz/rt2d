@@ -9,7 +9,9 @@
 #ifndef MYSCENE_H
 #define MYSCENE_H
 
+#include <vector>
 #include <rt2d/scene.h>
+#include <rt2d/text.h>
 
 #include "gridmaker.h"
 #include "basicunit.h"
@@ -32,6 +34,9 @@ private:
 	/// @brief the grid which makes the level.
 	GridMaker* gridMaker;
 	BasicUnit* basicunit;
+
+protected:
+	std::vector<Text*> text;
 };
 
 #endif /* SCENE00_H */
