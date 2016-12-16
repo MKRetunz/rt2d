@@ -41,19 +41,6 @@ void MyScene::update(float deltaTime)
 		this->stop();
 	}
 
-	if (input()->getKeyUp(GLFW_KEY_W)) {
-		basicunit->moveUnit(0);
-	}
-	if (input()->getKeyUp(GLFW_KEY_A)) {
-		basicunit->moveUnit(1);
-	}
-	if (input()->getKeyUp(GLFW_KEY_S)) {
-		basicunit->moveUnit(2);
-	}
-	if (input()->getKeyUp(GLFW_KEY_D)) {
-		basicunit->moveUnit(3);
-	}
-
 	int mousex = input()->getMouseX() + camera()->position.x - SWIDTH / 2;
 	int mousey = input()->getMouseY() + camera()->position.y - SHEIGHT / 2;
 
@@ -81,7 +68,6 @@ void MyScene::update(float deltaTime)
 				
 				std::cout << basicunit->position << mousex << " " << mousey << std::endl;
 
-				//gridMaker->HighlightGrid(6, counter);
 				if (input()->getMouseDown(0)) {
 					if (!gridMaker->isHighlighting && mousex < unitspriteR && mousex > unitspriteL && mousey > unitspriteT && mousey < unitspriteD) {
 						gridMaker->ResetGrid();
