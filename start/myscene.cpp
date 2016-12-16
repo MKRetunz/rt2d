@@ -11,6 +11,19 @@
 
 MyScene::MyScene() : Scene()
 {
+	for (unsigned int i = 0; i < 16; i++) {
+		Text* line = new Text();
+		line->scale = Point2(0.5f, 0.5f);
+		line->position.y = i*25;
+		line->position.x = 10;
+
+		text.push_back(line);
+		this->addChild(line);
+	}
+
+	text[1]->message("Placeholder:");
+	text[2]->message("This will be the basic UI and needs to be changed when possible.");
+
 	gridMaker = new GridMaker();
 	gridMaker->MakeGrid(10, 10, 64, 64);
 	gridMaker->position = Point2(SWIDTH/4, SHEIGHT/4);
@@ -25,6 +38,14 @@ MyScene::MyScene() : Scene()
 
 MyScene::~MyScene()
 {
+	int ts = text.size();
+	for (int i = 0; i<ts; i++) {
+		this->removeChild(text[i]);
+		delete text[i];
+		text[i] = NULL;
+	}
+	text.clear();
+
 	this->removeChild(gridMaker);
 	delete gridMaker;
 
