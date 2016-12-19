@@ -86,28 +86,32 @@ void MyScene::update(float deltaTime)
 
 			if (mousex > left && mousex < right && mousey > top && mousey < bottom) {
 				gridMaker->spritebatch()[counter]->color.a = 192;
-				
-				int unitspriteR = basicunit->position.x + gridMaker->cellwidth / 2;
-				int unitspriteL = basicunit->position.x - gridMaker->cellwidth / 2;
-				int unitspriteD = basicunit->position.y + gridMaker->cellwidth / 2;
-				int unitspriteT = basicunit->position.y - gridMaker->cellwidth / 2;
-				
-				std::cout << basicunit->position << mousex << " " << mousey << std::endl;
 
-				if (input()->getMouseDown(0)) {
-					if (!gridMaker->isHighlighting && mousex < unitspriteR && mousex > unitspriteL && mousey > unitspriteT && mousey < unitspriteD) {
-						gridMaker->ResetGrid();
-						gridMaker->HighlightGrid(6, counter);
-						gridMaker->isHighlighting = true;					
-					}
-					else if (gridMaker->isHighlighting && gridMaker->spritebatch()[counter]->frame() == 1) {				
-						gridMaker->MoveUnit(basicunit, pos);
-						gridMaker->ResetGrid();
-						gridMaker->isHighlighting = false;
-					}
-					else if (gridMaker->isHighlighting && gridMaker->spritebatch()[counter]->frame() == 0) {
-						gridMaker->ResetGrid();
-						gridMaker->isHighlighting = false;
+				for (int ul = 0; ul < unitList.size(); ul++) {
+					if (unitList[ul]->selected == true) {
+						int unitspriteR = basicunit->position.x + gridMaker->cellwidth / 2;
+						int unitspriteL = basicunit->position.x - gridMaker->cellwidth / 2;
+						int unitspriteD = basicunit->position.y + gridMaker->cellwidth / 2;
+						int unitspriteT = basicunit->position.y - gridMaker->cellwidth / 2;
+
+						std::cout << basicunit->position << mousex << " " << mousey << std::endl;
+
+						if (input()->getMouseDown(0)) {
+							if (!gridMaker->isHighlighting && mousex < unitspriteR && mousex > unitspriteL && mousey > unitspriteT && mousey < unitspriteD) {
+								gridMaker->ResetGrid();
+								gridMaker->HighlightGrid(6, counter);
+								gridMaker->isHighlighting = true;
+							}
+							else if (gridMaker->isHighlighting && gridMaker->spritebatch()[counter]->frame() == 1) {
+								gridMaker->MoveUnit(basicunit, pos);
+								gridMaker->ResetGrid();
+								gridMaker->isHighlighting = false;
+							}
+							else if (gridMaker->isHighlighting && gridMaker->spritebatch()[counter]->frame() == 0) {
+								gridMaker->ResetGrid();
+								gridMaker->isHighlighting = false;
+							}
+						}
 					}
 				}
 			}
