@@ -41,6 +41,11 @@ MyScene::MyScene() : Scene()
 	this->addChild(unitTesting);
 	unitTesting->selected = true;
 	unitTesting->addSprite("assets/mercenaryv2.tga");
+
+	unitspriteR = 32;
+	unitspriteL = 32;
+	unitspriteD = 32;
+	unitspriteT = 32;
 }
 
 MyScene::~MyScene()

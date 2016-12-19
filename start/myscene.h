@@ -37,6 +37,11 @@ private:
 	BasicUnit* unitTesting;
 	std::vector<BasicUnit*> unitList;
 
+	int unitspriteR;
+	int unitspriteL;
+	int unitspriteD;
+	int unitspriteT;
+
 protected:
 	std::vector<Text*> text;
 };
