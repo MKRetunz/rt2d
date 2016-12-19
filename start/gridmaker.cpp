@@ -77,6 +77,7 @@ void GridMaker::HighlightGrid(int range, int target)
 			HighlightGrid(newRange, newTarget);
 		}
 	}
+	isHighlighting = true;
 }
 
 void GridMaker::ResetGrid()
@@ -88,6 +89,7 @@ void GridMaker::ResetGrid()
 			counter++;
 		}
 	}
+	isHighlighting = false;
 }
 
 void GridMaker::MoveUnit(Entity * e, Point2 p)
