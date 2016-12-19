@@ -87,7 +87,7 @@ void MyScene::update(float deltaTime)
 		unitspriteD = unitList[ul]->position.y + gridMaker->cellwidth / 2;
 		unitspriteT = unitList[ul]->position.y - gridMaker->cellwidth / 2;
 
-		if (mousex < unitspriteR && mousex > unitspriteL && mousey > unitspriteT && mousey < unitspriteD) {
+		if (mousex < unitspriteR && mousex > unitspriteL && mousey > unitspriteT && mousey < unitspriteD && input()->getMouseDown(0)) {
 			unitList[ul]->selected = true;
 			for (int ul2 = 0; ul2 < unitList.size(); ul2++) {
 				if (ul2 != ul) {
