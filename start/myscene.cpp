@@ -82,10 +82,10 @@ void MyScene::update(float deltaTime)
 			if (mousex > left && mousex < right && mousey > top && mousey < bottom) {
 				gridMaker->spritebatch()[counter]->color.a = 192;
 				
-				int unitspriteR = basicunit->position.x + 32;
-				int unitspriteL = basicunit->position.x - 32;
-				int unitspriteD = basicunit->position.y + 32;
-				int unitspriteT = basicunit->position.y - 32;
+				int unitspriteR = basicunit->position.x + gridMaker->cellwidth / 2;
+				int unitspriteL = basicunit->position.x - gridMaker->cellwidth / 2;
+				int unitspriteD = basicunit->position.y + gridMaker->cellwidth / 2;
+				int unitspriteT = basicunit->position.y - gridMaker->cellwidth / 2;
 				
 				std::cout << basicunit->position << mousex << " " << mousey << std::endl;
 
