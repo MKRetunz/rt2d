@@ -33,8 +33,14 @@ public:
 private:
 	/// @brief the grid which makes the level.
 	GridMaker* gridMaker;
+
+	/// @brief a example unit to be replaced by the final version later.
 	BasicUnit* basicunit;
+
+	/// @brief another example unit to be replaced later.
 	BasicUnit* unitTesting;
+
+	/// @brief the list of units.
 	std::vector<BasicUnit*> unitList;
 
 	int unitspriteR;
@@ -43,6 +49,7 @@ private:
 	int unitspriteT;
 
 protected:
+	/// @brief a list of texts for the UI.
 	std::vector<Text*> text;
 };
 
