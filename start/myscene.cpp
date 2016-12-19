@@ -35,6 +35,8 @@ MyScene::MyScene() : Scene()
 	this->addChild(basicunit);
 
 	basicunit->position = gridMaker->position;
+
+	basicunit->selected = true;
 }
 
 MyScene::~MyScene()
