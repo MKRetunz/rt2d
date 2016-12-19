@@ -34,6 +34,7 @@ private:
 	/// @brief the grid which makes the level.
 	GridMaker* gridMaker;
 	BasicUnit* basicunit;
+	std::vector<BasicUnit*> unitList;
 
 protected:
 	std::vector<Text*> text;

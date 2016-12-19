@@ -31,6 +31,7 @@ MyScene::MyScene() : Scene()
 	this->addChild(gridMaker);
 
 	basicunit = new BasicUnit();
+	unitList.push_back(basicunit);
 	this->addChild(basicunit);
 
 	basicunit->position = gridMaker->position;
@@ -46,11 +47,15 @@ MyScene::~MyScene()
 	}
 	text.clear();
 
+	int us = unitList.size();
+	for (int i = 0; i < us; i++) {
+		this->removeChild(unitList[i]);
+		delete unitList[i];
+	}
+	unitList.clear();
+
 	this->removeChild(gridMaker);
 	delete gridMaker;
-
-	this->removeChild(basicunit);
-	delete basicunit;
 }
 
 void MyScene::update(float deltaTime)
