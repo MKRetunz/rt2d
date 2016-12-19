@@ -33,7 +33,13 @@ MyScene::MyScene() : Scene()
 	unitList.push_back(basicunit);
 	basicunit->position = gridMaker->position;
 	this->addChild(basicunit);
-	basicunit->selected = true;
+	//basicunit->selected = true;
+
+	unitTesting = new BasicUnit();
+	unitList.push_back(unitTesting);
+	unitTesting->position = gridMaker->position + gridMaker->cellwidth;
+	this->addChild(unitTesting);
+	unitTesting->selected = true;
 }
 
 MyScene::~MyScene()
