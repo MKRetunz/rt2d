@@ -11,8 +11,6 @@ public:
 
 	void update(float deltaTime);
 
-	void moveUnit(int input);
-
 	bool selected;
 };
 
