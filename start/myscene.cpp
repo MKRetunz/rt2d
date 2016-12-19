@@ -27,22 +27,19 @@ MyScene::MyScene() : Scene()
 	gridMaker = new GridMaker();
 	gridMaker->MakeGrid(10, 10, 64, 64);
 	gridMaker->position = Point2(SWIDTH/4, SHEIGHT/4);
-
 	this->addChild(gridMaker);
 
 	basicunit = new BasicUnit();
 	unitList.push_back(basicunit);
-	this->addChild(basicunit);
-
 	basicunit->position = gridMaker->position;
-
+	this->addChild(basicunit);
 	basicunit->selected = true;
 }
 
 MyScene::~MyScene()
 {
 	int ts = text.size();
-	for (int i = 0; i<ts; i++) {
+	for (int i = 0; i < ts; i++) {
 		this->removeChild(text[i]);
 		delete text[i];
 		text[i] = NULL;
@@ -76,7 +73,6 @@ void MyScene::update(float deltaTime)
 	for (int x = 0; x<gridMaker->gridwidth; x++) {
 		for (int y = 0; y<gridMaker->gridheight; y++) {
 			Point2 pos = gridMaker->spritebatch()[counter]->spriteposition;
-
 			pos += gridMaker->position;
 
 			int halfwidth = gridMaker->cellwidth / 2;
