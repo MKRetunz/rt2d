@@ -93,10 +93,10 @@ void MyScene::update(float deltaTime)
 
 				for (int ul = 0; ul < unitList.size(); ul++) {
 					if (unitList[ul]->selected == true) {
-						int unitspriteR = basicunit->position.x + gridMaker->cellwidth / 2;
-						int unitspriteL = basicunit->position.x - gridMaker->cellwidth / 2;
-						int unitspriteD = basicunit->position.y + gridMaker->cellwidth / 2;
-						int unitspriteT = basicunit->position.y - gridMaker->cellwidth / 2;
+						int unitspriteR = unitList[ul]->position.x + gridMaker->cellwidth / 2;
+						int unitspriteL = unitList[ul]->position.x - gridMaker->cellwidth / 2;
+						int unitspriteD = unitList[ul]->position.y + gridMaker->cellwidth / 2;
+						int unitspriteT = unitList[ul]->position.y - gridMaker->cellwidth / 2;
 
 						std::cout << basicunit->position << mousex << " " << mousey << std::endl;
 
@@ -107,7 +107,7 @@ void MyScene::update(float deltaTime)
 								gridMaker->isHighlighting = true;
 							}
 							else if (gridMaker->isHighlighting && gridMaker->spritebatch()[counter]->frame() == 1) {
-								gridMaker->MoveUnit(basicunit, pos);
+								gridMaker->MoveUnit(unitList[ul], pos);
 								gridMaker->ResetGrid();
 								gridMaker->isHighlighting = false;
 							}
