@@ -89,14 +89,6 @@ void MyScene::update(float deltaTime)
 
 		if (mousex < unitspriteR && mousex > unitspriteL && mousey > unitspriteT && mousey < unitspriteD) {
 			unitList[ul]->selected = true;
-			for (int ul2 = 0; ul2 < unitList.size(); ul2++) {
-				if (ul2 != ul) {
-					unitList[ul2]->selected = false;
-				}
-				else if (gridMaker->isHighlighting) {
-					gridMaker->ResetGrid();
-				}
-			}
 		}
 	}
 
