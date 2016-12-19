@@ -40,6 +40,7 @@ MyScene::MyScene() : Scene()
 	unitTesting->position = gridMaker->position + gridMaker->cellwidth;
 	this->addChild(unitTesting);
 	unitTesting->selected = true;
+	unitTesting->addSprite("assets/mercenaryv2.tga");
 }
 
 MyScene::~MyScene()
