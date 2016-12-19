@@ -26,7 +26,7 @@ MyScene::MyScene() : Scene()
 
 	gridMaker = new GridMaker();
 	gridMaker->MakeGrid(10, 10, 64, 64);
-	gridMaker->position = Point2(SWIDTH/4, SHEIGHT/4);
+	gridMaker->position = Point2(SWIDTH/4, SHEIGHT/8);
 	this->addChild(gridMaker);
 
 	basicunit = new BasicUnit();
