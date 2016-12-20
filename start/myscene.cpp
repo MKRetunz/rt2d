@@ -89,6 +89,9 @@ void MyScene::update(float deltaTime)
 		unitspriteT = unitList[ul]->position.y - gridMaker->cellwidth / 2;
 
 		if (mousex < unitspriteR && mousex > unitspriteL && mousey > unitspriteT && mousey < unitspriteD) {
+			text[3]->message("You have moused over a unit.");
+			text[4]->message("This will show its stats once they are implemented!");
+
 			if (input()->getMouseDown(0)) {
 				unitList[ul]->selected = true;
 				for (int ul2 = 0; ul2 < unitList.size(); ul2++) {
