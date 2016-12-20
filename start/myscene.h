@@ -16,7 +16,7 @@
 #include "gridmaker.h"
 #include "basicunit.h"
 
-/// @brief The MyScene class is the Scene implementation.
+/// @brief The MyScene class is the Scene implementation
 class MyScene : public Scene
 {
 public:
@@ -31,25 +31,32 @@ public:
 	virtual void update(float deltaTime);
 
 private:
-	/// @brief the grid which makes the level.
+	/// @brief the grid which makes the level
 	GridMaker* gridMaker;
 
-	/// @brief a example unit to be replaced by the final version later.
+	/// @brief a example unit to be replaced by the final version later
 	BasicUnit* basicunit;
 
-	/// @brief another example unit to be replaced later.
+	/// @brief another example unit to be replaced later
 	BasicUnit* unitTesting;
 
-	/// @brief the list of units.
+	/// @brief the list of units
 	std::vector<BasicUnit*> unitList;
 
+	/// @brief the right side of a unit's sprite
 	int unitspriteR;
+
+	/// @brief the left side of a unit's sprite
 	int unitspriteL;
+
+	/// @brief the bottom side of a unit's sprite
 	int unitspriteD;
+
+	/// @brief the top side of a unit's sprite
 	int unitspriteT;
 
 protected:
-	/// @brief a list of texts for the UI.
+	/// @brief a list of texts for the UI
 	std::vector<Text*> text;
 };
 

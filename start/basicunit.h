@@ -12,11 +12,12 @@ public:
 	/// @brief Deconstructor
 	virtual ~BasicUnit();
 
-	/// @brief update is automatically called every frame.
-	/// @param deltaTime the elapsed time in seconds.
-	/// @return void.
+	/// @brief update is automatically called every frame
+	/// @param deltaTime the elapsed time in seconds
+	/// @return void
 	void update(float deltaTime);
 
+	/// @brief a boolean to see if the unit is being selected or not
 	bool selected;
 };
 
