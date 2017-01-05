@@ -34,6 +34,8 @@ MyScene::MyScene() : Scene()
 	unitspriteD = 32;
 	unitspriteT = 32;
 
+	menuOn = false;
+
 	for (unsigned int i = 0; i < 16; i++) {
 		Text* line = new Text();
 		line->scale = Point2(0.5f, 0.5f);

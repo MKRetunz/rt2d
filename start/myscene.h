@@ -58,6 +58,8 @@ private:
 	/// @brief the top side of a unit's sprite
 	int unitspriteT;
 
+	bool menuOn;
+
 protected:
 	/// @brief a list of texts for the UI
 	std::vector<Text*> text;
