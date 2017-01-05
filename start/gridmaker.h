@@ -56,6 +56,8 @@ public:
 	/// @brief the height of the cell in pixels
 	int cellheight;
 
+	int currentTile;
+
 	/// @brief a bool to see if the grid is being highlighted or not
 	bool isHighlighting;
 
