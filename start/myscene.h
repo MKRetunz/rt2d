@@ -30,6 +30,8 @@ public:
 	/// @return void
 	virtual void update(float deltaTime);
 
+	void actionMenu();
+
 private:
 	/// @brief the grid which makes the level
 	GridMaker* gridMaker;

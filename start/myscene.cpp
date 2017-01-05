@@ -151,3 +151,8 @@ void MyScene::update(float deltaTime)
 		}
 	}
 }
+
+void MyScene::actionMenu()
+{
+
+}
