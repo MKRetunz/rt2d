@@ -128,8 +128,6 @@ void MyScene::update(float deltaTime)
 						unitspriteD = unitList[ul]->position.y + gridMaker->cellwidth / 2;
 						unitspriteT = unitList[ul]->position.y - gridMaker->cellwidth / 2;
 
-						std::cout << basicunit->position << mousex << " " << mousey << std::endl;
-
 						if (input()->getMouseDown(0)) {
 							if (!gridMaker->isHighlighting && mousex < unitspriteR && mousex > unitspriteL && mousey > unitspriteT && mousey < unitspriteD) {
 								gridMaker->ResetGrid();
