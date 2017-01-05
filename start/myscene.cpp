@@ -162,7 +162,7 @@ void MyScene::update(float deltaTime)
 void MyScene::actionMenu()
 {
 	text[10]->message("Press Z to attack");
-	text[11]->message("Press X to do nothing");
+	text[11]->message("Press X to wait");
 
 	menuOn = true;
 }
