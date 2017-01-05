@@ -136,6 +136,7 @@ void MyScene::update(float deltaTime)
 							else if (gridMaker->isHighlighting && gridMaker->spritebatch()[counter]->frame() == 1) {
 								gridMaker->MoveUnit(unitList[ul], pos);
 								gridMaker->ResetGrid();
+								actionMenu();
 							}
 							else if (gridMaker->isHighlighting && gridMaker->spritebatch()[counter]->frame() == 0) {
 								gridMaker->ResetGrid();
@@ -154,5 +155,6 @@ void MyScene::update(float deltaTime)
 
 void MyScene::actionMenu()
 {
-
+	text[10]->message("Press Z to attack");
+	text[11]->message("Press X to do nothing");
 }
