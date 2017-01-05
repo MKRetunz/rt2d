@@ -137,6 +137,7 @@ void MyScene::update(float deltaTime)
 							}
 							else if (gridMaker->isHighlighting && gridMaker->spritebatch()[counter]->frame() == 1) {
 								gridMaker->MoveUnit(unitList[ul], pos);
+								gridMaker->currentTile = counter;
 								//gridMaker->ResetGrid();
 								actionMenu();
 							}
@@ -158,7 +159,7 @@ void MyScene::update(float deltaTime)
 		gridMaker->ResetGrid();
 	}
 	if (menuOn && input()->getKeyDown(GLFW_KEY_Z)) {
-		gridMaker->HighlightGrid(1, 1, 3);
+		gridMaker->HighlightGrid(1, gridMaker->currentTile, 3);
 	}
 }
 
