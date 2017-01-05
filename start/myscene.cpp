@@ -157,6 +157,9 @@ void MyScene::update(float deltaTime)
 	if (menuOn && input()->getKeyDown(GLFW_KEY_X)) {
 		gridMaker->ResetGrid();
 	}
+	if (menuOn && input()->getKeyDown(GLFW_KEY_Z)) {
+		gridMaker->HighlightGrid(1, 1, 3);
+	}
 }
 
 void MyScene::actionMenu()
