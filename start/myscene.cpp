@@ -137,7 +137,7 @@ void MyScene::update(float deltaTime)
 							}
 							else if (gridMaker->isHighlighting && gridMaker->spritebatch()[counter]->frame() == 1) {
 								gridMaker->MoveUnit(unitList[ul], pos);
-								gridMaker->ResetGrid();
+								//gridMaker->ResetGrid();
 								actionMenu();
 							}
 							else if (gridMaker->isHighlighting && gridMaker->spritebatch()[counter]->frame() == 0) {
@@ -153,10 +153,16 @@ void MyScene::update(float deltaTime)
 			counter++;
 		}
 	}
+
+	if (menuOn && input()->getKeyDown(GLFW_KEY_X)) {
+		gridMaker->ResetGrid();
+	}
 }
 
 void MyScene::actionMenu()
 {
 	text[10]->message("Press Z to attack");
 	text[11]->message("Press X to do nothing");
+
+	menuOn = true;
 }
