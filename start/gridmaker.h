@@ -33,7 +33,7 @@ public:
 	/// @brief highlights tiles within the specified range
 	/// @param range indicates the reach of the function while target is the base
 	/// @return void
-	void HighlightGrid(int range, int target);
+	void HighlightGrid(int range, int target, int color);
 
 	/// @brief unhighlights all the tiles on the grid
 	/// @return void
