@@ -142,6 +142,10 @@ void MyScene::update(float deltaTime)
 							else if (gridMaker->isHighlighting && gridMaker->spritebatch()[counter]->frame() == 0) {
 								gridMaker->ResetGrid();
 							}
+							else if (gridMaker->isHighlighting && gridMaker->spritebatch()[counter]->frame() == 3 && unitList[ul]->position == pos) {
+								removeChild(unitList[ul]);
+								gridMaker->ResetGrid();
+							}
 						}
 					}
 				}
