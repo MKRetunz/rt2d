@@ -5,6 +5,16 @@ BasicUnit::BasicUnit() : Entity()
 	this->addSprite("assets/mercenaryv1.tga");
 
 	selected = false;
+
+	HitPoints = 10;
+
+	Damage = 0;
+
+	Hit = 0;
+
+	Avoid = 0;
+
+	Defense = 0;
 }
 
 
