@@ -131,12 +131,15 @@ void MyScene::update(float deltaTime)
 						if (input()->getMouseDown(0)) {
 							if (!gridMaker->isHighlighting && mousex < unitspriteR && mousex > unitspriteL && mousey > unitspriteT && mousey < unitspriteD) {
 								gridMaker->ResetGrid();
+								gridMaker->sourceTile = counter;
 								gridMaker->HighlightGrid(6, counter, 1);
 							}
 							else if (gridMaker->isHighlighting && gridMaker->spritebatch()[counter]->frame() == 1) {
+								gridMaker->ResetGrid();
+								gridMaker->HighlightGrid(6, gridMaker->sourceTile, 1);
 								gridMaker->MoveUnit(unitList[ul], pos);
 								gridMaker->currentTile = counter;
-								//gridMaker->ResetGrid();
+								std::cout << unitList[ul]->position << std::endl;
 								actionMenu();
 							}
 							else if (gridMaker->isHighlighting && gridMaker->spritebatch()[counter]->frame() == 0) {

@@ -13,6 +13,7 @@ GridMaker::GridMaker() : Entity()
 	cellwidth = 0;
 	cellheight = 0;
 	currentTile = 0;
+	sourceTile = 0;
 
 	isHighlighting = false;
 }

@@ -58,6 +58,8 @@ public:
 
 	int currentTile;
 
+	int sourceTile;
+
 	/// @brief a bool to see if the grid is being highlighted or not
 	bool isHighlighting;
 
