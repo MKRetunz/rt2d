@@ -15,6 +15,8 @@ BasicUnit::BasicUnit() : Entity()
 	Avoid = 0;
 
 	Defense = 0;
+
+	Move = 6;
 }
 
 

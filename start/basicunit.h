@@ -29,6 +29,8 @@ public:
 	int Avoid;
 
 	int Defense;
+
+	int Move;
 };
 
 #endif /* BASICUNIT_H */
