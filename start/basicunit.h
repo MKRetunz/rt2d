@@ -2,6 +2,8 @@
 #define BASICUNIT_H
 
 #include "entity.h"
+#include "unithandler.h"
+
 class BasicUnit :
 	public Entity
 {
