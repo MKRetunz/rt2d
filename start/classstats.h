@@ -1,4 +1,6 @@
-#pragma once
+#ifndef CLASSSTATS_H
+#define CLASSSTATS_H
+
 class ClassStats
 {
 public:
@@ -15,3 +17,4 @@ private:
 	int MovAllocater;
 };
 
+#endif /* CLASSSTATS_H */
