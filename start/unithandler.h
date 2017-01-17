@@ -6,6 +6,9 @@ class UnitHandler
 public:
 	UnitHandler();
 	virtual ~UnitHandler();
+
+private:
+
 };
 
 #endif /* UNITHANDLER_H */
