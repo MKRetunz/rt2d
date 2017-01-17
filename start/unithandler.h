@@ -9,6 +9,8 @@ public:
 	UnitHandler();
 	virtual ~UnitHandler();
 
+	int AllocateStats();
+
 private:
 
 };

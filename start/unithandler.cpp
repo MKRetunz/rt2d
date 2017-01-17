@@ -10,3 +10,7 @@ UnitHandler::~UnitHandler()
 {
 
 }
+
+int UnitHandler::AllocateStats() {
+
+}
