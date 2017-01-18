@@ -2,7 +2,7 @@
 
 UnitHandler::UnitHandler()
 {
-
+	statSource = new ClassStats();
 }
 
 

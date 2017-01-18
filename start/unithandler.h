@@ -12,7 +12,7 @@ public:
 	int AllocateStats(int stat);
 
 private:
-
+	ClassStats* statSource;
 };
 
 #endif /* UNITHANDLER_H */
