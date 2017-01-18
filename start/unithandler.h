@@ -9,7 +9,7 @@ public:
 	UnitHandler();
 	virtual ~UnitHandler();
 
-	int AllocateStats();
+	int AllocateStats(int stat);
 
 private:
 

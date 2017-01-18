@@ -11,6 +11,8 @@ UnitHandler::~UnitHandler()
 
 }
 
-int UnitHandler::AllocateStats() {
+int UnitHandler::AllocateStats(int stat) {
+	int statAllocater = 0;
 
+	return statAllocater;
 }
