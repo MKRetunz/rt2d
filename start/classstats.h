@@ -7,6 +7,8 @@ public:
 	ClassStats();
 	virtual ~ClassStats();
 
+	int GetStat(int stat);
+
 private:
 
 	int HPAllocater;

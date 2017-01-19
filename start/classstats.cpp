@@ -17,3 +17,8 @@ ClassStats::~ClassStats()
 {
 
 }
+
+int ClassStats::GetStat(int stat)
+{
+	return 0;
+}
