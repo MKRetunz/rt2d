@@ -18,7 +18,7 @@ ClassStats::~ClassStats()
 
 }
 
-int ClassStats::GetStat(int stat)
+int ClassStats::GetStat(int stat, int baseclass)
 {
 	return 0;
 }

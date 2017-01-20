@@ -7,7 +7,7 @@ public:
 	ClassStats();
 	virtual ~ClassStats();
 
-	int GetStat(int stat);
+	int GetStat(int stat, int baseclass);
 
 private:
 
