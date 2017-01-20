@@ -20,5 +20,25 @@ ClassStats::~ClassStats()
 
 int ClassStats::GetStat(int stat, int baseclass)
 {
-	return 0;
+	if (stat = 0) {
+		return HPAllocater;
+	}
+	else if (stat = 1) {
+		return DamAllocater;
+	}
+	else if (stat = 2) {
+		return HitAllocater;
+	}
+	else if (stat  = 3) {
+		return AvoAllocater;
+	}
+	else if (stat = 4) {
+		return DefAllocater;
+	}
+	else if (stat = 5) {
+		return MovAllocater;
+	}
+	else {
+		return 0;
+	}
 }
