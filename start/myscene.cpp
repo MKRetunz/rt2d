@@ -168,6 +168,8 @@ void MyScene::update(float deltaTime)
 
 	if (menuOn && input()->getKeyDown(GLFW_KEY_X)) {
 		gridMaker->ResetGrid();
+		text[10]->message("");
+		text[11]->message("");
 	}
 	if (menuOn && input()->getKeyDown(GLFW_KEY_Z)) {
 		gridMaker->HighlightGrid(1, gridMaker->currentTile, 3);
