@@ -1,7 +1,5 @@
 #include "ClassStats.h"
 
-
-
 ClassStats::ClassStats()
 {
 	HPAllocater = 0;
@@ -101,17 +99,35 @@ int ClassStats::GetStat(int stat, int baseclass)
 	}
 }
 
-void ClassStats::GetSprite(int baseclass, Entity* e)
+void ClassStats::GetSprite(int baseclass, Entity* e, bool team)
 {
 	if (baseclass == 0) {
-		e->addSprite("assets/mercenaryv1.tga");
+		if (!team) {
+			e->addSprite("assets/mercenaryv1.tga");
+		}
+		else
+		{
+			e->addSprite("assets/mercenaryv2.tga");
+		}
 	}
 	else if (baseclass == 1)
 	{
-		e->addSprite("assets/soldierv1.tga");
+		if (!team) {
+			e->addSprite("assets/soldierv1.tga");
+		}
+		else
+		{
+			e->addSprite("assets/soldierv2.tga");
+		}
 	}
 	else if (baseclass == 2) {
-		e->addSprite("assets/fighterv1.tga");
+		if (!team) {
+			e->addSprite("assets/fighterv1.tga");
+		}
+		else
+		{
+			e->addSprite("assets/fighterv2.tga");
+		}
 	}
 }
 

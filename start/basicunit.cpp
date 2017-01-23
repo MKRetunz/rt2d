@@ -6,6 +6,8 @@ BasicUnit::BasicUnit() : Entity()
 
 	selected = false;
 
+	unitTeam = false;
+
 	unitClass = 0;
 
 	HitPoints = 10;
@@ -40,5 +42,5 @@ void BasicUnit::makeUnit()
 	Avoid = cs->GetStat(3, unitClass);
 	Defense = cs->GetStat(4, unitClass);
 	Move = cs->GetStat(5, unitClass);
-	cs->GetSprite(unitClass, this);
+	cs->GetSprite(unitClass, this, unitTeam);
 }

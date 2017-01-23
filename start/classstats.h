@@ -11,7 +11,7 @@ public:
 
 	int GetStat(int stat, int baseclass);
 
-	void GetSprite(int baseclass, Entity* e);
+	void GetSprite(int baseclass, Entity* e, bool team);
 
 private:
 

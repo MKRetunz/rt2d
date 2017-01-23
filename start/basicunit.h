@@ -2,7 +2,7 @@
 #define BASICUNIT_H
 
 #include "entity.h"
-#include "unithandler.h"
+#include "classstats.h"
 
 class BasicUnit :
 	public Entity
@@ -21,6 +21,8 @@ public:
 
 	/// @brief a boolean to see if the unit is being selected or not
 	bool selected;
+
+	bool unitTeam;
 
 	int unitClass;
 
