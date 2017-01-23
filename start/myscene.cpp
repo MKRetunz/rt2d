@@ -21,13 +21,17 @@ MyScene::MyScene() : Scene()
 	basicunit->position = gridMaker->position;
 	this->addChild(basicunit);
 	//basicunit->selected = true;
+	basicunit->unitClass = 1;
+	basicunit->makeUnit();
 
 	unitTesting = new BasicUnit();
 	unitList.push_back(unitTesting);
 	unitTesting->position = gridMaker->position + gridMaker->cellwidth;
 	this->addChild(unitTesting);
-	unitTesting->selected = true;
-	unitTesting->addSprite("assets/mercenaryv2.tga");
+	//unitTesting->selected = true;
+	//unitTesting->addSprite("assets/mercenaryv2.tga");
+	unitTesting->unitClass = 2;
+	unitTesting->makeUnit();
 
 	unitspriteR = 32;
 	unitspriteL = 32;
