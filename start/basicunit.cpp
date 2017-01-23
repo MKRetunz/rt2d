@@ -2,6 +2,7 @@
 
 BasicUnit::BasicUnit() : Entity()
 {
+	cs = new ClassStats();
 
 	selected = false;
 

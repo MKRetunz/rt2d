@@ -33,6 +33,8 @@ public:
 	int Defense;
 
 	int Move;
+
+	ClassStats* cs;
 };
 
 #endif /* BASICUNIT_H */
