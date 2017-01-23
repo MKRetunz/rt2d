@@ -34,6 +34,8 @@ private:
 
 	void actionMenu();
 
+	void unitMenu(BasicUnit* b);
+
 	/// @brief the grid which makes the level
 	GridMaker* gridMaker;
 

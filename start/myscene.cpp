@@ -95,8 +95,7 @@ void MyScene::update(float deltaTime)
 		unitspriteT = unitList[ul]->position.y - gridMaker->cellwidth / 2;
 
 		if (mousex < unitspriteR && mousex > unitspriteL && mousey > unitspriteT && mousey < unitspriteD) {
-			text[3]->message("You have moused over a unit.");
-			text[4]->message("This will show its stats once they are implemented!");
+			
 
 			if (input()->getMouseDown(0)) {
 				unitList[ul]->selected = true;
@@ -126,7 +125,10 @@ void MyScene::update(float deltaTime)
 				gridMaker->spritebatch()[counter]->color.a = 192;
 
 				for (int ul = 0; ul < unitList.size(); ul++) {
+
 					if (unitList[ul]->selected == true) {
+						unitMenu(unitList[ul]);
+
 						unitspriteR = unitList[ul]->position.x + gridMaker->cellwidth / 2;
 						unitspriteL = unitList[ul]->position.x - gridMaker->cellwidth / 2;
 						unitspriteD = unitList[ul]->position.y + gridMaker->cellwidth / 2;
@@ -178,4 +180,41 @@ void MyScene::actionMenu()
 	text[11]->message("Press X to wait");
 
 	menuOn = true;
+}
+
+void MyScene::unitMenu(BasicUnit * b)
+{
+	std::string Message;
+
+	Message = "Hit points: ";
+	Message.append(std::to_string(b->HitPoints));
+
+	text[3]->message(Message);
+
+	Message = "Damage: ";
+	Message.append(std::to_string(b->Damage));
+
+	text[4]->message(Message);
+
+	Message = "Hit: ";
+	Message.append(std::to_string(b->Hit));
+
+	text[5]->message(Message);
+
+	Message = "Avoid: ";
+	Message.append(std::to_string(b->Avoid));
+
+	text[6]->message(Message);
+
+	Message = "Defense: ";
+	Message.append(std::to_string(b->Defense));
+
+	text[7]->message(Message);
+
+	Message = "Movement: ";
+	Message.append(std::to_string(b->Move));
+
+	text[8]->message(Message);
+
+	Message.clear();
 }
