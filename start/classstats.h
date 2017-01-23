@@ -1,6 +1,8 @@
 #ifndef CLASSSTATS_H
 #define CLASSSTATS_H
 
+#include "rt2d/entity.h"
+
 class ClassStats
 {
 public:
@@ -8,6 +10,8 @@ public:
 	virtual ~ClassStats();
 
 	int GetStat(int stat, int baseclass);
+
+	void GetSprite(int baseclass, Entity* e);
 
 private:
 

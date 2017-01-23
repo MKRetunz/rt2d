@@ -99,3 +99,18 @@ int ClassStats::GetStat(int stat, int baseclass)
 		return 0;
 	}
 }
+
+void ClassStats::GetSprite(int baseclass, Entity* e)
+{
+	if (baseclass == 0) {
+		e->addSprite("assets/mercenaryv1.tga");
+	}
+	else if (baseclass == 1)
+	{
+		e->addSprite("assets/soldierv1.tga");
+	}
+	else if (baseclass == 2) {
+		e->addSprite("assets/fighterv1.tga");
+	}
+}
+
