@@ -37,6 +37,8 @@ public:
 	int Move;
 
 	ClassStats* cs;
+
+	void makeUnit();
 };
 
 #endif /* BASICUNIT_H */

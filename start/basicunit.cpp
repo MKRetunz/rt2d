@@ -31,3 +31,14 @@ void BasicUnit::update(float deltaTime)
 {
 
 }
+
+void BasicUnit::makeUnit()
+{
+	HitPoints = cs->GetStat(1, unitClass);
+	Damage = cs->GetStat(2, unitClass);
+	Hit = cs->GetStat(3, unitClass);
+	Avoid = cs->GetStat(4, unitClass);
+	Defense = cs->GetStat(5, unitClass);
+	Move = cs->GetStat(6, unitClass);
+	cs->GetSprite(unitClass, this);
+}
