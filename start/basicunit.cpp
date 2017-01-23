@@ -6,6 +6,8 @@ BasicUnit::BasicUnit() : Entity()
 
 	selected = false;
 
+	unitClass = 0;
+
 	HitPoints = 10;
 
 	Damage = 0;

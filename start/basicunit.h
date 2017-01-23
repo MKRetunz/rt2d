@@ -22,6 +22,8 @@ public:
 	/// @brief a boolean to see if the unit is being selected or not
 	bool selected;
 
+	int unitClass;
+
 	int HitPoints;
 
 	int Damage;
