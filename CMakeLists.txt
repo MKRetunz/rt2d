@@ -185,6 +185,8 @@ add_executable(start
 	start/myscene.h
 	start/basicunit.cpp
 	start/basicunit.h
+	start/classstats.cpp
+	start/classstats.h
 )
 target_link_libraries(start
 	${ALL_LIBS}
