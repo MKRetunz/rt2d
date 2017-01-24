@@ -31,7 +31,10 @@ BasicUnit::~BasicUnit()
 
 void BasicUnit::update(float deltaTime)
 {
-
+	if (this->HitPoints <= 0) {
+		this->position.x += 1000;
+		parent()->removeChild(this);
+	}
 }
 
 void BasicUnit::makeUnit()
