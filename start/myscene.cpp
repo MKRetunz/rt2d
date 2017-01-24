@@ -31,6 +31,7 @@ MyScene::MyScene() : Scene()
 	//unitTesting->selected = true;
 	//unitTesting->addSprite("assets/mercenaryv2.tga");
 	unitTesting->unitClass = 2;
+	unitTesting->unitTeam = true;
 	unitTesting->makeUnit();
 
 	unitspriteR = 32;
@@ -39,6 +40,8 @@ MyScene::MyScene() : Scene()
 	unitspriteT = 32;
 
 	menuOn = false;
+
+	currentTurn = false;
 
 	for (unsigned int i = 0; i < 16; i++) {
 		Text* line = new Text();
@@ -51,7 +54,7 @@ MyScene::MyScene() : Scene()
 	}
 
 	text[1]->message("Placeholder:");
-	text[2]->message("This will be the basic UI and needs to be changed when possible.");
+	text[2]->message("Press A to switch turns.");
 
 }
 
@@ -173,6 +176,17 @@ void MyScene::update(float deltaTime)
 	}
 	if (menuOn && input()->getKeyDown(GLFW_KEY_Z)) {
 		gridMaker->HighlightGrid(1, gridMaker->currentTile, 3);
+	}
+	if (input()->getKeyDown(GLFW_KEY_A)) {
+		if (currentTurn) {
+			currentTurn = false;
+			text[1]->message("Turn: Red");
+		}
+		else
+		{
+			currentTurn = true;
+			text[1]->message("Turn: Blue");
+		}
 	}
 }
 

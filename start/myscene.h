@@ -62,6 +62,8 @@ private:
 
 	bool menuOn;
 
+	bool currentTurn;
+
 protected:
 	/// @brief a list of texts for the UI
 	std::vector<Text*> text;
