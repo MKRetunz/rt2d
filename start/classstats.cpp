@@ -103,30 +103,30 @@ void ClassStats::GetSprite(int baseclass, Entity* e, bool team)
 {
 	if (baseclass == 0) {
 		if (!team) {
-			e->addSprite("assets/mercenaryv1.tga");
+			e->addSpriteSheet("assets/MercAnimation.tga", 2, 2);
 		}
 		else
 		{
-			e->addSprite("assets/mercenaryv2.tga");
+			e->addSpriteSheet("assets/MercAnimation2.tga", 2, 2);
 		}
 	}
 	else if (baseclass == 1)
 	{
 		if (!team) {
-			e->addSprite("assets/soldierv1.tga");
+			e->addSpriteSheet("assets/SoldierAnimation.tga", 2, 2);
 		}
 		else
 		{
-			e->addSprite("assets/soldierv2.tga");
+			e->addSpriteSheet("assets/SoldierAnimation2.tga", 2, 2);
 		}
 	}
 	else if (baseclass == 2) {
 		if (!team) {
-			e->addSprite("assets/fighterv1.tga");
+			e->addSpriteSheet("assets/fighAnimation.tga", 2, 2);
 		}
 		else
 		{
-			e->addSprite("assets/fighterv2.tga");
+			e->addSpriteSheet("assets/fighAnimation2.tga", 2, 2);
 		}
 	}
 }
