@@ -154,6 +154,7 @@ void MyScene::update(float deltaTime)
 						else if (gridMaker->isHighlighting && gridMaker->spritebatch()[counter]->frame() == 3 && unitList[ul]->position == pos && unitList[ul]->unitTeam != currentTurn) {
 							removeChild(unitList[ul]);
 							gridMaker->ResetGrid();
+							menuOn = false;
 						}			
 					}
 				}
