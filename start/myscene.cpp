@@ -26,7 +26,8 @@ MyScene::MyScene() : Scene()
 
 	unitTesting = new BasicUnit();
 	unitList.push_back(unitTesting);
-	unitTesting->position = gridMaker->position + gridMaker->cellwidth;
+	unitTesting->position = gridMaker->position;
+	unitTesting->position.y += gridMaker->cellwidth;
 	this->addChild(unitTesting);
 	//unitTesting->selected = true;
 	//unitTesting->addSprite("assets/mercenaryv2.tga");
@@ -133,7 +134,7 @@ void MyScene::update(float deltaTime)
 					unitspriteD = unitList[ul]->position.y + gridMaker->cellwidth / 2;
 					unitspriteT = unitList[ul]->position.y - gridMaker->cellwidth / 2;
 
-					if (input()->getMouseDown(0)) {
+					if (input()->getMouseDown(0)) {		
 						if (!gridMaker->isHighlighting && mousex < unitspriteR && mousex > unitspriteL && mousey > unitspriteT && mousey < unitspriteD && unitList[ul]->unitTeam == currentTurn ) {
 							gridMaker->ResetGrid();
 							gridMaker->sourceTile = counter;
