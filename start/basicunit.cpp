@@ -8,6 +8,14 @@ BasicUnit::BasicUnit() : Entity()
 
 	unitTeam = false;
 
+	attacking = false;
+
+	scounter = 0.0f;
+
+	frame = 0;
+
+	fcounter = 0;
+
 	unitClass = 0;
 
 	HitPoints = 10;
@@ -31,6 +39,23 @@ BasicUnit::~BasicUnit()
 
 void BasicUnit::update(float deltaTime)
 {
+	if (this->attacking == true) {
+		scounter += deltaTime;
+		if (frame > 2) { frame = 0; }
+		if (scounter > 1.0f && fcounter < 3) {
+			frame++;
+			scounter = 0.0f;
+			fcounter++;
+		}
+		if (fcounter == 3) {
+			this->attacking = false;
+			frame = 0;
+			fcounter = 0;
+		}
+	}
+
+	this->sprite()->frame(frame);
+
 	if (this->HitPoints <= 0) {
 		this->position.x += 1000;
 		parent()->removeChild(this);
@@ -56,4 +81,6 @@ void BasicUnit::attack(BasicUnit * unit)
 	if ((rand() % 100 + 1) <= totalHit) {
 		unit->HitPoints -= totalDamage;
 	}
+
+	attacking = true;
 }

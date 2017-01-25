@@ -24,6 +24,14 @@ public:
 
 	bool unitTeam;
 
+	bool attacking;
+
+	float scounter;
+
+	int frame;
+
+	int fcounter;
+
 	int unitClass;
 
 	int HitPoints;
