@@ -146,6 +146,7 @@ void MyScene::update(float deltaTime)
 						}
 						else if (gridMaker->isHighlighting && gridMaker->spritebatch()[counter]->frame() == 0) {
 							gridMaker->ResetGrid();
+							menuOn = false;
 						}
 						else if (gridMaker->isHighlighting && gridMaker->spritebatch()[counter]->frame() == 3 && unitList[ul]->position == pos && unitList[ul]->unitTeam != currentTurn) {
 							for (int ul2 = 0; ul2 < unitList.size(); ul2++) { 
