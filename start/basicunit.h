@@ -41,6 +41,8 @@ public:
 	ClassStats* cs;
 
 	void makeUnit();
+
+	void attack(BasicUnit* unit);
 };
 
 #endif /* BASICUNIT_H */

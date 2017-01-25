@@ -47,3 +47,13 @@ void BasicUnit::makeUnit()
 	Move = cs->GetStat(5, unitClass);
 	cs->GetSprite(unitClass, this, unitTeam);
 }
+
+void BasicUnit::attack(BasicUnit * unit)
+{
+	int totalHit = this->Hit - unit->Avoid;
+	int totalDamage = this->Damage - unit->Defense;
+
+	if ((rand() % 100 + 1) <= totalHit) {
+		unit->HitPoints -= totalDamage;
+	}
+}
