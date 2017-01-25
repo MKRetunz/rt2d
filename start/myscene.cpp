@@ -130,7 +130,7 @@ void MyScene::update(float deltaTime)
 					unitspriteD = unitList[ul]->position.y + gridMaker->cellwidth / 2;
 					unitspriteT = unitList[ul]->position.y - gridMaker->cellwidth / 2;
 
-					if (input()->getMouseDown(0)) {		
+					if (input()->getMouseDown(0)) {	
 						if (!gridMaker->isHighlighting && mousex < unitspriteR && mousex > unitspriteL && mousey > unitspriteT && mousey < unitspriteD && unitList[ul]->unitTeam == currentTurn ) {
 							gridMaker->ResetGrid();
 							gridMaker->sourceTile = counter;
@@ -185,6 +185,7 @@ void MyScene::update(float deltaTime)
 			currentTurn = true;
 			text[1]->message("Turn: Blue");
 		}
+		gridMaker->ResetGrid();
 	}
 }
 
