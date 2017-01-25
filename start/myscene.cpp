@@ -128,37 +128,32 @@ void MyScene::update(float deltaTime)
 				gridMaker->spritebatch()[counter]->color.a = 192;
 
 				for (int ul = 0; ul < unitList.size(); ul++) {
+					unitspriteR = unitList[ul]->position.x + gridMaker->cellwidth / 2;
+					unitspriteL = unitList[ul]->position.x - gridMaker->cellwidth / 2;
+					unitspriteD = unitList[ul]->position.y + gridMaker->cellwidth / 2;
+					unitspriteT = unitList[ul]->position.y - gridMaker->cellwidth / 2;
 
-					if (unitList[ul]->selected == true) {
-						unitMenu(unitList[ul]);
-
-						unitspriteR = unitList[ul]->position.x + gridMaker->cellwidth / 2;
-						unitspriteL = unitList[ul]->position.x - gridMaker->cellwidth / 2;
-						unitspriteD = unitList[ul]->position.y + gridMaker->cellwidth / 2;
-						unitspriteT = unitList[ul]->position.y - gridMaker->cellwidth / 2;
-
-						if (input()->getMouseDown(0)) {
-							if (!gridMaker->isHighlighting && mousex < unitspriteR && mousex > unitspriteL && mousey > unitspriteT && mousey < unitspriteD) {
-								gridMaker->ResetGrid();
-								gridMaker->sourceTile = counter;
-								gridMaker->HighlightGrid(unitList[ul]->Move, counter, 1);
-							}
-							else if (gridMaker->isHighlighting && gridMaker->spritebatch()[counter]->frame() == 1) {
-								gridMaker->ResetGrid();
-								gridMaker->HighlightGrid(unitList[ul]->Move, gridMaker->sourceTile, 1);
-								gridMaker->MoveUnit(unitList[ul], pos);
-								gridMaker->currentTile = counter;
-								std::cout << unitList[ul]->position << std::endl;
-								actionMenu();
-							}
-							else if (gridMaker->isHighlighting && gridMaker->spritebatch()[counter]->frame() == 0) {
-								gridMaker->ResetGrid();
-							}
-							else if (gridMaker->isHighlighting && gridMaker->spritebatch()[counter]->frame() == 3 && unitList[ul]->position == pos) {
-								removeChild(unitList[ul]);
-								gridMaker->ResetGrid();
-							}
+					if (input()->getMouseDown(0)) {
+						if (!gridMaker->isHighlighting && mousex < unitspriteR && mousex > unitspriteL && mousey > unitspriteT && mousey < unitspriteD && unitList[ul]->unitTeam == currentTurn ) {
+							gridMaker->ResetGrid();
+							gridMaker->sourceTile = counter;
+							gridMaker->HighlightGrid(unitList[ul]->Move, counter, 1);
+							unitMenu(unitList[ul]);
 						}
+						else if (gridMaker->isHighlighting && gridMaker->spritebatch()[counter]->frame() == 1 && unitList[ul]->unitTeam == currentTurn) {
+							gridMaker->ResetGrid();
+							gridMaker->HighlightGrid(unitList[ul]->Move, gridMaker->sourceTile, 1);
+							gridMaker->MoveUnit(unitList[ul], pos);
+							gridMaker->currentTile = counter;
+							actionMenu();
+						}
+						else if (gridMaker->isHighlighting && gridMaker->spritebatch()[counter]->frame() == 0) {
+							gridMaker->ResetGrid();
+						}
+						else if (gridMaker->isHighlighting && gridMaker->spritebatch()[counter]->frame() == 3 && unitList[ul]->position == pos && unitList[ul]->unitTeam != currentTurn) {
+							removeChild(unitList[ul]);
+							gridMaker->ResetGrid();
+						}			
 					}
 				}
 			}
