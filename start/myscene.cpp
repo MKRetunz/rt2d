@@ -54,7 +54,7 @@ MyScene::MyScene() : Scene()
 
 	currentTurn = false;
 
-	text[1]->message("Turn: Blue");
+	text[1]->message("Turn: Red");
 	text[2]->message("Press A to switch turns.");
 
 }
