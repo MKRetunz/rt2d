@@ -5,29 +5,17 @@ BasicUnit::BasicUnit() : Entity()
 	cs = new ClassStats();
 
 	selected = false;
-
 	unitTeam = false;
-
 	attacking = false;
-
 	scounter = 0.0f;
-
 	frame = 0;
-
 	fcounter = 0;
-
 	unitClass = 0;
-
 	HitPoints = 10;
-
 	Damage = 0;
-
 	Hit = 0;
-
 	Avoid = 0;
-
 	Defense = 0;
-
 	Move = 6;
 }
 
