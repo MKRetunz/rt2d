@@ -146,7 +146,7 @@ void MyScene::update(float deltaTime)
 						}
 						else if (gridMaker->isHighlighting && gridMaker->spritebatch()[counter]->frame() == 0) {
 							gridMaker->ResetGrid();
-							menuOn = false;
+							actionMenu();
 						}
 						else if (gridMaker->isHighlighting && gridMaker->spritebatch()[counter]->frame() == 3 && unitList[ul]->position == pos && unitList[ul]->unitTeam != currentTurn) {
 							for (int ul2 = 0; ul2 < unitList.size(); ul2++) { 
@@ -155,7 +155,7 @@ void MyScene::update(float deltaTime)
 								}
 							}
 							gridMaker->ResetGrid();
-							menuOn = false;
+							actionMenu();
 						}			
 					}
 				}
@@ -169,9 +169,7 @@ void MyScene::update(float deltaTime)
 
 	if (menuOn && input()->getKeyDown(GLFW_KEY_X)) {
 		gridMaker->ResetGrid();
-		text[10]->message("");
-		text[11]->message("");
-		menuOn = false;
+		actionMenu();
 	}
 	if (menuOn && input()->getKeyDown(GLFW_KEY_Z)) {
 		gridMaker->HighlightGrid(1, gridMaker->currentTile, 3);
@@ -192,10 +190,17 @@ void MyScene::update(float deltaTime)
 
 void MyScene::actionMenu()
 {
-	text[10]->message("Press Z to attack");
-	text[11]->message("Press X to wait");
+	if (!menuOn) {
+		text[10]->message("Press Z to attack");
+		text[11]->message("Press X to wait");
 
-	menuOn = true;
+		menuOn = true;
+	}
+	else {
+		text[10]->message("");
+		text[11]->message("");
+		menuOn = false;
+	}
 }
 
 void MyScene::unitMenu(BasicUnit * b)
