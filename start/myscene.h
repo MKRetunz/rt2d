@@ -40,10 +40,18 @@ private:
 	GridMaker* gridMaker;
 
 	/// @brief a example unit to be replaced by the final version later
-	BasicUnit* basicunit;
+	BasicUnit* mercR;
+
+	BasicUnit* soldierR;
+
+	BasicUnit* fighterR;
 
 	/// @brief another example unit to be replaced later
-	BasicUnit* unitTesting;
+	BasicUnit* mercB;
+
+	BasicUnit* soldierB;
+	
+	BasicUnit* fighterB;
 
 	/// @brief the list of units
 	std::vector<BasicUnit*> unitList;

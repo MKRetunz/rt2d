@@ -26,24 +26,57 @@ MyScene::MyScene() : Scene()
 	gridMaker->position = Point2(SWIDTH/4, SHEIGHT/8);
 	this->addChild(gridMaker);
 
-	basicunit = new BasicUnit();
-	unitList.push_back(basicunit);
-	basicunit->position = gridMaker->position;
-	this->addChild(basicunit);
-	//basicunit->selected = true;
-	basicunit->unitClass = 1;
-	basicunit->makeUnit();
+	mercR = new BasicUnit();
+	unitList.push_back(mercR);
+	mercR->position = gridMaker->position;
+	this->addChild(mercR);
+	mercR->unitClass = 0;
+	mercR->makeUnit();
 
-	unitTesting = new BasicUnit();
-	unitList.push_back(unitTesting);
-	unitTesting->position = gridMaker->position;
-	unitTesting->position.y += gridMaker->cellwidth;
-	this->addChild(unitTesting);
-	//unitTesting->selected = true;
-	//unitTesting->addSprite("assets/mercenaryv2.tga");
-	unitTesting->unitClass = 2;
-	unitTesting->unitTeam = true;
-	unitTesting->makeUnit();
+	soldierR = new BasicUnit();
+	unitList.push_back(soldierR);
+	soldierR->position = gridMaker->position;
+	soldierR->position.y += 64;
+	this->addChild(soldierR);
+	soldierR->unitClass = 1;
+	soldierR->makeUnit();
+
+	fighterR = new BasicUnit();
+	unitList.push_back(fighterR);
+	fighterR->position = gridMaker->position;
+	fighterR->position.y += 124;
+	this->addChild(fighterR);
+	fighterR->unitClass = 2;
+	fighterR->makeUnit();
+
+	mercB = new BasicUnit();
+	unitList.push_back(mercB);
+	mercB->position = gridMaker->position;
+	mercB->position.x += 124;
+	this->addChild(mercB);
+	mercB->unitClass = 0;
+	mercB->unitTeam = true;
+	mercB->makeUnit();
+
+	soldierB = new BasicUnit();
+	unitList.push_back(soldierB);
+	soldierB->position = gridMaker->position;
+	soldierB->position.x += 128;
+	soldierB->position.y += 64;
+	this->addChild(soldierB);
+	soldierB->unitClass = 1;
+	soldierB->unitTeam = true;
+	soldierB->makeUnit();
+
+	fighterB = new BasicUnit();
+	unitList.push_back(fighterB);
+	fighterB->position = gridMaker->position;
+	fighterB->position.x += 128;
+	fighterB->position.y += 128;
+	this->addChild(fighterB);
+	fighterB->unitClass = 2;
+	fighterB->unitTeam = true;
+	fighterB->makeUnit();
 
 	unitspriteR = 32;
 	unitspriteL = 32;
