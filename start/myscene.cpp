@@ -169,6 +169,7 @@ void MyScene::update(float deltaTime)
 							gridMaker->sourceTile = counter;
 							gridMaker->HighlightGrid(unitList[ul]->Move, counter, 1);
 							unitMenu(unitList[ul]);
+							actionMenu();
 						}
 						else if (gridMaker->isHighlighting && gridMaker->spritebatch()[counter]->frame() == 1 && unitList[ul]->unitTeam == currentTurn && unitList[ul]->selected) {
 							gridMaker->ResetGrid();
