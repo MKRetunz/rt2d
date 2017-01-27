@@ -133,6 +133,7 @@ void MyScene::update(float deltaTime)
 
 		if (mousex < unitspriteR && mousex > unitspriteL && mousey > unitspriteT && mousey < unitspriteD && input()->getMouseDown(0) && unitList[ul]->unitTeam == currentTurn) {
 			unitList[ul]->selected = true;
+			std::cout << ul << std::endl;
 			for (int ul2 = 0; ul2 < unitList.size(); ul2++) {
 				if (ul2 != ul) {
 					unitList[ul2]->selected = false;
@@ -175,6 +176,7 @@ void MyScene::update(float deltaTime)
 							gridMaker->HighlightGrid(unitList[ul]->Move, gridMaker->sourceTile, 1);
 							gridMaker->MoveUnit(unitList[ul], pos);
 							gridMaker->currentTile = counter;
+							menuOn = false;
 							actionMenu();
 						}
 						else if (gridMaker->isHighlighting && gridMaker->spritebatch()[counter]->frame() == 0) {
