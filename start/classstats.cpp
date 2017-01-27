@@ -20,25 +20,25 @@ int ClassStats::GetStat(int stat, int baseclass)
 {
 	if (stat == 0) {
 		if (baseclass == 0) {
-			HPAllocater = 25; //12.5
+			HPAllocater = 22; //11
 		}
 		if (baseclass == 1) {
 			HPAllocater = 19; //9.5
 		}
 		if (baseclass == 2) {
-			HPAllocater = 28; //14
+			HPAllocater = 27; //13.5
 		}
 		return HPAllocater;
 	}
 	else if (stat == 1) {
 		if (baseclass == 0) {
-			DamAllocater = 21; //21
+			DamAllocater = 21; //31.5
 		}
 		if (baseclass == 1) {
-			DamAllocater = 18; //18
+			DamAllocater = 18; //27
 		}
 		if (baseclass == 2) {
-			DamAllocater = 24; //24
+			DamAllocater = 24; //36
 		}
 		return DamAllocater;
 	}
@@ -74,7 +74,7 @@ int ClassStats::GetStat(int stat, int baseclass)
 			DefAllocater = 12; //15
 		}
 		if (baseclass == 2) {
-			DefAllocater = 14; //17.5
+			DefAllocater = 12; //15
 		}
 		return DefAllocater;
 	}
@@ -92,7 +92,7 @@ int ClassStats::GetStat(int stat, int baseclass)
 		return MovAllocater;
 	}
 
-	/* Total: 0 = 91 1 = 91 2 = 91 */
+	/* Total: 0 = 100 1 = 100 2 = 100 */
 
 	else {
 		return 0;
