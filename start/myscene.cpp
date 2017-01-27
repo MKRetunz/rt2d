@@ -133,7 +133,6 @@ void MyScene::update(float deltaTime)
 
 		if (mousex < unitspriteR && mousex > unitspriteL && mousey > unitspriteT && mousey < unitspriteD && input()->getMouseDown(0) && unitList[ul]->unitTeam == currentTurn) {
 			unitList[ul]->selected = true;
-			std::cout << ul << std::endl;
 			for (int ul2 = 0; ul2 < unitList.size(); ul2++) {
 				if (ul2 != ul) {
 					unitList[ul2]->selected = false;
@@ -165,13 +164,13 @@ void MyScene::update(float deltaTime)
 					unitspriteT = unitList[ul]->position.y - gridMaker->cellwidth / 2;
 
 					if (input()->getMouseDown(0)) {	
-						if (!gridMaker->isHighlighting && mousex < unitspriteR && mousex > unitspriteL && mousey > unitspriteT && mousey < unitspriteD && unitList[ul]->unitTeam == currentTurn ) {
+						if (!gridMaker->isHighlighting && mousex < unitspriteR && mousex > unitspriteL && mousey > unitspriteT && mousey < unitspriteD && unitList[ul]->unitTeam == currentTurn && unitList[ul]->selected) {
 							gridMaker->ResetGrid();
 							gridMaker->sourceTile = counter;
 							gridMaker->HighlightGrid(unitList[ul]->Move, counter, 1);
 							unitMenu(unitList[ul]);
 						}
-						else if (gridMaker->isHighlighting && gridMaker->spritebatch()[counter]->frame() == 1 && unitList[ul]->unitTeam == currentTurn) {
+						else if (gridMaker->isHighlighting && gridMaker->spritebatch()[counter]->frame() == 1 && unitList[ul]->unitTeam == currentTurn && unitList[ul]->selected) {
 							gridMaker->ResetGrid();
 							gridMaker->HighlightGrid(unitList[ul]->Move, gridMaker->sourceTile, 1);
 							gridMaker->MoveUnit(unitList[ul], pos);
