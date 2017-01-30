@@ -32,25 +32,34 @@ public:
 
 private:
 
+	/// @brief when called the menu gets turned on or off
+	/// @return void
 	void actionMenu();
 
+	/// @brief adds a menu of the called unit, displaying its stats
+	/// @param BasicUnit supplies the stats to be showcased
+	/// @return void
 	void unitMenu(BasicUnit* b);
 
 	/// @brief the grid which makes the level
 	GridMaker* gridMaker;
 
-	/// @brief a example unit to be replaced by the final version later
+	/// @brief a red side unit of the mercenary class
 	BasicUnit* mercR;
 
+	/// @brief a red side unit of the soldier class
 	BasicUnit* soldierR;
 
+	/// @brief a red side unit of the fighter class
 	BasicUnit* fighterR;
 
-	/// @brief another example unit to be replaced later
+	/// @brief a blue side unit of the mercenary class
 	BasicUnit* mercB;
 
+	/// @brief a blue side unit of the soldier class
 	BasicUnit* soldierB;
 	
+	/// @brief a blue side unit of the fighter class
 	BasicUnit* fighterB;
 
 	/// @brief the list of units
@@ -68,8 +77,10 @@ private:
 	/// @brief the top side of a unit's sprite
 	int unitspriteT;
 
+	/// @brief a bool to turn the menu on and off
 	bool menuOn;
 
+	/// @brief a bool to track which turn it is
 	bool currentTurn;
 
 protected:

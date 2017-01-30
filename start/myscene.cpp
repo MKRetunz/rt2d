@@ -191,7 +191,7 @@ void MyScene::update(float deltaTime)
 							}
 							gridMaker->ResetGrid();
 							actionMenu();
-						}			
+						}
 					}
 				}
 			}

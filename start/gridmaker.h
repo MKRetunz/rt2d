@@ -17,6 +17,7 @@ class GridMaker : public Entity
 public:
 	/// @brief Constructor
 	GridMaker();
+
 	/// @brief Destructor
 	virtual ~GridMaker();
 
@@ -56,8 +57,10 @@ public:
 	/// @brief the height of the cell in pixels
 	int cellheight;
 
+	/// @brief the current tile to be used to spawn highlighting
 	int currentTile;
 
+	/// @brief the origin tile for highlighting to be saved later
 	int sourceTile;
 
 	/// @brief a bool to see if the grid is being highlighted or not
