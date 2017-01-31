@@ -58,6 +58,7 @@ public:
 	/// @brief a boolean to see which team the unit is on
 	bool unitTeam;
 
+	/// @brief a boolean to see if a unit has done their turn
 	bool turnDone;
 
 private:

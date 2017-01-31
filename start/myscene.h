@@ -77,6 +77,7 @@ private:
 	/// @brief the top side of a unit's sprite
 	int unitspriteT;
 
+	/// @brief tracks the unit to disable their turn
 	int unitTracker;
 
 	/// @brief a bool to turn the menu on and off
