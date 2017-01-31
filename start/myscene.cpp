@@ -82,6 +82,7 @@ GameScene::GameScene() : Scene()
 	unitspriteL = 32;
 	unitspriteD = 32;
 	unitspriteT = 32;
+	unitTracker = 0;
 
 	menuOn = false;
 	currentTurn = false;
@@ -164,12 +165,13 @@ void GameScene::update(float deltaTime)
 					unitspriteD = unitList[ul]->position.y + gridMaker->cellwidth / 2;
 					unitspriteT = unitList[ul]->position.y - gridMaker->cellwidth / 2;
 
-					if (input()->getMouseDown(0)) {	
+					if (input()->getMouseDown(0) && !unitList[ul]->turnDone) {	
 						if (!gridMaker->isHighlighting && mousex < unitspriteR && mousex > unitspriteL && mousey > unitspriteT && mousey < unitspriteD && unitList[ul]->unitTeam == currentTurn && unitList[ul]->selected) {
 							gridMaker->ResetGrid();
 							gridMaker->sourceTile = counter;
 							gridMaker->HighlightGrid(unitList[ul]->Move, counter, 1);
 							actionMenu();
+							unitTracker = ul;
 						}
 						else if (gridMaker->isHighlighting && gridMaker->spritebatch()[counter]->frame() == 1 && unitList[ul]->unitTeam == currentTurn && unitList[ul]->selected) {
 							gridMaker->ResetGrid();
@@ -178,6 +180,7 @@ void GameScene::update(float deltaTime)
 							gridMaker->currentTile = counter;
 							menuOn = false;
 							actionMenu();
+							unitTracker = ul;
 						}
 						else if (gridMaker->isHighlighting && gridMaker->spritebatch()[counter]->frame() == 0) {
 							gridMaker->ResetGrid();
@@ -187,6 +190,7 @@ void GameScene::update(float deltaTime)
 							for (int ul2 = 0; ul2 < unitList.size(); ul2++) { 
 								if (unitList[ul2]->selected) {
 									unitList[ul2]->attack(unitList[ul]);
+									unitList[ul2]->turnDone = true;
 								}
 							}
 						gridMaker->ResetGrid();
@@ -205,6 +209,7 @@ void GameScene::update(float deltaTime)
 	if (menuOn && input()->getKeyDown(GLFW_KEY_X)) {
 		gridMaker->ResetGrid();
 		actionMenu();
+		unitList[unitTracker]->turnDone = true;
 	}
 	if (menuOn && input()->getKeyDown(GLFW_KEY_Z)) {
 		gridMaker->HighlightGrid(1, gridMaker->currentTile, 3);

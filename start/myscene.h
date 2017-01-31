@@ -77,6 +77,8 @@ private:
 	/// @brief the top side of a unit's sprite
 	int unitspriteT;
 
+	int unitTracker;
+
 	/// @brief a bool to turn the menu on and off
 	bool menuOn;
 
