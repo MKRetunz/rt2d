@@ -131,12 +131,15 @@ void GameScene::update(float deltaTime)
 		unitspriteD = unitList[ul]->position.y + gridMaker->cellwidth / 2;
 		unitspriteT = unitList[ul]->position.y - gridMaker->cellwidth / 2;
 
-		if (mousex < unitspriteR && mousex > unitspriteL && mousey > unitspriteT && mousey < unitspriteD && input()->getMouseDown(0) && unitList[ul]->unitTeam == currentTurn) {
-			unitList[ul]->selected = true;
-			for (int ul2 = 0; ul2 < unitList.size(); ul2++) {
-				if (ul2 != ul) {
-					unitList[ul2]->selected = false;
-				}		
+		if (mousex < unitspriteR && mousex > unitspriteL && mousey > unitspriteT && mousey < unitspriteD) {
+			unitMenu(unitList[ul]);
+			if (input()->getMouseDown(0) && unitList[ul]->unitTeam == currentTurn) {
+				unitList[ul]->selected = true;
+				for (int ul2 = 0; ul2 < unitList.size(); ul2++) {
+					if (ul2 != ul) {
+						unitList[ul2]->selected = false;
+					}
+				}
 			}
 		}
 	}
@@ -168,7 +171,6 @@ void GameScene::update(float deltaTime)
 							gridMaker->ResetGrid();
 							gridMaker->sourceTile = counter;
 							gridMaker->HighlightGrid(unitList[ul]->Move, counter, 1);
-							unitMenu(unitList[ul]);
 							actionMenu();
 						}
 						else if (gridMaker->isHighlighting && gridMaker->spritebatch()[counter]->frame() == 1 && unitList[ul]->unitTeam == currentTurn && unitList[ul]->selected) {
