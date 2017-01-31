@@ -31,15 +31,6 @@ public:
 	/// @brief the classstats, used to allocate the stats.
 	ClassStats* cs;
 
-	/// @brief a float to move the animation forward
-	float scounter;
-
-	/// @brief a int that moves the animation
-	int frame;
-
-	/// @brief a int that keeps track of the current frame of the animation
-	int fcounter;
-
 	/// @brief a int that contains the units class
 	int unitClass;
 
@@ -67,8 +58,19 @@ public:
 	/// @brief a boolean to see which team the unit is on
 	bool unitTeam;
 
+private:
+
+	/// @brief a float to move the animation forward
+	float scounter;
+
+	/// @brief a int that moves the animation
+	int frame;
+
+	/// @brief a int that keeps track of the current frame of the animation
+	int fcounter;
+
 	/// @brief a boolean to control the attack animation
-	bool attacking;	
+	bool attacking;
 };
 
 #endif /* BASICUNIT_H */
