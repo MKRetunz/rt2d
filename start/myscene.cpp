@@ -84,12 +84,10 @@ GameScene::GameScene() : Scene()
 	unitspriteT = 32;
 
 	menuOn = false;
-
 	currentTurn = false;
 
 	text[1]->message("Turn: Red");
 	text[2]->message("Press A to switch turns.");
-
 }
 
 GameScene::~GameScene()
@@ -191,8 +189,8 @@ void GameScene::update(float deltaTime)
 									unitList[ul2]->attack(unitList[ul]);
 								}
 							}
-							gridMaker->ResetGrid();
-							actionMenu();
+						gridMaker->ResetGrid();
+						actionMenu();
 						}
 					}
 				}
