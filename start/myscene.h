@@ -1,13 +1,13 @@
 /**
  * Copyright 2015 Your Name <you@yourhost.com>
  *
- * @file myscene.h
+ * @file gamescene.h
  *
- * @brief description of MyScene behavior.
+ * @brief description of gamescene behavior.
  */
 
-#ifndef MYSCENE_H
-#define MYSCENE_H
+#ifndef GAMESCENE_H
+#define GAMESCENE_H
 
 #include <vector>
 #include <rt2d/scene.h>
@@ -16,14 +16,14 @@
 #include "gridmaker.h"
 #include "basicunit.h"
 
-/// @brief The MyScene class is the Scene implementation
-class MyScene : public Scene
+/// @brief The gamescene class is the Scene implementation
+class GameScene : public Scene
 {
 public:
 	/// @brief Constructor
-	MyScene();
+	GameScene();
 	/// @brief Destructor
-	virtual ~MyScene();
+	virtual ~GameScene();
 
 	/// @brief update is automatically called every frame
 	/// @param deltaTime the elapsed time in seconds
@@ -88,4 +88,4 @@ protected:
 	std::vector<Text*> text;
 };
 
-#endif /* SCENE00_H */
+#endif /* GAMESCENE_H */

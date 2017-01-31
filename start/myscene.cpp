@@ -1,5 +1,5 @@
 /**
- * This class describes MyScene behavior.
+ * This class describes GameScene behavior.
  *
  * Copyright 2015 Your Name <you@yourhost.com>
  */
@@ -9,7 +9,7 @@
 
 #include "myscene.h"
 
-MyScene::MyScene() : Scene()
+GameScene::GameScene() : Scene()
 {
 	for (unsigned int i = 0; i < 16; i++) {
 		Text* line = new Text();
@@ -92,7 +92,7 @@ MyScene::MyScene() : Scene()
 
 }
 
-MyScene::~MyScene()
+GameScene::~GameScene()
 {
 	int ts = text.size();
 	for (int i = 0; i < ts; i++) {
@@ -113,7 +113,7 @@ MyScene::~MyScene()
 	delete gridMaker;
 }
 
-void MyScene::update(float deltaTime)
+void GameScene::update(float deltaTime)
 {
 	// ###############################################################
 	// Escape key stops the Scene
@@ -223,7 +223,7 @@ void MyScene::update(float deltaTime)
 	}
 }
 
-void MyScene::actionMenu()
+void GameScene::actionMenu()
 {
 	if (!menuOn) {
 		text[10]->message("Press Z to attack");
@@ -238,7 +238,7 @@ void MyScene::actionMenu()
 	}
 }
 
-void MyScene::unitMenu(BasicUnit * b)
+void GameScene::unitMenu(BasicUnit * b)
 {
 	std::string Message;
 
