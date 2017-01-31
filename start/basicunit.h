@@ -58,6 +58,8 @@ public:
 	/// @brief a boolean to see which team the unit is on
 	bool unitTeam;
 
+	bool turnDone;
+
 private:
 
 	/// @brief a float to move the animation forward

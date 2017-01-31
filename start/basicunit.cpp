@@ -7,6 +7,7 @@ BasicUnit::BasicUnit() : Entity()
 	selected = false;
 	unitTeam = false;
 	attacking = false;
+	turnDone = false;
 	scounter = 0.0f;
 	frame = 0;
 	fcounter = 0;
