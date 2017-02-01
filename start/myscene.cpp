@@ -225,6 +225,9 @@ void GameScene::update(float deltaTime)
 			text[1]->message("Turn: Blue");
 		}
 		gridMaker->ResetGrid();
+		for (int ul = 0; ul < unitList.size(); ul++) {
+			unitList[ul]->turnDone = false;
+		}
 	}
 }
 
