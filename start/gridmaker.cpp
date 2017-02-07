@@ -99,6 +99,10 @@ void GridMaker::MoveUnit(Entity * e, Point2 p)
 
 void GridMaker::gridObstacle()
 {
-
+	for (int x = 0; x < gridwidth; x++) {
+		for (int y = 0; y < gridheight; y++) {
+			//Do something
+		}
+	}
 }
 
