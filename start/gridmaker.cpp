@@ -47,8 +47,6 @@ void GridMaker::MakeGrid(int GW, int GH, int CW, int CH)
 			counter++;
 		}
 	}
-
-	//HighlightGrid(3, 15);
 }
 
 void GridMaker::HighlightGrid(int range, int target, int color)
