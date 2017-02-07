@@ -68,6 +68,8 @@ public:
 
 private:
 
+	void gridObstacle();
+
 };
 
 #endif /* GridMaker_H */

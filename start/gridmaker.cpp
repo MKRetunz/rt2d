@@ -97,3 +97,8 @@ void GridMaker::MoveUnit(Entity * e, Point2 p)
 	e->position = p;
 }
 
+void GridMaker::gridObstacle()
+{
+
+}
+
