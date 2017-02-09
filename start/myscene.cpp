@@ -27,6 +27,21 @@ GameScene::GameScene() : Scene()
 	this->addChild(gridMaker);
 
 	gridMaker->spritebatch()[5]->frame(2);
+	gridMaker->spritebatch()[15]->frame(2);
+	gridMaker->spritebatch()[25]->frame(2);
+	gridMaker->spritebatch()[35]->frame(2);
+	gridMaker->spritebatch()[6]->frame(2);
+	gridMaker->spritebatch()[16]->frame(2);
+	gridMaker->spritebatch()[26]->frame(2);
+	gridMaker->spritebatch()[36]->frame(2);
+	gridMaker->spritebatch()[7]->frame(2);
+	gridMaker->spritebatch()[17]->frame(2);
+	gridMaker->spritebatch()[27]->frame(2);
+	gridMaker->spritebatch()[37]->frame(2);
+	gridMaker->spritebatch()[8]->frame(2);
+	gridMaker->spritebatch()[18]->frame(2);
+	gridMaker->spritebatch()[28]->frame(2);
+	gridMaker->spritebatch()[38]->frame(2);
 
 	mercR = new BasicUnit();
 	unitList.push_back(mercR);
