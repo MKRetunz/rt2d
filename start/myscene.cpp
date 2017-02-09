@@ -26,6 +26,8 @@ GameScene::GameScene() : Scene()
 	gridMaker->position = Point2(SWIDTH/4, SHEIGHT/8);
 	this->addChild(gridMaker);
 
+	gridMaker->spritebatch()[5]->frame(2);
+
 	mercR = new BasicUnit();
 	unitList.push_back(mercR);
 	mercR->position = gridMaker->position;

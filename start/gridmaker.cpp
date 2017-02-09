@@ -62,7 +62,9 @@ void GridMaker::HighlightGrid(int range, int target, int color)
 				{
 					int counterRow = counter / gridwidth;
 					if (counterRow == targetRow) {
-						this->spritebatch()[counter]->frame(color);
+						if (counter != 5) {
+							this->spritebatch()[counter]->frame(color);
+						}
 					}
 				}
 				counter++;
@@ -85,7 +87,9 @@ void GridMaker::ResetGrid()
 	int counter = 0;
 	for (int x = 0; x < gridwidth; x++) {
 		for (int y = 0; y < gridheight; y++) {
-			this->spritebatch()[counter]->frame(0);
+			if (counter != 5) {
+				this->spritebatch()[counter]->frame(0);
+			}
 			counter++;
 		}
 	}
