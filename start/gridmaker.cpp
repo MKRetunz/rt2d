@@ -62,7 +62,7 @@ void GridMaker::HighlightGrid(int range, int target, int color)
 				{
 					int counterRow = counter / gridwidth;
 					if (counterRow == targetRow) {
-						if (counter != 5) {
+						if (this->spritebatch()[counter]->frame() != 2) {
 							this->spritebatch()[counter]->frame(color);
 						}
 					}
@@ -87,13 +87,14 @@ void GridMaker::ResetGrid()
 	int counter = 0;
 	for (int x = 0; x < gridwidth; x++) {
 		for (int y = 0; y < gridheight; y++) {
-			if (counter != 5) {
+			if (this->spritebatch()[counter]->frame() != 2) {
 				this->spritebatch()[counter]->frame(0);
 			}
 			counter++;
 		}
 	}
 	isHighlighting = false;
+	gridObstacle();
 }
 
 void GridMaker::MoveUnit(Entity * e, Point2 p)
@@ -103,9 +104,18 @@ void GridMaker::MoveUnit(Entity * e, Point2 p)
 
 void GridMaker::gridObstacle()
 {
+	int counter = 0;
+	int checker = 0;
 	for (int x = 0; x < gridwidth; x++) {
 		for (int y = 0; y < gridheight; y++) {
-			//Do something
+			if (this->spritebatch()[counter]->frame() == 0) {
+				
+			}
+			else {
+				checker = counter++;
+				if (this->spritebatch()[checker]->frame() == 0)
+			}
+			counter++;
 		}
 	}
 }
