@@ -179,10 +179,14 @@ file(
 ####################################################################
 add_executable(start
 	start/main.cpp
-	start/myentity.cpp
-	start/myentity.h
+	start/gridmaker.cpp
+	start/gridmaker.h
 	start/myscene.cpp
 	start/myscene.h
+	start/basicunit.cpp
+	start/basicunit.h
+	start/classstats.cpp
+	start/classstats.h
 )
 target_link_libraries(start
 	${ALL_LIBS}

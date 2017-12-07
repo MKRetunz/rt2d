@@ -24,7 +24,7 @@ int main( void )
 	Core core;
 
 	// Scene01
-	MyScene* myscene = new MyScene(); // create Scene on the heap
+	GameScene* myscene = new GameScene(); // create Scene on the heap
 	while(myscene->isRunning()) { // check status of Scene every frame
 		core.run(myscene); // update and render the current scene
 		core.showFrameRate(5); // show framerate in output every n seconds
